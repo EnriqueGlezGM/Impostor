@@ -61,7 +61,7 @@ const AppLayout = () => {
       <header className="app__header">
         <div>
           <p className="app__eyebrow">Juego de deducción social</p>
-          <h1>El Impostor</h1>
+          <h1>El Impostor 😈</h1>
         </div>
         <button
           type="button"
