@@ -13,8 +13,6 @@
 
 ## Deploy en GitHub Pages
 
-El repositorio es `https://github.com/EnriqueGlezGM/Impostor`, y el `base` ya está configurado en `vite.config.js` como `/Impostor/`.
-
 1. Genera el build:
    ```bash
    npm run build
