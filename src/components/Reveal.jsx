@@ -256,9 +256,9 @@ const Reveal = () => {
     if (!showSecretForm) {
       return (
         <div className="reveal">
-          <span className="badge">Votacion secreta</span>
+          <span className="badge">Votación secreta</span>
           <h3>
-            Pasa el movil a{' '}
+            Pasa el móvil a{' '}
             <span
               className="player-tag"
               style={{ '--player-color': currentSecretPlayer?.color || '#9aa0a6' }}
@@ -266,7 +266,7 @@ const Reveal = () => {
               {currentSecretName}
             </span>
           </h3>
-          <p className="muted">Nadie mas debe mirar.</p>
+          <p className="muted">Nadie más debe mirar.</p>
           <button type="button" className="primary" onClick={() => setShowSecretForm(true)}>
             Votar en secreto
           </button>
@@ -324,21 +324,21 @@ const Reveal = () => {
   return (
     <section className="screen">
       <div className="card">
-        <h2>Votacion</h2>
+        <h2>Votación</h2>
         <p className="muted">
-          Elige a quien creeis que es el impostor. Si acierta el grupo, ganan los
+          Elige a quién creéis que es el impostor. Si acierta el grupo, ganan los
           inocentes.
         </p>
         {canVote && (
           <div className="field">
-            <label>Modo de votacion</label>
+            <label>Modo de votación</label>
             <div className="toggle">
               <button
                 type="button"
                 className={!isSecretMode ? 'chip chip--active' : 'chip'}
                 onClick={() => onSetVoteMode('public')}
               >
-                Publica
+                Pública
               </button>
               <button
                 type="button"
@@ -377,7 +377,7 @@ const Reveal = () => {
               className="primary"
               onClick={() => dispatch({ type: 'START_SECRET_VOTE' })}
             >
-              Iniciar votacion secreta
+              Iniciar votación secreta
             </button>
           </div>
         )}
@@ -427,7 +427,7 @@ const Reveal = () => {
                 dispatch({ type: 'CANCEL_SECRET_VOTE' });
               }}
             >
-              Cancelar votacion secreta
+              Cancelar votación secreta
             </button>
           )}
           <button type="button" className="ghost" onClick={() => dispatch({ type: 'RESET_GAME' })}>

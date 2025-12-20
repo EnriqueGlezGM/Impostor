@@ -22,7 +22,7 @@ const Deal = () => {
           <h2>Todos listos</h2>
           <p className="muted">Cada jugador conoce su rol. Es momento de empezar.</p>
           <button type="button" className="primary" onClick={() => dispatch({ type: 'START_ROUND' })}>
-            {timerEnabled ? 'Empezar ronda' : 'Ir a votacion'}
+            {timerEnabled ? 'Empezar ronda' : 'Ir a votación'}
           </button>
         </div>
       </section>

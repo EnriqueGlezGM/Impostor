@@ -60,7 +60,7 @@ const Setup = () => {
   const onStart = () => {
     const nextErrors = [];
     if (state.playerCount < 3 || state.playerCount > 15) {
-      nextErrors.push('El numero de jugadores debe estar entre 3 y 15.');
+      nextErrors.push('El número de jugadores debe estar entre 3 y 15.');
     }
 
     if (!wordEntries.length) {
@@ -69,9 +69,9 @@ const Setup = () => {
 
     if (state.categoryMode === 'custom') {
       if (!selectedCategories.length) {
-        nextErrors.push('Selecciona al menos una categoria.');
+        nextErrors.push('Selecciona al menos una categoría.');
       } else if (!filteredEntries.length) {
-        nextErrors.push('No hay palabras para las categorias seleccionadas.');
+        nextErrors.push('No hay palabras para las categorías seleccionadas.');
       }
     }
 
@@ -98,7 +98,7 @@ const Setup = () => {
           Ajusta jugadores y prepara la partida.
         </p>
         <div className="field">
-          <label htmlFor="playerCount">Numero de jugadores</label>
+          <label htmlFor="playerCount">Número de jugadores</label>
           <div className="stepper">
             <button
               type="button"
@@ -173,7 +173,7 @@ const Setup = () => {
           </div>
         </div>
         <div className="field">
-          <label>Categorias</label>
+          <label>Categorías</label>
           <div className="toggle">
             <button
               type="button"
@@ -191,12 +191,12 @@ const Setup = () => {
             </button>
           </div>
           <span className="helper">
-            Categorias seleccionadas: {selectedCount || 0} · Palabras disponibles: {availableWordsCount || 0}
+            Categorías seleccionadas: {selectedCount || 0} · Palabras disponibles: {availableWordsCount || 0}
           </span>
         </div>
         {state.categoryMode === 'custom' && (
           <div className="field">
-            <label>Selecciona categorias</label>
+            <label>Selecciona categorías</label>
             <div className="option-grid">
               {categories.map((category) => (
                 <label key={category} className="checkbox">
@@ -233,11 +233,11 @@ const Setup = () => {
               Varios impostores
             </button>
           </div>
-          <span className="helper">Activa para ajustar mas de un impostor.</span>
+          <span className="helper">Activa para ajustar más de un impostor.</span>
         </div>
         {state.allowMultipleImpostors && (
           <div className="field field--danger">
-            <label htmlFor="impostorCount">Numero de impostores</label>
+            <label htmlFor="impostorCount">Número de impostores</label>
             <div className="stepper">
               <button
                 type="button"
@@ -295,7 +295,7 @@ const Setup = () => {
         </div>
         {state.timerEnabled && (
           <div className="field">
-            <label htmlFor="timer">Duracion (segundos)</label>
+            <label htmlFor="timer">Duración (segundos)</label>
             <input
               id="timer"
               type="number"

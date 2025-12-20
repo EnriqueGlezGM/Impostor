@@ -51,7 +51,7 @@ const AppLayout = () => {
   }, [theme]);
 
   const onExit = () => {
-    const confirmed = window.confirm('Finalizar partida y volver a configuracion?');
+    const confirmed = window.confirm('Finalizar partida y volver a configuración?');
     if (confirmed) {
       dispatch({ type: 'RESET_GAME' });
     }
@@ -138,10 +138,10 @@ const AppLayout = () => {
             aria-label="Instrucciones del juego"
             onClick={(event) => event.stopPropagation()}
           >
-            <h2>Como jugar</h2>
+            <h2>Cómo jugar</h2>
             <ol className="modal__list">
-              <li>Configura jugadores, categorias y reglas.</li>
-              <li>Pasa el movil y mira tu rol en secreto.</li>
+              <li>Configura jugadores, categorías y reglas.</li>
+              <li>Pasa el móvil y mira tu rol en secreto.</li>
               <li>Da pistas sin decir la palabra.</li>
               <li>Vota al impostor cuando termine la ronda.</li>
               <li>Si aciertan todos los impostores, ganan los inocentes.</li>
