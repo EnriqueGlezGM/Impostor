@@ -10,14 +10,14 @@ Comida;sushi;palillos
 Comida;paella;domingo
 Comida;pizza;caja cuadrada
 Comida;hamburguesa;doble piso
-Comida;ensalada;tenedor frio
-Comida;sandwich;papel aluminio
+Comida;ensalada;tenedor frío
+Comida;sándwich;papel aluminio
 Comida;croqueta;bar
 Comida;gazpacho;verano
 Comida;hummus;pan pita
 Comida;arepa;plancha
 Comida;empanada;bolsillo
-Comida;lasagna;capas
+Comida;lasaña;capas
 Comida;risotto;cuchara
 Comida;taco;mancha
 Comida;ramen;bol hondo
@@ -27,14 +27,14 @@ Comida;curry;olor fuerte
 Comida;kebab;papel
 Comida;falafel;bolita
 Comida;donut;agujero
-Comida;churro;azucar
+Comida;churro;azúcar
 Comida;helado;goteo
 Comida;flan;cuchara
 Comida;yogur;tapa
 Comida;queso;tabla
-Comida;jamon;corte fino
+Comida;jamón;corte fino
 Comida;salchicha;mostaza
-Comida;albondiga;salsa
+Comida;albóndiga;salsa
 Comida;gazpacho;vaso
 Comida;pan;bolsa
 Comida;croissant;migajas
@@ -43,29 +43,29 @@ Comida;chocolate;envoltorio
 Comida;palomita;cine
 Comida;granola;crujido
 Comida;fresa;semillas
-Comida;platano;curva
+Comida;plátano;curva
 Comida;uva;racimo
 Comida;manzana;crujido
 Animal;perro;correa
 Animal;gato;bigotes
 Animal;conejo;zanahoria
-Animal;hamster;rueda
+Animal;hámster;rueda
 Animal;caballo;herradura
 Animal;vaca;campana
 Animal;oveja;lana
 Animal;cerdo;barro
 Animal;gallina;corral
 Animal;pato;charco
-Animal;aguila;circulos
-Animal;buho;noche
+Animal;águila;círculos
+Animal;búho;noche
 Animal;paloma;plaza
 Animal;cuervo;brillo
-Animal;delfin;salto
-Animal;tiburon;silencio
+Animal;delfín;salto
+Animal;tiburón;silencio
 Animal;ballena;eco
 Animal;pulpo;tinta
 Animal;medusa;picor
-Animal;pingino;traje
+Animal;pingüino;traje
 Animal;koala;abrazo
 Animal;canguro;bolsillo
 Animal;zorro;sigilo
@@ -75,12 +75,12 @@ Animal;ciervo;ramas
 Animal;jirafa;mirador
 Animal;elefante;memoria
 Animal;rinoceronte;blindaje
-Animal;camaleon;cambio
+Animal;camaleón;cambio
 Animal;serpiente;zigzag
 Animal;lagarto;sol
 Animal;abeja;zumbido
 Animal;mariposa;aleteo
-Objeto;paraguas;chaparron
+Objeto;paraguas;chaparrón
 Objeto;linterna;corte luz
 Objeto;reloj;segundero
 Objeto;llave;bolsillo
@@ -89,26 +89,26 @@ Objeto;gafas;huellas
 Objeto;auricular;cable
 Objeto;cargador;enchufe
 Objeto;teclado;clic
-Objeto;raton;alfombrilla
+Objeto;ratón;alfombrilla
 Objeto;monitor;reflejo
 Objeto;impresora;atasco
 Objeto;microondas;pitido
 Objeto;nevera;imanes
 Objeto;horno;guante
-Objeto;sarten;aceite
+Objeto;sartén;aceite
 Objeto;cuchillo;tabla
 Objeto;tenedor;tres puntas
 Objeto;cuchara;postre
 Objeto;plato;lavavajillas
-Objeto;vaso;condensacion
+Objeto;vaso;condensación
 Objeto;botella;rosca
 Objeto;mochila;cremallera
 Objeto;maleta;ruedas
 Objeto;casco;hebilla
 Objeto;cepillo;pelos
 Objeto;toalla;ganchito
-Objeto;jabon;espuma
-Objeto;champu;ducha
+Objeto;jabón;espuma
+Objeto;champú;ducha
 Objeto;secador;ruido
 Objeto;plancha;vapor
 Objeto;aspiradora;polvo
@@ -116,146 +116,146 @@ Objeto;ventilador;verano
 Objeto;calefactor;invierno
 Objeto;televisor;mando
 Lugar;aeropuerto;cola
-Lugar;estacion;andén
+Lugar;estación;andén
 Lugar;biblioteca;silencio
 Lugar;farmacia;ticket
 Lugar;hospital;pasillo
 Lugar;gimnasio;pesas
 Lugar;estadio;gradas
 Lugar;cine;butaca
-Lugar;teatro;telon
+Lugar;teatro;telón
 Lugar;museo;pasos
 Lugar;playa;arena
-Lugar;montana;sendero
+Lugar;montaña;sendero
 Lugar;parque;banco
 Lugar;plaza;fuente
 Lugar;mercado;puestos
 Lugar;supermercado;carrito
-Lugar;panaderia;cola
-Lugar;cafeteria;taza
+Lugar;panadería;cola
+Lugar;cafetería;taza
 Lugar;bar;servilleta
 Lugar;restaurante;cuenta
-Lugar;hotel;recepcion
-Lugar;oficina;reunion
+Lugar;hotel;recepción
+Lugar;oficina;reunión
 Lugar;escuela;timbre
 Lugar;universidad;campus
 Lugar;iglesia;eco
 Lugar;aparcamiento;ticket
 Lugar;gasolinera;repostar
 Lugar;tienda;probador
-Lugar;peluqueria;espejo
-Lugar;lavanderia;monedas
-Profesion;medico;guardia
-Profesion;enfermero;turno
-Profesion;dentista;guante
-Profesion;abogado;pleito
-Profesion;bombero;sirena
-Profesion;policia;radio
-Profesion;piloto;cabina
-Profesion;azafato;pasillo
-Profesion;camarero;bandeja
-Profesion;cocinero;delantal
-Profesion;panadero;harina
-Profesion;carpintero;serrin
-Profesion;fontanero;llave inglesa
-Profesion;electricista;fusible
-Profesion;mecanico;grasa
-Profesion;ingeniero;diagrama
-Profesion;programador;commit
-Profesion;disenador;paleta
-Profesion;arquitecto;maqueta
-Profesion;fotografo;enfoque
-Profesion;periodista;titular
-Profesion;profesor;pizarra
-Profesion;psicologo;consulta
-Profesion;veterinario;jaula
-Profesion;farmaceutico;receta
-Profesion;cajero;codigo barras
-Profesion;repartidor;timbre
-Profesion;taxista;parada
-Profesion;jardinero;tijera
-Profesion;actor;ensayo
-Accion;cocinar;delantal
-Accion;viajar;maleta
-Accion;conducir;peaje
-Accion;estudiar;subrayador
-Accion;trabajar;deadline
-Accion;dormir;siesta
-Accion;leer;marcador
-Accion;escribir;tecla
-Accion;dibujar;lapiz
-Accion;cantar;karaoke
-Accion;bailar;luces
-Accion;correr;zapatilla
-Accion;nadar;gafas
-Accion;escalar;magnesio
-Accion;acampar;tienda
-Accion;pescar;anzuelo
-Accion;comprar;bolsa
-Accion;vender;rebaja
-Accion;llamar;tono
-Accion;grabar;microfono
-Accion;fotografiar;flash
-Accion;limpiar;guante
-Accion;ordenar;cajon
-Accion;planificar;agenda
-Accion;reservar;confirmacion
-Accion;celebrar;confeti
-Accion;discutir;tono
-Accion;negociar;apreton
-Accion;descansar;hamaca
-Accion;meditar;silencio
-Accion;improvisar;sin plan
+Lugar;peluquería;espejo
+Lugar;lavandería;monedas
+Profesión;médico;guardia
+Profesión;enfermero;turno
+Profesión;dentista;guante
+Profesión;abogado;pleito
+Profesión;bombero;sirena
+Profesión;policía;radio
+Profesión;piloto;cabina
+Profesión;azafato;pasillo
+Profesión;camarero;bandeja
+Profesión;cocinero;delantal
+Profesión;panadero;harina
+Profesión;carpintero;serrín
+Profesión;fontanero;llave inglesa
+Profesión;electricista;fusible
+Profesión;mecánico;grasa
+Profesión;ingeniero;diagrama
+Profesión;programador;commit
+Profesión;diseñador;paleta
+Profesión;arquitecto;maqueta
+Profesión;fotógrafo;enfoque
+Profesión;periodista;titular
+Profesión;profesor;pizarra
+Profesión;psicólogo;consulta
+Profesión;veterinario;jaula
+Profesión;farmacéutico;receta
+Profesión;cajero;código de barras
+Profesión;repartidor;timbre
+Profesión;taxista;parada
+Profesión;jardinero;tijera
+Profesión;actor;ensayo
+Acción;cocinar;delantal
+Acción;viajar;maleta
+Acción;conducir;peaje
+Acción;estudiar;subrayador
+Acción;trabajar;deadline
+Acción;dormir;siesta
+Acción;leer;marcador
+Acción;escribir;tecla
+Acción;dibujar;lápiz
+Acción;cantar;karaoke
+Acción;bailar;luces
+Acción;correr;zapatilla
+Acción;nadar;gafas
+Acción;escalar;magnesio
+Acción;acampar;tienda
+Acción;pescar;anzuelo
+Acción;comprar;bolsa
+Acción;vender;rebaja
+Acción;llamar;tono
+Acción;grabar;micrófono
+Acción;fotografiar;flash
+Acción;limpiar;guante
+Acción;ordenar;cajón
+Acción;planificar;agenda
+Acción;reservar;confirmación
+Acción;celebrar;confeti
+Acción;discutir;tono
+Acción;negociar;apretón
+Acción;descansar;hamaca
+Acción;meditar;silencio
+Acción;improvisar;sin plan
 Comida;burrito;medianoche
 Comida;nacho;cine
-Comida;tiramisu;cuchara pequena
+Comida;tiramisú;cuchara pequeña
 Comida;brownie;dedos
-Comida;cupcake;cumpleanos
-Comida;muffin;manana
+Comida;cupcake;cumpleaños
+Comida;muffin;mañana
 Comida;pancake;sirop
 Comida;waffle;hotel
 Comida;crepe;puesto calle
 Comida;macaron;caja bonita
 Comida;pudding;vasito
-Comida;cuscus;especias
+Comida;cuscús;especias
 Comida;gnocchi;domingo lento
 Comida;dumpling;vapor
 Comida;kimchi;olor raro
 Comida;edamame;barra
 Comida;tofu;plancha
 Comida;tempura;crujido
-Comida;sashimi;plato frio
+Comida;sashimi;plato frío
 Comida;bruschetta;brindis
 Comida;pesto;verde
 Comida;guacamole;nachera
-Comida;pisto;sarten
+Comida;pisto;sartén
 Comida;tostada;crujido
 Comida;bizcocho;merienda
-Animal;leon;melena
+Animal;león;melena
 Animal;tigre;rayas
 Animal;puma;sombra
 Animal;pantera;sigilo
 Animal;hiena;risita
-Animal;mono;imitacion
+Animal;mono;imitación
 Animal;gorila;pecho
-Animal;orangutan;bosque
-Animal;cebra;patron
-Animal;hipopotamo;rio lento
+Animal;orangután;bosque
+Animal;cebra;patrón
+Animal;hipopótamo;río lento
 Animal;cocodrilo;orilla
 Animal;tortuga;paso lento
 Animal;rana;charco
-Animal;sapo;jardin
-Animal;salamandra;piedra humeda
-Animal;loro;repeticion
+Animal;sapo;jardín
+Animal;salamandra;piedra húmeda
+Animal;loro;repetición
 Animal;canario;jaula
 Animal;pavo;pluma
 Animal;avestruz;carrera
 Animal;flamenco;una pata
 Animal;erizo;bola
-Animal;mapache;ladron
+Animal;mapache;ladrón
 Animal;nutria;juego
 Animal;castor;dique
-Animal;murcielago;techo
+Animal;murciélago;techo
 Objeto;martillo;clavo
 Objeto;destornillador;tornillo
 Objeto;tijera;papel
@@ -264,24 +264,24 @@ Objeto;pegamento;manualidad
 Objeto;cinta;paquete
 Objeto;carpeta;archivos
 Objeto;cuaderno;espiral
-Objeto;boligrafo;mancha
+Objeto;bolígrafo;mancha
 Objeto;lapicero;mina
 Objeto;borrador;viruta
-Objeto;regla;linea
+Objeto;regla;línea
 Objeto;calculadora;teclas
-Objeto;termometro;fiebre
+Objeto;termómetro;fiebre
 Objeto;candado;llave gemela
 Objeto;silla;respaldo
 Objeto;mesa;esquina
 Objeto;cortina;ventana
-Objeto;almohada;sillon
+Objeto;almohada;sillón
 Objeto;manta;siesta
 Objeto;tostadora;palanca
 Objeto;batidora;ruido
 Objeto;cafetera;goteo
 Objeto;llavero;sonido
 Objeto;radio;ruleta
-Lugar;zoologico;familia
+Lugar;zoológico;familia
 Lugar;acuario;cristal
 Lugar;discoteca;luces
 Lugar;auditorio;fila
@@ -295,114 +295,115 @@ Lugar;castillo;muralla
 Lugar;palacio;escalera
 Lugar;puerto;amarre
 Lugar;puente;paso
-Lugar;tunel;eco
+Lugar;túnel;eco
 Lugar;autopista;peaje
 Lugar;granja;amanecer
-Lugar;fabrica;turno
-Lugar;almacen;palet
+Lugar;fábrica;turno
+Lugar;almacén;palet
 Lugar;taller;herramienta
 Lugar;laboratorio;bata
 Lugar;tribunal;estrado
-Lugar;comisaria;denuncia
+Lugar;comisaría;denuncia
 Lugar;mercadillo;regateo
 Lugar;mirador;atardecer
-Profesion;cirujano;mascarilla
-Profesion;traductor;doble texto
-Profesion;contable;cierre
-Profesion;auditor;carpeta
-Profesion;albanil;cemento
-Profesion;soldador;chispa
-Profesion;minero;casco sucio
-Profesion;pescador;amanecer
-Profesion;pastelero;glaseado
-Profesion;frutero;caja
-Profesion;florista;ramo
-Profesion;joyero;lupa
-Profesion;relojero;muelle
-Profesion;cientifico;hipotesis
-Profesion;investigador;nota
-Profesion;entrenador;pizarra
-Profesion;arbitro;silbato
-Profesion;socorrista;torre
-Profesion;astronauta;gravedad
-Profesion;meteorologo;mapa
-Profesion;guia;banderita
-Profesion;locutor;microfono
-Profesion;barbero;navaja
-Profesion;carnicero;delantal
-Profesion;camionero;kilometro
-Accion;saltar;charco
-Accion;reir;sin motivo
-Accion;llorar;pelicula
-Accion;susurrar;secreto
-Accion;gritar;gol
-Accion;escuchar;auricular prestado
-Accion;observar;desde lejos
-Accion;perseguir;pasillo
-Accion;esconder;detras
-Accion;buscar;bolsillos
-Accion;navegar;pestana
-Accion;patinar;pista
-Accion;volar;ventanilla
-Accion;bucear;aleta
-Accion;aplaudir;final
-Accion;brindar;copas
-Accion;desayunar;prisa
-Accion;cenar;tarde
-Accion;merendar;entre horas
-Accion;jugar;turno
-Accion;entrenar;serie
-Accion;reciclar;contenedor
-Accion;reparar;parche
-Accion;decorar;guirnalda
-Accion;cortar;tabla
-Deporte;futbol;penalti
+Profesión;cirujano;mascarilla
+Profesión;traductor;doble texto
+Profesión;contable;cierre
+Profesión;auditor;carpeta
+Profesión;albañil;cemento
+Profesión;soldador;chispa
+Profesión;minero;casco sucio
+Profesión;pescador;amanecer
+Profesión;pastelero;glaseado
+Profesión;frutero;caja
+Profesión;florista;ramo
+Profesión;joyero;lupa
+Profesión;relojero;muelle
+Profesión;científico;hipótesis
+Profesión;investigador;nota
+Profesión;entrenador;pizarra
+Profesión;árbitro;silbato
+Profesión;socorrista;torre
+Profesión;astronauta;gravedad
+Profesión;meteorólogo;mapa
+Profesión;guía;banderita
+Profesión;locutor;micrófono
+Profesión;barbero;navaja
+Profesión;carnicero;delantal
+Profesión;camionero;kilómetro
+Acción;saltar;charco
+Acción;reír;sin motivo
+Acción;llorar;película
+Acción;susurrar;secreto
+Acción;gritar;gol
+Acción;escuchar;auricular prestado
+Acción;observar;desde lejos
+Acción;perseguir;pasillo
+Acción;esconder;detrás
+Acción;buscar;bolsillos
+Acción;navegar;pestaña
+Acción;patinar;pista
+Acción;volar;ventanilla
+Acción;bucear;aleta
+Acción;aplaudir;final
+Acción;brindar;copas
+Acción;desayunar;prisa
+Acción;cenar;tarde
+Acción;merendar;entre horas
+Acción;jugar;turno
+Acción;entrenar;serie
+Acción;reciclar;contenedor
+Acción;reparar;parche
+Acción;decorar;guirnalda
+Acción;cortar;tabla
+Deporte;fútbol;penalti
 Deporte;baloncesto;triple
 Deporte;tenis;saque
-Deporte;padel;cristal
+Deporte;pádel;cristal
 Deporte;boxeo;campana
 Deporte;voleibol;red
 Deporte;balonmano;resina
 Deporte;rugby;melé
-Deporte;beisbol;bate
+Deporte;béisbol;bate
 Deporte;hockey;disco
 Deporte;golf;green
 Deporte;atletismo;pista
 Deporte;gimnasia;colchoneta
 Deporte;esgrima;careta
 Deporte;surf;ola
-Deporte;esqui;remonte
+Deporte;esquí;remonte
 Deporte;snowboard;tabla
 Deporte;patinaje;hielo
-Deporte;ciclismo;peloton
-Deporte;triatlon;transicion
+Deporte;ciclismo;pelotón
+Deporte;triatlón;transición
 Deporte;judo;kimono
-Deporte;karate;cinturon
+Deporte;karate;cinturón
 Deporte;taekwondo;patada
 Deporte;remo;cadencia
 Deporte;yoga;esterilla
-Tecnologia;servidor;sala fria
-Tecnologia;firewall;regla
-Tecnologia;nube;sin disco
-Tecnologia;algoritmo;caja negra
-Tecnologia;sensor;lectura
-Tecnologia;dron;zumbido
-Tecnologia;robot;rutina
-Tecnologia;laser;haz
-Tecnologia;chip;silicio
-Tecnologia;bateria;porcentaje
-Tecnologia;satelite;orbita
-Tecnologia;consola;mandos
-Tecnologia;navegador;pestanas
-Tecnologia;wifi;clave
-Tecnologia;bluetooth;emparejar
-Tecnologia;codigo;pull request
-Tecnologia;token;caduca
-Tecnologia;backup;por si acaso
-Tecnologia;kernel;reinicio
-Tecnologia;plugin;extra
-Tecnologia;chatbot;respuesta rapida
-Tecnologia;streaming;buffer
-Tecnologia;gps;flecha
-Tecnologia;api;endpoint
-Tecnologia;criptografia;llave`,cf=()=>{const{state:a,dispatch:h}=Rt(),[d,O]=re.useState([]),k=re.useMemo(()=>rf(sf),[]),_=re.useMemo(()=>{const C=new Set;return k.forEach(Q=>{Q.category&&C.add(Q.category)}),Array.from(C).sort((Q,F)=>Q.localeCompare(F,"es"))},[k]),D=re.useMemo(()=>a.selectedCategories.filter(C=>_.includes(C)),[_,a.selectedCategories]),B=re.useMemo(()=>a.categoryMode!=="custom"?k:D.length?k.filter(C=>D.includes(C.category)):[],[D,a.categoryMode,k]),R=a.categoryMode==="custom"?D.length:_.length,W=a.categoryMode==="custom"?B.length:k.length,G=()=>{O([]),h({type:"RESET_ALL"})},j=C=>{if(C==="all"){h({type:"SET_CATEGORY_MODE",payload:"all"});return}!D.length&&_.length&&h({type:"SET_SELECTED_CATEGORIES",payload:_}),h({type:"SET_CATEGORY_MODE",payload:"custom"})},V=C=>{const Q=D.includes(C)?D.filter(F=>F!==C):[...D,C];h({type:"SET_SELECTED_CATEGORIES",payload:Q})},Z=()=>{const C=[];if((a.playerCount<3||a.playerCount>15)&&C.push("El numero de jugadores debe estar entre 3 y 15."),k.length||C.push("Agrega palabras en src/data/words.csv para iniciar la partida."),a.categoryMode==="custom"&&(D.length?B.length||C.push("No hay palabras para las categorias seleccionadas."):C.push("Selecciona al menos una categoria.")),a.players.filter(F=>!F.name.trim()).length&&C.push("Todos los jugadores deben tener un nombre."),O(C),C.length===0){const F=lf(B.length?B:k);h({type:"START_GAME",payload:{word:F.word,wordHint:F.hint}})}};return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:"Configura la partida"}),s.jsx("p",{className:"muted",children:"Ajusta jugadores y prepara la partida."}),s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"playerCount",children:"Numero de jugadores"}),s.jsxs("div",{className:"stepper",children:[s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>h({type:"SET_PLAYER_COUNT",payload:a.playerCount-1}),"aria-label":"Disminuir jugadores",children:"▾"}),s.jsx("input",{id:"playerCount",className:"stepper__input",type:"number",min:3,max:15,value:a.playerCount,onChange:C=>h({type:"SET_PLAYER_COUNT",payload:Number(C.target.value)})}),s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>h({type:"SET_PLAYER_COUNT",payload:a.playerCount+1}),"aria-label":"Aumentar jugadores",children:"▴"})]})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Jugadores"}),s.jsx("div",{className:"stack",children:a.players.map((C,Q)=>s.jsxs("div",{className:"player-row",children:[s.jsxs("div",{className:"player-name",children:[s.jsx("span",{className:"color-dot",style:{"--player-color":C.color},"aria-hidden":"true"}),s.jsx("input",{type:"text",placeholder:`Jugador ${Q+1}`,value:C.name,onChange:F=>h({type:"SET_PLAYER_NAME",payload:{index:Q,name:F.target.value}})})]}),s.jsx("input",{type:"color",className:"color-input",value:C.color,onChange:F=>h({type:"SET_PLAYER_COLOR",payload:{index:Q,color:F.target.value}}),"aria-label":`Color de ${C.name||`Jugador ${Q+1}`}`})]},Q))})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Categorias"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.categoryMode!=="custom"?"chip chip--active":"chip",onClick:()=>j("all"),children:"Todas"}),s.jsx("button",{type:"button",className:a.categoryMode==="custom"?"chip chip--active":"chip",onClick:()=>j("custom"),children:"Seleccionar"})]}),s.jsxs("span",{className:"helper",children:["Categorias seleccionadas: ",R||0," · Palabras disponibles: ",W||0]})]}),a.categoryMode==="custom"&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Selecciona categorias"}),s.jsx("div",{className:"option-grid",children:_.map(C=>s.jsxs("label",{className:"checkbox",children:[s.jsx("input",{type:"checkbox",checked:D.includes(C),onChange:()=>V(C)}),C]},C))})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Impostores"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.allowMultipleImpostors?"chip":"chip chip--active",onClick:()=>h({type:"SET_ALLOW_MULTIPLE_IMPOSTORS",payload:!1}),children:"1 impostor"}),s.jsx("button",{type:"button",className:a.allowMultipleImpostors?"chip chip--active":"chip",onClick:()=>h({type:"SET_ALLOW_MULTIPLE_IMPOSTORS",payload:!0}),children:"Varios impostores"})]}),s.jsx("span",{className:"helper",children:"Activa para ajustar mas de un impostor."})]}),a.allowMultipleImpostors&&s.jsxs("div",{className:"field field--danger",children:[s.jsx("label",{htmlFor:"impostorCount",children:"Numero de impostores"}),s.jsxs("div",{className:"stepper",children:[s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>h({type:"SET_IMPOSTOR_COUNT",payload:a.impostorCount-1}),"aria-label":"Disminuir impostores",children:"▾"}),s.jsx("input",{id:"impostorCount",className:"stepper__input",type:"number",min:1,max:a.playerCount,value:a.impostorCount,onChange:C=>h({type:"SET_IMPOSTOR_COUNT",payload:Number(C.target.value)})}),s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>h({type:"SET_IMPOSTOR_COUNT",payload:a.impostorCount+1}),"aria-label":"Aumentar impostores",children:"▴"})]}),s.jsx("span",{className:"helper",children:"Se permiten varios impostores."})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Temporizador de ronda"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.timerEnabled?"chip":"chip chip--active",onClick:()=>h({type:"SET_TIMER_ENABLED",payload:!1}),children:"Desactivado"}),s.jsx("button",{type:"button",className:a.timerEnabled?"chip chip--active":"chip",onClick:()=>h({type:"SET_TIMER_ENABLED",payload:!0}),children:"Activado"})]})]}),a.timerEnabled&&s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"timer",children:"Duracion (segundos)"}),s.jsx("input",{id:"timer",type:"number",min:30,max:900,step:30,value:a.timerSeconds,onChange:C=>h({type:"SET_TIMER_SECONDS",payload:Number(C.target.value)})}),s.jsx("span",{className:"helper",children:"Entre 30 y 900 segundos."})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Pistas"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.hintsEnabled?"chip chip--active":"chip",onClick:()=>h({type:"SET_HINTS_ENABLED",payload:!0}),children:"Activadas"}),s.jsx("button",{type:"button",className:a.hintsEnabled?"chip":"chip chip--active",onClick:()=>h({type:"SET_HINTS_ENABLED",payload:!1}),children:"Desactivadas"})]}),s.jsx("span",{className:"helper",children:"Si se activan, solo las ve el impostor."})]}),d.length>0&&s.jsx("div",{className:"alert",role:"alert",children:d.map(C=>s.jsx("p",{children:C},C))}),s.jsxs("div",{className:"actions",children:[s.jsx("button",{type:"button",className:"primary",onClick:Z,children:"Iniciar"}),s.jsx("button",{type:"button",className:"ghost",onClick:G,children:"Reiniciar ajustes"})]})]})})},df=()=>{const{state:a,dispatch:h}=Rt(),{dealOrder:d,dealStep:O,players:k,showRole:_,impostorIndices:D,word:B,wordHint:R,hintsEnabled:W,timerEnabled:G}=a;if(O>=d.length)return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card card--center",children:[s.jsx("h2",{children:"Todos listos"}),s.jsx("p",{className:"muted",children:"Cada jugador conoce su rol. Es momento de empezar."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>h({type:"START_ROUND"}),children:G?"Empezar ronda":"Ir a votacion"})]})});const j=d[O],V=k[j]||{name:"Jugador",color:"#9aa0a6"},Z=D.includes(j),C=_?"screen screen--full":"screen";return s.jsx("section",{className:C,children:_?s.jsxs("div",{className:"card card--center role",children:[Z?s.jsxs(s.Fragment,{children:[s.jsx("span",{className:"badge badge--alert",children:"Impostor"}),s.jsxs("p",{className:"muted",children:["Jugador:"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":V.color},children:V.name})]}),s.jsx("h2",{children:"Eres el IMPOSTOR"}),s.jsx("p",{className:"muted",children:"No tienes palabra. Observa y disimula."}),W&&R&&s.jsxs(s.Fragment,{children:[s.jsx("p",{className:"muted",children:"Pista:"}),s.jsx("p",{className:"word-hint",children:R})]})]}):s.jsxs(s.Fragment,{children:[s.jsx("span",{className:"badge",children:"Inocente"}),s.jsxs("p",{className:"muted",children:["Jugador:"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":V.color},children:V.name})]}),s.jsx("h2",{children:"Tu palabra es:"}),s.jsx("p",{className:"word",children:B})]}),s.jsx("button",{type:"button",className:"ghost",onClick:()=>h({type:"HIDE_ROLE"}),children:"Ocultar"})]}):s.jsxs("div",{className:"card card--center",children:[s.jsx("h2",{children:"Pasa el móvil"}),s.jsxs("p",{className:"muted",children:["Es el turno de"," ",s.jsx("strong",{className:"player-tag",style:{"--player-color":V.color},children:V.name}),". Nadie más debe mirar."]}),s.jsx("button",{type:"button",className:"primary",onClick:()=>h({type:"SHOW_ROLE"}),children:"Ver mi rol"})]})})},ff=({seconds:a})=>{const[h,d]=re.useState(a),[O,k]=re.useState(!0),_=re.useRef(!1);re.useEffect(()=>{d(a),k(!0),_.current=!1},[a]),re.useEffect(()=>{if(!O||h<=0)return;const B=window.setInterval(()=>{d(R=>Math.max(R-1,0))},1e3);return()=>window.clearInterval(B)},[O,h]),re.useEffect(()=>{if(h!==0||_.current)return;(()=>{try{const R=window.AudioContext||window.webkitAudioContext;if(!R)return;const W=new R,G=W.createOscillator(),j=W.createGain();G.type="square",j.gain.value=1e-4,G.connect(j),j.connect(W.destination);const V=W.currentTime,Z=(F,Re)=>{G.frequency.setValueAtTime(Re,F),j.gain.setValueAtTime(1e-4,F),j.gain.exponentialRampToValueAtTime(.18,F+.02),j.gain.exponentialRampToValueAtTime(1e-4,F+.25)},C=8,Q=.18;for(let F=0;F<C;F+=1)Z(V+F*Q,F%2===0?880:660);G.start(V),G.stop(V+C*Q+.1),G.onended=()=>W.close()}catch{}})(),_.current=!0},[h]);const D=()=>{d(a),k(!0),_.current=!1};return s.jsxs("div",{className:"timer",children:[s.jsx("div",{className:`timer__face ${h===0?"timer__face--done":""}`,children:tf(h)}),s.jsxs("div",{className:"timer__actions",children:[s.jsx("button",{type:"button",className:"chip",onClick:()=>k(B=>!B),children:O?"Pausar":"Continuar"}),s.jsx("button",{type:"button",className:"chip",onClick:D,children:"Reiniciar"})]}),h===0&&s.jsx("p",{className:"muted",children:"Tiempo agotado. Finaliza la ronda cuando quieras."})]})},pf=()=>{const{state:a,dispatch:h}=Rt();return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:"Ronda en marcha"}),s.jsx("p",{className:"muted",children:"Hablad en círculo, describid la palabra con una pista breve y tratad de descubrir quién no sabe de qué se habla."}),a.timerEnabled&&s.jsx(ff,{seconds:a.timerSeconds}),s.jsx("button",{type:"button",className:"primary",onClick:()=>h({type:"END_ROUND"}),children:"Finalizar ronda"})]})})},Hs=({value:a,options:h,placeholder:d,onChange:O,disabled:k})=>{const[_,D]=re.useState(!1),B=re.useRef(null),R=re.useId(),W=h.find(j=>String(j.value)===String(a));re.useEffect(()=>{if(!_)return;const j=Z=>{B.current?.contains(Z.target)||D(!1)},V=Z=>{Z.key==="Escape"&&D(!1)};return document.addEventListener("pointerdown",j),document.addEventListener("keydown",V),()=>{document.removeEventListener("pointerdown",j),document.removeEventListener("keydown",V)}},[_]);const G=j=>{O?.(j.value),D(!1)};return s.jsxs("div",{className:"color-select",ref:B,children:[s.jsxs("button",{type:"button",className:"color-select__trigger","aria-haspopup":"listbox","aria-expanded":_,"aria-controls":R,onClick:()=>D(j=>!j),disabled:k,children:[W?s.jsx("span",{className:"player-tag",style:{"--player-color":W.color},children:W.label}):s.jsx("span",{className:"color-select__placeholder",children:d}),s.jsx("span",{className:"color-select__chevron","aria-hidden":"true",children:"▾"})]}),_&&s.jsx("div",{className:"color-select__list",role:"listbox",id:R,children:h.map(j=>{const V=String(j.value)===String(a);return s.jsx("button",{type:"button",className:`color-select__option ${V?"color-select__option--selected":""}`,role:"option","aria-selected":V,onClick:()=>G(j),children:s.jsx("span",{className:"player-tag",style:{"--player-color":j.color},children:j.label})},j.value)})})]})},mf=()=>{const{state:a,dispatch:h}=Rt(),[d,O]=re.useState(""),[k,_]=re.useState(""),[D,B]=re.useState(!1),R=re.useMemo(()=>(a.impostorIndices||[]).map(I=>({index:I,name:a.players[I]?.name||"Jugador",color:a.players[I]?.color||"#9aa0a6"})),[a.impostorIndices,a.players]),W=a.hintsEnabled&&a.wordHint?a.wordHint:"",G=re.useMemo(()=>a.alivePlayers.length?a.alivePlayers:a.players.map((I,q)=>q),[a.alivePlayers,a.players]),j=re.useMemo(()=>a.players.map((I,q)=>({name:I.name,color:I.color,index:q})).filter(I=>!G.includes(I.index)),[G,a.players]),V=G.length-(a.impostorIndices||[]).filter(I=>G.includes(I)).length,Z=a.voteMode==="secret",C=Z&&a.secretVoteOrder.length>0&&a.secretVoteStep<a.secretVoteOrder.length,Q=a.tieCandidates.length?a.tieCandidates:G,F=re.useMemo(()=>Q.map(I=>({value:String(I),label:a.players[I]?.name||"Jugador",color:a.players[I]?.color||"#9aa0a6"})),[a.players,Q]),Re=C?a.secretVoteOrder[a.secretVoteStep]:null,Ve=Re!=null?a.players[Re]:null,ze=Ve?.name||"";re.useEffect(()=>{d&&!Q.includes(Number(d))&&O(""),k&&!Q.includes(Number(k))&&_("")},[d,k,Q]),re.useEffect(()=>{B(!1),_("")},[a.secretVoteStep]);const we=()=>{if(!d)return;const I=Number(d),q=a.players[I]?.name||"Jugador";window.confirm(`Votar a ${q} como impostor?`)&&h({type:"CAST_VOTE",payload:I})},Ye=()=>{if(!k)return;const I=Number(k);window.confirm("Confirmar voto secreto?")&&(h({type:"SUBMIT_SECRET_VOTE",payload:I}),B(!1),_(""))},Ce=()=>{window.confirm("Revelar el impostor finaliza la partida. Continuar?")&&h({type:"REVEAL_IMPOSTOR"})},Ne=()=>{if(!a.lastVote||a.lastVote.status==="tie")return null;if(a.lastVote.status==="correct"){if(!a.winner){const I=Number.isInteger(a.lastVote.remainingImpostors)?a.lastVote.remainingImpostors:(a.impostorIndices||[]).filter(q=>G.includes(q)).length;return s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Correcto"}),s.jsx("p",{className:"muted",children:"Era un impostor."}),I>0&&s.jsx("p",{className:"muted",children:"Quedan más impostores."})]})}return a.winner!=="innocents"?null:s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Correcto"}),s.jsx("h3",{children:"Ganan los inocentes"}),s.jsx("div",{className:"tag-list",children:R.map(I=>s.jsx("span",{className:"player-tag",style:{"--player-color":I.color},children:I.name},I.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),W&&s.jsxs("p",{className:"muted",children:["Pista: ",W]})]})}return s.jsxs("div",{className:"reveal reveal--warning",children:[s.jsx("span",{className:"badge badge--alert",children:"Fallasteis"}),s.jsxs("p",{className:"muted",children:["No era el impostor. Se elimina a"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":a.lastVote.color||"#9aa0a6"},children:a.lastVote.name}),"."]}),!a.winner&&s.jsxs("p",{className:"muted",children:["Quedan"," ",Number.isInteger(a.lastVote.remainingInnocents)?a.lastVote.remainingInnocents:V," ","inocentes."]}),!a.winner&&s.jsx("p",{className:"muted",children:"Seguid hablando y votad de nuevo."})]})},Fe=()=>{if(!a.lastVote||a.lastVote.status!=="tie")return null;const I=Array.isArray(a.lastVote.indices)?a.lastVote.indices:[];return I.length?s.jsxs("div",{className:"reveal reveal--warning",children:[s.jsx("span",{className:"badge badge--alert",children:"Empate"}),s.jsx("div",{className:"tag-list",children:I.map(q=>s.jsx("span",{className:"player-tag",style:{"--player-color":a.players[q]?.color||"#9aa0a6"},children:a.players[q]?.name||"Jugador"},q))}),s.jsx("p",{className:"muted",children:"Votad de nuevo solo entre ellos."})]}):null},hn=()=>!a.winner||a.winner==="innocents"?null:s.jsxs("div",{className:"reveal reveal--danger",children:[s.jsx("span",{className:"badge badge--alert",children:"Impostor"}),s.jsx("h3",{children:"Ganan los impostores"}),s.jsx("div",{className:"tag-list",children:R.map(I=>s.jsx("span",{className:"player-tag",style:{"--player-color":I.color},children:I.name},I.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),W&&s.jsxs("p",{className:"muted",children:["Pista: ",W]})]}),an=()=>!a.revealImpostor||a.winner?null:s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge badge--alert",children:"Revelado"}),s.jsx("h3",{children:"Impostores"}),s.jsx("div",{className:"tag-list",children:R.map(I=>s.jsx("span",{className:"player-tag",style:{"--player-color":I.color},children:I.name},I.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),W&&s.jsxs("p",{className:"muted",children:["Pista: ",W]})]}),En=()=>!C||!ze?null:D?s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Voto secreto"}),s.jsx("h3",{children:s.jsx("span",{className:"player-tag",style:{"--player-color":Ve?.color||"#9aa0a6"},children:ze})}),s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"secretVote",children:"Votar por"}),s.jsx(Hs,{value:k,options:F,placeholder:"Selecciona un jugador",onChange:_}),s.jsx("button",{type:"button",className:"primary",onClick:Ye,disabled:!k,children:"Confirmar voto"})]})]}):s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Votacion secreta"}),s.jsxs("h3",{children:["Pasa el movil a"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":Ve?.color||"#9aa0a6"},children:ze})]}),s.jsx("p",{className:"muted",children:"Nadie mas debe mirar."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>B(!0),children:"Votar en secreto"})]}),Pe=!a.winner&&!a.revealImpostor,Me=Pe&&!Z&&!C,Ge=Pe&&Z&&!C,Ke=I=>{if(I==="public"){B(!1),_(""),h({type:"CANCEL_SECRET_VOTE"}),h({type:"SET_VOTE_MODE",payload:"public"});return}h({type:"SET_VOTE_MODE",payload:"secret"})};return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:"Votacion"}),s.jsx("p",{className:"muted",children:"Elige a quien creeis que es el impostor. Si acierta el grupo, ganan los inocentes."}),Pe&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Modo de votacion"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:Z?"chip":"chip chip--active",onClick:()=>Ke("public"),children:"Publica"}),s.jsx("button",{type:"button",className:Z?"chip chip--active":"chip",onClick:()=>Ke("secret"),children:"Secreta"})]})]}),Me&&s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"vote",children:"Votar por"}),s.jsx(Hs,{value:d,options:F,placeholder:"Selecciona un jugador",onChange:O}),s.jsx("button",{type:"button",className:"primary",onClick:we,disabled:!d,children:"Confirmar voto"})]}),Ge&&s.jsxs("div",{className:"field",children:[s.jsx("p",{className:"muted",children:"Cada jugador vota en privado, uno por uno."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>h({type:"START_SECRET_VOTE"}),children:"Iniciar votacion secreta"})]}),En(),!C&&Fe(),!C&&Ne(),!C&&hn(),!C&&an(),!C&&j.length>0&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Eliminados"}),s.jsx("div",{className:"tag-list",children:j.map(I=>s.jsx("span",{className:"player-tag",style:{"--player-color":I.color||"#9aa0a6"},children:I.name||"Jugador"},I.index))})]}),s.jsxs("div",{className:"actions",children:[a.timerEnabled&&Pe&&!C&&s.jsx("button",{type:"button",className:"ghost",onClick:()=>h({type:"PLAY_AGAIN"}),children:"Jugar otra ronda"}),Pe&&!C&&s.jsx("button",{type:"button",className:"ghost",onClick:Ce,children:"Revelar impostor"}),C&&s.jsx("button",{type:"button",className:"ghost",onClick:()=>{B(!1),_(""),h({type:"CANCEL_SECRET_VOTE"})},children:"Cancelar votacion secreta"}),s.jsx("button",{type:"button",className:"ghost",onClick:()=>h({type:"RESET_GAME"}),children:"Nueva partida"})]})]})})},Qs="impostor-theme",hf=()=>{try{const a=window.localStorage.getItem(Qs);if(a==="light"||a==="dark")return a}catch{}return"dark"},vf=()=>{const{state:a}=Rt();switch(a.screen){case"deal":return s.jsx(df,{});case"round":return s.jsx(pf,{});case"reveal":return s.jsx(mf,{});default:return s.jsx(cf,{})}},gf=()=>{const{state:a,dispatch:h}=Rt(),d=a.screen!=="setup",[O,k]=re.useState(hf),[_,D]=re.useState(!1);re.useEffect(()=>{document.documentElement.dataset.theme=O;try{window.localStorage.setItem(Qs,O)}catch{}},[O]);const B=()=>{window.confirm("Finalizar partida y volver a configuracion?")&&h({type:"RESET_GAME"})};return s.jsxs("div",{className:"app",children:[s.jsxs("header",{className:"app__header",children:[s.jsxs("div",{children:[s.jsx("p",{className:"app__eyebrow",children:"Juego de deducción social"}),s.jsx("h1",{children:"El Impostor 😈"})]}),s.jsxs("div",{className:"header-actions",children:[s.jsx("button",{type:"button",className:"icon-button",onClick:()=>D(!0),"aria-label":"Ver instrucciones",children:s.jsx("svg",{viewBox:"0 0 24 24","aria-hidden":"true",children:s.jsx("path",{d:"M12 7.5a2.5 2.5 0 0 1 2.5 2.5c0 1.2-.8 1.9-1.6 2.4-.7.5-.9.7-.9 1.6v.5M12 17.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",fill:"none",stroke:"currentColor",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"1.8"})})}),s.jsx("button",{type:"button",className:"icon-button",onClick:()=>k(R=>R==="dark"?"light":"dark"),"aria-pressed":O==="dark","aria-label":O==="dark"?"Cambiar a modo claro":"Cambiar a modo oscuro",children:O==="dark"?s.jsx("svg",{viewBox:"0 0 24 24","aria-hidden":"true",children:s.jsx("path",{d:"M12 3v2.25M12 18.75V21M4.219 4.219 5.47 5.47M18.53 18.53l1.25 1.25M3 12h2.25M18.75 12H21M4.219 19.781 5.47 18.53M18.53 5.47l1.25-1.25M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z",fill:"none",stroke:"currentColor",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"1.8"})}):s.jsx("svg",{viewBox:"0 0 24 24","aria-hidden":"true",children:s.jsx("path",{d:"M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79Z",fill:"none",stroke:"currentColor",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"1.8"})})})]})]}),s.jsx("main",{className:"app__main",children:s.jsx(vf,{})}),d&&s.jsx("div",{className:"floating-exit",children:s.jsx("button",{type:"button",className:"ghost",onClick:B,children:"Finalizar partida"})}),_&&s.jsx("div",{className:"modal-backdrop",role:"presentation",onClick:()=>D(!1),children:s.jsxs("div",{className:"modal",role:"dialog","aria-modal":"true","aria-label":"Instrucciones del juego",onClick:R=>R.stopPropagation(),children:[s.jsx("h2",{children:"Como jugar"}),s.jsxs("ol",{className:"modal__list",children:[s.jsx("li",{children:"Configura jugadores, categorias y reglas."}),s.jsx("li",{children:"Pasa el movil y mira tu rol en secreto."}),s.jsx("li",{children:"Da pistas sin decir la palabra."}),s.jsx("li",{children:"Vota al impostor cuando termine la ronda."}),s.jsx("li",{children:"Si aciertan todos los impostores, ganan los inocentes."})]}),s.jsx("div",{className:"modal__actions",children:s.jsx("button",{type:"button",className:"primary",onClick:()=>D(!1),children:"Entendido"})})]})}),s.jsx("footer",{className:"app__footer",children:s.jsx("span",{children:"Diseñado para jugar en móvil, en ronda y sin prisas."})})]})},yf=()=>s.jsx(uf,{children:s.jsx(gf,{})});qd.createRoot(document.getElementById("root")).render(s.jsx($d.StrictMode,{children:s.jsx(yf,{})}));
+Tecnología;servidor;sala fría
+Tecnología;firewall;regla
+Tecnología;nube;sin disco
+Tecnología;algoritmo;caja negra
+Tecnología;sensor;lectura
+Tecnología;dron;zumbido
+Tecnología;robot;rutina
+Tecnología;láser;haz
+Tecnología;chip;silicio
+Tecnología;batería;porcentaje
+Tecnología;satélite;órbita
+Tecnología;consola;mandos
+Tecnología;navegador;pestañas
+Tecnología;wifi;clave
+Tecnología;bluetooth;emparejar
+Tecnología;código;pull request
+Tecnología;token;caduca
+Tecnología;backup;por si acaso
+Tecnología;kernel;reinicio
+Tecnología;plugin;extra
+Tecnología;chatbot;respuesta rápida
+Tecnología;streaming;buffer
+Tecnología;gps;flecha
+Tecnología;api;endpoint
+Tecnología;criptografía;llave
+`,cf=()=>{const{state:a,dispatch:h}=Rt(),[d,O]=re.useState([]),k=re.useMemo(()=>rf(sf),[]),_=re.useMemo(()=>{const C=new Set;return k.forEach(Q=>{Q.category&&C.add(Q.category)}),Array.from(C).sort((Q,F)=>Q.localeCompare(F,"es"))},[k]),D=re.useMemo(()=>a.selectedCategories.filter(C=>_.includes(C)),[_,a.selectedCategories]),B=re.useMemo(()=>a.categoryMode!=="custom"?k:D.length?k.filter(C=>D.includes(C.category)):[],[D,a.categoryMode,k]),R=a.categoryMode==="custom"?D.length:_.length,W=a.categoryMode==="custom"?B.length:k.length,G=()=>{O([]),h({type:"RESET_ALL"})},j=C=>{if(C==="all"){h({type:"SET_CATEGORY_MODE",payload:"all"});return}!D.length&&_.length&&h({type:"SET_SELECTED_CATEGORIES",payload:_}),h({type:"SET_CATEGORY_MODE",payload:"custom"})},V=C=>{const Q=D.includes(C)?D.filter(F=>F!==C):[...D,C];h({type:"SET_SELECTED_CATEGORIES",payload:Q})},Z=()=>{const C=[];if((a.playerCount<3||a.playerCount>15)&&C.push("El número de jugadores debe estar entre 3 y 15."),k.length||C.push("Agrega palabras en src/data/words.csv para iniciar la partida."),a.categoryMode==="custom"&&(D.length?B.length||C.push("No hay palabras para las categorías seleccionadas."):C.push("Selecciona al menos una categoría.")),a.players.filter(F=>!F.name.trim()).length&&C.push("Todos los jugadores deben tener un nombre."),O(C),C.length===0){const F=lf(B.length?B:k);h({type:"START_GAME",payload:{word:F.word,wordHint:F.hint}})}};return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:"Configura la partida"}),s.jsx("p",{className:"muted",children:"Ajusta jugadores y prepara la partida."}),s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"playerCount",children:"Número de jugadores"}),s.jsxs("div",{className:"stepper",children:[s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>h({type:"SET_PLAYER_COUNT",payload:a.playerCount-1}),"aria-label":"Disminuir jugadores",children:"▾"}),s.jsx("input",{id:"playerCount",className:"stepper__input",type:"number",min:3,max:15,value:a.playerCount,onChange:C=>h({type:"SET_PLAYER_COUNT",payload:Number(C.target.value)})}),s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>h({type:"SET_PLAYER_COUNT",payload:a.playerCount+1}),"aria-label":"Aumentar jugadores",children:"▴"})]})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Jugadores"}),s.jsx("div",{className:"stack",children:a.players.map((C,Q)=>s.jsxs("div",{className:"player-row",children:[s.jsxs("div",{className:"player-name",children:[s.jsx("span",{className:"color-dot",style:{"--player-color":C.color},"aria-hidden":"true"}),s.jsx("input",{type:"text",placeholder:`Jugador ${Q+1}`,value:C.name,onChange:F=>h({type:"SET_PLAYER_NAME",payload:{index:Q,name:F.target.value}})})]}),s.jsx("input",{type:"color",className:"color-input",value:C.color,onChange:F=>h({type:"SET_PLAYER_COLOR",payload:{index:Q,color:F.target.value}}),"aria-label":`Color de ${C.name||`Jugador ${Q+1}`}`})]},Q))})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Categorías"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.categoryMode!=="custom"?"chip chip--active":"chip",onClick:()=>j("all"),children:"Todas"}),s.jsx("button",{type:"button",className:a.categoryMode==="custom"?"chip chip--active":"chip",onClick:()=>j("custom"),children:"Seleccionar"})]}),s.jsxs("span",{className:"helper",children:["Categorías seleccionadas: ",R||0," · Palabras disponibles: ",W||0]})]}),a.categoryMode==="custom"&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Selecciona categorías"}),s.jsx("div",{className:"option-grid",children:_.map(C=>s.jsxs("label",{className:"checkbox",children:[s.jsx("input",{type:"checkbox",checked:D.includes(C),onChange:()=>V(C)}),C]},C))})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Impostores"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.allowMultipleImpostors?"chip":"chip chip--active",onClick:()=>h({type:"SET_ALLOW_MULTIPLE_IMPOSTORS",payload:!1}),children:"1 impostor"}),s.jsx("button",{type:"button",className:a.allowMultipleImpostors?"chip chip--active":"chip",onClick:()=>h({type:"SET_ALLOW_MULTIPLE_IMPOSTORS",payload:!0}),children:"Varios impostores"})]}),s.jsx("span",{className:"helper",children:"Activa para ajustar más de un impostor."})]}),a.allowMultipleImpostors&&s.jsxs("div",{className:"field field--danger",children:[s.jsx("label",{htmlFor:"impostorCount",children:"Número de impostores"}),s.jsxs("div",{className:"stepper",children:[s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>h({type:"SET_IMPOSTOR_COUNT",payload:a.impostorCount-1}),"aria-label":"Disminuir impostores",children:"▾"}),s.jsx("input",{id:"impostorCount",className:"stepper__input",type:"number",min:1,max:a.playerCount,value:a.impostorCount,onChange:C=>h({type:"SET_IMPOSTOR_COUNT",payload:Number(C.target.value)})}),s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>h({type:"SET_IMPOSTOR_COUNT",payload:a.impostorCount+1}),"aria-label":"Aumentar impostores",children:"▴"})]}),s.jsx("span",{className:"helper",children:"Se permiten varios impostores."})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Temporizador de ronda"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.timerEnabled?"chip":"chip chip--active",onClick:()=>h({type:"SET_TIMER_ENABLED",payload:!1}),children:"Desactivado"}),s.jsx("button",{type:"button",className:a.timerEnabled?"chip chip--active":"chip",onClick:()=>h({type:"SET_TIMER_ENABLED",payload:!0}),children:"Activado"})]})]}),a.timerEnabled&&s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"timer",children:"Duración (segundos)"}),s.jsx("input",{id:"timer",type:"number",min:30,max:900,step:30,value:a.timerSeconds,onChange:C=>h({type:"SET_TIMER_SECONDS",payload:Number(C.target.value)})}),s.jsx("span",{className:"helper",children:"Entre 30 y 900 segundos."})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Pistas"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.hintsEnabled?"chip chip--active":"chip",onClick:()=>h({type:"SET_HINTS_ENABLED",payload:!0}),children:"Activadas"}),s.jsx("button",{type:"button",className:a.hintsEnabled?"chip":"chip chip--active",onClick:()=>h({type:"SET_HINTS_ENABLED",payload:!1}),children:"Desactivadas"})]}),s.jsx("span",{className:"helper",children:"Si se activan, solo las ve el impostor."})]}),d.length>0&&s.jsx("div",{className:"alert",role:"alert",children:d.map(C=>s.jsx("p",{children:C},C))}),s.jsxs("div",{className:"actions",children:[s.jsx("button",{type:"button",className:"primary",onClick:Z,children:"Iniciar"}),s.jsx("button",{type:"button",className:"ghost",onClick:G,children:"Reiniciar ajustes"})]})]})})},df=()=>{const{state:a,dispatch:h}=Rt(),{dealOrder:d,dealStep:O,players:k,showRole:_,impostorIndices:D,word:B,wordHint:R,hintsEnabled:W,timerEnabled:G}=a;if(O>=d.length)return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card card--center",children:[s.jsx("h2",{children:"Todos listos"}),s.jsx("p",{className:"muted",children:"Cada jugador conoce su rol. Es momento de empezar."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>h({type:"START_ROUND"}),children:G?"Empezar ronda":"Ir a votación"})]})});const j=d[O],V=k[j]||{name:"Jugador",color:"#9aa0a6"},Z=D.includes(j),C=_?"screen screen--full":"screen";return s.jsx("section",{className:C,children:_?s.jsxs("div",{className:"card card--center role",children:[Z?s.jsxs(s.Fragment,{children:[s.jsx("span",{className:"badge badge--alert",children:"Impostor"}),s.jsxs("p",{className:"muted",children:["Jugador:"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":V.color},children:V.name})]}),s.jsx("h2",{children:"Eres el IMPOSTOR"}),s.jsx("p",{className:"muted",children:"No tienes palabra. Observa y disimula."}),W&&R&&s.jsxs(s.Fragment,{children:[s.jsx("p",{className:"muted",children:"Pista:"}),s.jsx("p",{className:"word-hint",children:R})]})]}):s.jsxs(s.Fragment,{children:[s.jsx("span",{className:"badge",children:"Inocente"}),s.jsxs("p",{className:"muted",children:["Jugador:"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":V.color},children:V.name})]}),s.jsx("h2",{children:"Tu palabra es:"}),s.jsx("p",{className:"word",children:B})]}),s.jsx("button",{type:"button",className:"ghost",onClick:()=>h({type:"HIDE_ROLE"}),children:"Ocultar"})]}):s.jsxs("div",{className:"card card--center",children:[s.jsx("h2",{children:"Pasa el móvil"}),s.jsxs("p",{className:"muted",children:["Es el turno de"," ",s.jsx("strong",{className:"player-tag",style:{"--player-color":V.color},children:V.name}),". Nadie más debe mirar."]}),s.jsx("button",{type:"button",className:"primary",onClick:()=>h({type:"SHOW_ROLE"}),children:"Ver mi rol"})]})})},ff=({seconds:a})=>{const[h,d]=re.useState(a),[O,k]=re.useState(!0),_=re.useRef(!1);re.useEffect(()=>{d(a),k(!0),_.current=!1},[a]),re.useEffect(()=>{if(!O||h<=0)return;const B=window.setInterval(()=>{d(R=>Math.max(R-1,0))},1e3);return()=>window.clearInterval(B)},[O,h]),re.useEffect(()=>{if(h!==0||_.current)return;(()=>{try{const R=window.AudioContext||window.webkitAudioContext;if(!R)return;const W=new R,G=W.createOscillator(),j=W.createGain();G.type="square",j.gain.value=1e-4,G.connect(j),j.connect(W.destination);const V=W.currentTime,Z=(F,Re)=>{G.frequency.setValueAtTime(Re,F),j.gain.setValueAtTime(1e-4,F),j.gain.exponentialRampToValueAtTime(.18,F+.02),j.gain.exponentialRampToValueAtTime(1e-4,F+.25)},C=8,Q=.18;for(let F=0;F<C;F+=1)Z(V+F*Q,F%2===0?880:660);G.start(V),G.stop(V+C*Q+.1),G.onended=()=>W.close()}catch{}})(),_.current=!0},[h]);const D=()=>{d(a),k(!0),_.current=!1};return s.jsxs("div",{className:"timer",children:[s.jsx("div",{className:`timer__face ${h===0?"timer__face--done":""}`,children:tf(h)}),s.jsxs("div",{className:"timer__actions",children:[s.jsx("button",{type:"button",className:"chip",onClick:()=>k(B=>!B),children:O?"Pausar":"Continuar"}),s.jsx("button",{type:"button",className:"chip",onClick:D,children:"Reiniciar"})]}),h===0&&s.jsx("p",{className:"muted",children:"Tiempo agotado. Finaliza la ronda cuando quieras."})]})},pf=()=>{const{state:a,dispatch:h}=Rt();return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:"Ronda en marcha"}),s.jsx("p",{className:"muted",children:"Hablad en círculo, describid la palabra con una pista breve y tratad de descubrir quién no sabe de qué se habla."}),a.timerEnabled&&s.jsx(ff,{seconds:a.timerSeconds}),s.jsx("button",{type:"button",className:"primary",onClick:()=>h({type:"END_ROUND"}),children:"Finalizar ronda"})]})})},Hs=({value:a,options:h,placeholder:d,onChange:O,disabled:k})=>{const[_,D]=re.useState(!1),B=re.useRef(null),R=re.useId(),W=h.find(j=>String(j.value)===String(a));re.useEffect(()=>{if(!_)return;const j=Z=>{B.current?.contains(Z.target)||D(!1)},V=Z=>{Z.key==="Escape"&&D(!1)};return document.addEventListener("pointerdown",j),document.addEventListener("keydown",V),()=>{document.removeEventListener("pointerdown",j),document.removeEventListener("keydown",V)}},[_]);const G=j=>{O?.(j.value),D(!1)};return s.jsxs("div",{className:"color-select",ref:B,children:[s.jsxs("button",{type:"button",className:"color-select__trigger","aria-haspopup":"listbox","aria-expanded":_,"aria-controls":R,onClick:()=>D(j=>!j),disabled:k,children:[W?s.jsx("span",{className:"player-tag",style:{"--player-color":W.color},children:W.label}):s.jsx("span",{className:"color-select__placeholder",children:d}),s.jsx("span",{className:"color-select__chevron","aria-hidden":"true",children:"▾"})]}),_&&s.jsx("div",{className:"color-select__list",role:"listbox",id:R,children:h.map(j=>{const V=String(j.value)===String(a);return s.jsx("button",{type:"button",className:`color-select__option ${V?"color-select__option--selected":""}`,role:"option","aria-selected":V,onClick:()=>G(j),children:s.jsx("span",{className:"player-tag",style:{"--player-color":j.color},children:j.label})},j.value)})})]})},mf=()=>{const{state:a,dispatch:h}=Rt(),[d,O]=re.useState(""),[k,_]=re.useState(""),[D,B]=re.useState(!1),R=re.useMemo(()=>(a.impostorIndices||[]).map(I=>({index:I,name:a.players[I]?.name||"Jugador",color:a.players[I]?.color||"#9aa0a6"})),[a.impostorIndices,a.players]),W=a.hintsEnabled&&a.wordHint?a.wordHint:"",G=re.useMemo(()=>a.alivePlayers.length?a.alivePlayers:a.players.map((I,q)=>q),[a.alivePlayers,a.players]),j=re.useMemo(()=>a.players.map((I,q)=>({name:I.name,color:I.color,index:q})).filter(I=>!G.includes(I.index)),[G,a.players]),V=G.length-(a.impostorIndices||[]).filter(I=>G.includes(I)).length,Z=a.voteMode==="secret",C=Z&&a.secretVoteOrder.length>0&&a.secretVoteStep<a.secretVoteOrder.length,Q=a.tieCandidates.length?a.tieCandidates:G,F=re.useMemo(()=>Q.map(I=>({value:String(I),label:a.players[I]?.name||"Jugador",color:a.players[I]?.color||"#9aa0a6"})),[a.players,Q]),Re=C?a.secretVoteOrder[a.secretVoteStep]:null,Ve=Re!=null?a.players[Re]:null,ze=Ve?.name||"";re.useEffect(()=>{d&&!Q.includes(Number(d))&&O(""),k&&!Q.includes(Number(k))&&_("")},[d,k,Q]),re.useEffect(()=>{B(!1),_("")},[a.secretVoteStep]);const we=()=>{if(!d)return;const I=Number(d),q=a.players[I]?.name||"Jugador";window.confirm(`Votar a ${q} como impostor?`)&&h({type:"CAST_VOTE",payload:I})},Ye=()=>{if(!k)return;const I=Number(k);window.confirm("Confirmar voto secreto?")&&(h({type:"SUBMIT_SECRET_VOTE",payload:I}),B(!1),_(""))},Ce=()=>{window.confirm("Revelar el impostor finaliza la partida. Continuar?")&&h({type:"REVEAL_IMPOSTOR"})},Ne=()=>{if(!a.lastVote||a.lastVote.status==="tie")return null;if(a.lastVote.status==="correct"){if(!a.winner){const I=Number.isInteger(a.lastVote.remainingImpostors)?a.lastVote.remainingImpostors:(a.impostorIndices||[]).filter(q=>G.includes(q)).length;return s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Correcto"}),s.jsx("p",{className:"muted",children:"Era un impostor."}),I>0&&s.jsx("p",{className:"muted",children:"Quedan más impostores."})]})}return a.winner!=="innocents"?null:s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Correcto"}),s.jsx("h3",{children:"Ganan los inocentes"}),s.jsx("div",{className:"tag-list",children:R.map(I=>s.jsx("span",{className:"player-tag",style:{"--player-color":I.color},children:I.name},I.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),W&&s.jsxs("p",{className:"muted",children:["Pista: ",W]})]})}return s.jsxs("div",{className:"reveal reveal--warning",children:[s.jsx("span",{className:"badge badge--alert",children:"Fallasteis"}),s.jsxs("p",{className:"muted",children:["No era el impostor. Se elimina a"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":a.lastVote.color||"#9aa0a6"},children:a.lastVote.name}),"."]}),!a.winner&&s.jsxs("p",{className:"muted",children:["Quedan"," ",Number.isInteger(a.lastVote.remainingInnocents)?a.lastVote.remainingInnocents:V," ","inocentes."]}),!a.winner&&s.jsx("p",{className:"muted",children:"Seguid hablando y votad de nuevo."})]})},Fe=()=>{if(!a.lastVote||a.lastVote.status!=="tie")return null;const I=Array.isArray(a.lastVote.indices)?a.lastVote.indices:[];return I.length?s.jsxs("div",{className:"reveal reveal--warning",children:[s.jsx("span",{className:"badge badge--alert",children:"Empate"}),s.jsx("div",{className:"tag-list",children:I.map(q=>s.jsx("span",{className:"player-tag",style:{"--player-color":a.players[q]?.color||"#9aa0a6"},children:a.players[q]?.name||"Jugador"},q))}),s.jsx("p",{className:"muted",children:"Votad de nuevo solo entre ellos."})]}):null},hn=()=>!a.winner||a.winner==="innocents"?null:s.jsxs("div",{className:"reveal reveal--danger",children:[s.jsx("span",{className:"badge badge--alert",children:"Impostor"}),s.jsx("h3",{children:"Ganan los impostores"}),s.jsx("div",{className:"tag-list",children:R.map(I=>s.jsx("span",{className:"player-tag",style:{"--player-color":I.color},children:I.name},I.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),W&&s.jsxs("p",{className:"muted",children:["Pista: ",W]})]}),an=()=>!a.revealImpostor||a.winner?null:s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge badge--alert",children:"Revelado"}),s.jsx("h3",{children:"Impostores"}),s.jsx("div",{className:"tag-list",children:R.map(I=>s.jsx("span",{className:"player-tag",style:{"--player-color":I.color},children:I.name},I.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),W&&s.jsxs("p",{className:"muted",children:["Pista: ",W]})]}),En=()=>!C||!ze?null:D?s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Voto secreto"}),s.jsx("h3",{children:s.jsx("span",{className:"player-tag",style:{"--player-color":Ve?.color||"#9aa0a6"},children:ze})}),s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"secretVote",children:"Votar por"}),s.jsx(Hs,{value:k,options:F,placeholder:"Selecciona un jugador",onChange:_}),s.jsx("button",{type:"button",className:"primary",onClick:Ye,disabled:!k,children:"Confirmar voto"})]})]}):s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Votación secreta"}),s.jsxs("h3",{children:["Pasa el móvil a"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":Ve?.color||"#9aa0a6"},children:ze})]}),s.jsx("p",{className:"muted",children:"Nadie más debe mirar."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>B(!0),children:"Votar en secreto"})]}),Pe=!a.winner&&!a.revealImpostor,Me=Pe&&!Z&&!C,Ge=Pe&&Z&&!C,Ke=I=>{if(I==="public"){B(!1),_(""),h({type:"CANCEL_SECRET_VOTE"}),h({type:"SET_VOTE_MODE",payload:"public"});return}h({type:"SET_VOTE_MODE",payload:"secret"})};return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:"Votación"}),s.jsx("p",{className:"muted",children:"Elige a quién creéis que es el impostor. Si acierta el grupo, ganan los inocentes."}),Pe&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Modo de votación"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:Z?"chip":"chip chip--active",onClick:()=>Ke("public"),children:"Pública"}),s.jsx("button",{type:"button",className:Z?"chip chip--active":"chip",onClick:()=>Ke("secret"),children:"Secreta"})]})]}),Me&&s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"vote",children:"Votar por"}),s.jsx(Hs,{value:d,options:F,placeholder:"Selecciona un jugador",onChange:O}),s.jsx("button",{type:"button",className:"primary",onClick:we,disabled:!d,children:"Confirmar voto"})]}),Ge&&s.jsxs("div",{className:"field",children:[s.jsx("p",{className:"muted",children:"Cada jugador vota en privado, uno por uno."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>h({type:"START_SECRET_VOTE"}),children:"Iniciar votación secreta"})]}),En(),!C&&Fe(),!C&&Ne(),!C&&hn(),!C&&an(),!C&&j.length>0&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Eliminados"}),s.jsx("div",{className:"tag-list",children:j.map(I=>s.jsx("span",{className:"player-tag",style:{"--player-color":I.color||"#9aa0a6"},children:I.name||"Jugador"},I.index))})]}),s.jsxs("div",{className:"actions",children:[a.timerEnabled&&Pe&&!C&&s.jsx("button",{type:"button",className:"ghost",onClick:()=>h({type:"PLAY_AGAIN"}),children:"Jugar otra ronda"}),Pe&&!C&&s.jsx("button",{type:"button",className:"ghost",onClick:Ce,children:"Revelar impostor"}),C&&s.jsx("button",{type:"button",className:"ghost",onClick:()=>{B(!1),_(""),h({type:"CANCEL_SECRET_VOTE"})},children:"Cancelar votación secreta"}),s.jsx("button",{type:"button",className:"ghost",onClick:()=>h({type:"RESET_GAME"}),children:"Nueva partida"})]})]})})},Qs="impostor-theme",hf=()=>{try{const a=window.localStorage.getItem(Qs);if(a==="light"||a==="dark")return a}catch{}return"dark"},vf=()=>{const{state:a}=Rt();switch(a.screen){case"deal":return s.jsx(df,{});case"round":return s.jsx(pf,{});case"reveal":return s.jsx(mf,{});default:return s.jsx(cf,{})}},gf=()=>{const{state:a,dispatch:h}=Rt(),d=a.screen!=="setup",[O,k]=re.useState(hf),[_,D]=re.useState(!1);re.useEffect(()=>{document.documentElement.dataset.theme=O;try{window.localStorage.setItem(Qs,O)}catch{}},[O]);const B=()=>{window.confirm("Finalizar partida y volver a configuración?")&&h({type:"RESET_GAME"})};return s.jsxs("div",{className:"app",children:[s.jsxs("header",{className:"app__header",children:[s.jsxs("div",{children:[s.jsx("p",{className:"app__eyebrow",children:"Juego de deducción social"}),s.jsx("h1",{children:"El Impostor 😈"})]}),s.jsxs("div",{className:"header-actions",children:[s.jsx("button",{type:"button",className:"icon-button",onClick:()=>D(!0),"aria-label":"Ver instrucciones",children:s.jsx("svg",{viewBox:"0 0 24 24","aria-hidden":"true",children:s.jsx("path",{d:"M12 7.5a2.5 2.5 0 0 1 2.5 2.5c0 1.2-.8 1.9-1.6 2.4-.7.5-.9.7-.9 1.6v.5M12 17.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",fill:"none",stroke:"currentColor",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"1.8"})})}),s.jsx("button",{type:"button",className:"icon-button",onClick:()=>k(R=>R==="dark"?"light":"dark"),"aria-pressed":O==="dark","aria-label":O==="dark"?"Cambiar a modo claro":"Cambiar a modo oscuro",children:O==="dark"?s.jsx("svg",{viewBox:"0 0 24 24","aria-hidden":"true",children:s.jsx("path",{d:"M12 3v2.25M12 18.75V21M4.219 4.219 5.47 5.47M18.53 18.53l1.25 1.25M3 12h2.25M18.75 12H21M4.219 19.781 5.47 18.53M18.53 5.47l1.25-1.25M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z",fill:"none",stroke:"currentColor",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"1.8"})}):s.jsx("svg",{viewBox:"0 0 24 24","aria-hidden":"true",children:s.jsx("path",{d:"M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79Z",fill:"none",stroke:"currentColor",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"1.8"})})})]})]}),s.jsx("main",{className:"app__main",children:s.jsx(vf,{})}),d&&s.jsx("div",{className:"floating-exit",children:s.jsx("button",{type:"button",className:"ghost",onClick:B,children:"Finalizar partida"})}),_&&s.jsx("div",{className:"modal-backdrop",role:"presentation",onClick:()=>D(!1),children:s.jsxs("div",{className:"modal",role:"dialog","aria-modal":"true","aria-label":"Instrucciones del juego",onClick:R=>R.stopPropagation(),children:[s.jsx("h2",{children:"Cómo jugar"}),s.jsxs("ol",{className:"modal__list",children:[s.jsx("li",{children:"Configura jugadores, categorías y reglas."}),s.jsx("li",{children:"Pasa el móvil y mira tu rol en secreto."}),s.jsx("li",{children:"Da pistas sin decir la palabra."}),s.jsx("li",{children:"Vota al impostor cuando termine la ronda."}),s.jsx("li",{children:"Si aciertan todos los impostores, ganan los inocentes."})]}),s.jsx("div",{className:"modal__actions",children:s.jsx("button",{type:"button",className:"primary",onClick:()=>D(!1),children:"Entendido"})})]})}),s.jsx("footer",{className:"app__footer",children:s.jsx("span",{children:"Diseñado para jugar en móvil, en ronda y sin prisas."})})]})},yf=()=>s.jsx(uf,{children:s.jsx(gf,{})});qd.createRoot(document.getElementById("root")).render(s.jsx($d.StrictMode,{children:s.jsx(yf,{})}));
