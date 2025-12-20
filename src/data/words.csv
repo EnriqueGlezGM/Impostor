@@ -1,34 +1,401 @@
-categoria;palabra;pista
-Objetos;ancla;se usa en barcos
-Transporte;avion;vuela por el cielo
-Tecnologia;bateria;da energia
-Naturaleza;bosque;muchos arboles
-Naturaleza;cactus;tiene espinas
-Objetos;camara;toma fotos
-Naturaleza;cascada;agua cae
-Naturaleza;cereza;fruta roja
-Naturaleza;cielo;esta arriba
-Naturaleza;colina;monticulo suave
-Cuerpo;corazon;late dentro
-Objetos;cuerda;se estira
-Naturaleza;delta;desembocadura de rio
-Naturaleza;delfin;vive en el mar
-Naturaleza;duna;arena en el desierto
-Espacio;estrella;brilla de noche
-Objetos;farol;da luz
-Lugares;faro;guia barcos
-Objetos;guitarra;instrumento con cuerdas
-Lugares;isla;tierra rodeada de agua
-Lugares;jardin;plantas y flores
-Lugares;laberinto;muchos caminos
-Objetos;linterna;luz portatil
-Naturaleza;montana;gran elevacion
-Transporte;nave;viaja en el espacio
-Naturaleza;piedra;roca pequena
-Lugares;puente;une dos lados
-Naturaleza;rio;agua en movimiento
-Formas;silueta;sombra con forma
-Espacio;sol;estrella cercana
-Transporte;tren;viaja por rieles
-Naturaleza;viento;aire en movimiento
-Naturaleza;volcan;montana con lava
+Comida;tortilla;domingo
+Comida;sushi;palillos
+Comida;paella;domingo
+Comida;pizza;caja cuadrada
+Comida;hamburguesa;doble piso
+Comida;ensalada;tenedor frio
+Comida;sandwich;papel aluminio
+Comida;croqueta;bar
+Comida;gazpacho;verano
+Comida;hummus;pan pita
+Comida;arepa;plancha
+Comida;empanada;bolsillo
+Comida;lasagna;capas
+Comida;risotto;cuchara
+Comida;taco;mancha
+Comida;ramen;bol hondo
+Comida;ceviche;lima
+Comida;fajita;chisporroteo
+Comida;curry;olor fuerte
+Comida;kebab;papel
+Comida;falafel;bolita
+Comida;donut;agujero
+Comida;churro;azucar
+Comida;helado;goteo
+Comida;flan;cuchara
+Comida;yogur;tapa
+Comida;queso;tabla
+Comida;jamon;corte fino
+Comida;salchicha;mostaza
+Comida;albondiga;salsa
+Comida;gazpacho;vaso
+Comida;pan;bolsa
+Comida;croissant;migajas
+Comida;galleta;leche
+Comida;chocolate;envoltorio
+Comida;palomita;cine
+Comida;granola;crujido
+Comida;fresa;semillas
+Comida;platano;curva
+Comida;uva;racimo
+Comida;manzana;crujido
+Animal;perro;correa
+Animal;gato;bigotes
+Animal;conejo;zanahoria
+Animal;hamster;rueda
+Animal;caballo;herradura
+Animal;vaca;campana
+Animal;oveja;lana
+Animal;cerdo;barro
+Animal;gallina;corral
+Animal;pato;charco
+Animal;aguila;circulos
+Animal;buho;noche
+Animal;paloma;plaza
+Animal;cuervo;brillo
+Animal;delfin;salto
+Animal;tiburon;silencio
+Animal;ballena;eco
+Animal;pulpo;tinta
+Animal;medusa;picor
+Animal;pingino;traje
+Animal;koala;abrazo
+Animal;canguro;bolsillo
+Animal;zorro;sigilo
+Animal;lobo;manada
+Animal;oso;cueva
+Animal;ciervo;ramas
+Animal;jirafa;mirador
+Animal;elefante;memoria
+Animal;rinoceronte;blindaje
+Animal;camaleon;cambio
+Animal;serpiente;zigzag
+Animal;lagarto;sol
+Animal;abeja;zumbido
+Animal;mariposa;aleteo
+Objeto;paraguas;chaparron
+Objeto;linterna;corte luz
+Objeto;reloj;segundero
+Objeto;llave;bolsillo
+Objeto;cartera;tarjeta
+Objeto;gafas;huellas
+Objeto;auricular;cable
+Objeto;cargador;enchufe
+Objeto;teclado;clic
+Objeto;raton;alfombrilla
+Objeto;monitor;reflejo
+Objeto;impresora;atasco
+Objeto;microondas;pitido
+Objeto;nevera;imanes
+Objeto;horno;guante
+Objeto;sarten;aceite
+Objeto;cuchillo;tabla
+Objeto;tenedor;tres puntas
+Objeto;cuchara;postre
+Objeto;plato;lavavajillas
+Objeto;vaso;condensacion
+Objeto;botella;rosca
+Objeto;mochila;cremallera
+Objeto;maleta;ruedas
+Objeto;casco;hebilla
+Objeto;cepillo;pelos
+Objeto;toalla;ganchito
+Objeto;jabon;espuma
+Objeto;champu;ducha
+Objeto;secador;ruido
+Objeto;plancha;vapor
+Objeto;aspiradora;polvo
+Objeto;ventilador;verano
+Objeto;calefactor;invierno
+Objeto;televisor;mando
+Lugar;aeropuerto;cola
+Lugar;estacion;andén
+Lugar;biblioteca;silencio
+Lugar;farmacia;ticket
+Lugar;hospital;pasillo
+Lugar;gimnasio;pesas
+Lugar;estadio;gradas
+Lugar;cine;butaca
+Lugar;teatro;telon
+Lugar;museo;pasos
+Lugar;playa;arena
+Lugar;montana;sendero
+Lugar;parque;banco
+Lugar;plaza;fuente
+Lugar;mercado;puestos
+Lugar;supermercado;carrito
+Lugar;panaderia;cola
+Lugar;cafeteria;taza
+Lugar;bar;servilleta
+Lugar;restaurante;cuenta
+Lugar;hotel;recepcion
+Lugar;oficina;reunion
+Lugar;escuela;timbre
+Lugar;universidad;campus
+Lugar;iglesia;eco
+Lugar;aparcamiento;ticket
+Lugar;gasolinera;repostar
+Lugar;tienda;probador
+Lugar;peluqueria;espejo
+Lugar;lavanderia;monedas
+Profesion;medico;guardia
+Profesion;enfermero;turno
+Profesion;dentista;guante
+Profesion;abogado;pleito
+Profesion;bombero;sirena
+Profesion;policia;radio
+Profesion;piloto;cabina
+Profesion;azafato;pasillo
+Profesion;camarero;bandeja
+Profesion;cocinero;delantal
+Profesion;panadero;harina
+Profesion;carpintero;serrin
+Profesion;fontanero;llave inglesa
+Profesion;electricista;fusible
+Profesion;mecanico;grasa
+Profesion;ingeniero;diagrama
+Profesion;programador;commit
+Profesion;disenador;paleta
+Profesion;arquitecto;maqueta
+Profesion;fotografo;enfoque
+Profesion;periodista;titular
+Profesion;profesor;pizarra
+Profesion;psicologo;consulta
+Profesion;veterinario;jaula
+Profesion;farmaceutico;receta
+Profesion;cajero;codigo barras
+Profesion;repartidor;timbre
+Profesion;taxista;parada
+Profesion;jardinero;tijera
+Profesion;actor;ensayo
+Accion;cocinar;delantal
+Accion;viajar;maleta
+Accion;conducir;peaje
+Accion;estudiar;subrayador
+Accion;trabajar;deadline
+Accion;dormir;siesta
+Accion;leer;marcador
+Accion;escribir;tecla
+Accion;dibujar;lapiz
+Accion;cantar;karaoke
+Accion;bailar;luces
+Accion;correr;zapatilla
+Accion;nadar;gafas
+Accion;escalar;magnesio
+Accion;acampar;tienda
+Accion;pescar;anzuelo
+Accion;comprar;bolsa
+Accion;vender;rebaja
+Accion;llamar;tono
+Accion;grabar;microfono
+Accion;fotografiar;flash
+Accion;limpiar;guante
+Accion;ordenar;cajon
+Accion;planificar;agenda
+Accion;reservar;confirmacion
+Accion;celebrar;confeti
+Accion;discutir;tono
+Accion;negociar;apreton
+Accion;descansar;hamaca
+Accion;meditar;silencio
+Accion;improvisar;sin plan
+Comida;burrito;medianoche
+Comida;nacho;cine
+Comida;tiramisu;cuchara pequena
+Comida;brownie;dedos
+Comida;cupcake;cumpleanos
+Comida;muffin;manana
+Comida;pancake;sirop
+Comida;waffle;hotel
+Comida;crepe;puesto calle
+Comida;macaron;caja bonita
+Comida;pudding;vasito
+Comida;cuscus;especias
+Comida;gnocchi;domingo lento
+Comida;dumpling;vapor
+Comida;kimchi;olor raro
+Comida;edamame;barra
+Comida;tofu;plancha
+Comida;tempura;crujido
+Comida;sashimi;plato frio
+Comida;bruschetta;brindis
+Comida;pesto;verde
+Comida;guacamole;nachera
+Comida;pisto;sarten
+Comida;tostada;crujido
+Comida;bizcocho;merienda
+Animal;leon;melena
+Animal;tigre;rayas
+Animal;puma;sombra
+Animal;pantera;sigilo
+Animal;hiena;risita
+Animal;mono;imitacion
+Animal;gorila;pecho
+Animal;orangutan;bosque
+Animal;cebra;patron
+Animal;hipopotamo;rio lento
+Animal;cocodrilo;orilla
+Animal;tortuga;paso lento
+Animal;rana;charco
+Animal;sapo;jardin
+Animal;salamandra;piedra humeda
+Animal;loro;repeticion
+Animal;canario;jaula
+Animal;pavo;pluma
+Animal;avestruz;carrera
+Animal;flamenco;una pata
+Animal;erizo;bola
+Animal;mapache;ladron
+Animal;nutria;juego
+Animal;castor;dique
+Animal;murcielago;techo
+Objeto;martillo;clavo
+Objeto;destornillador;tornillo
+Objeto;tijera;papel
+Objeto;grapadora;oficina
+Objeto;pegamento;manualidad
+Objeto;cinta;paquete
+Objeto;carpeta;archivos
+Objeto;cuaderno;espiral
+Objeto;boligrafo;mancha
+Objeto;lapicero;mina
+Objeto;borrador;viruta
+Objeto;regla;linea
+Objeto;calculadora;teclas
+Objeto;termometro;fiebre
+Objeto;candado;llave gemela
+Objeto;silla;respaldo
+Objeto;mesa;esquina
+Objeto;cortina;ventana
+Objeto;almohada;sillon
+Objeto;manta;siesta
+Objeto;tostadora;palanca
+Objeto;batidora;ruido
+Objeto;cafetera;goteo
+Objeto;llavero;sonido
+Objeto;radio;ruleta
+Lugar;zoologico;familia
+Lugar;acuario;cristal
+Lugar;discoteca;luces
+Lugar;auditorio;fila
+Lugar;piscina;cloro
+Lugar;spa;silencio
+Lugar;mirador;foto
+Lugar;acantilado;viento
+Lugar;camping;linterna
+Lugar;refugio;chimenea
+Lugar;castillo;muralla
+Lugar;palacio;escalera
+Lugar;puerto;amarre
+Lugar;puente;paso
+Lugar;tunel;eco
+Lugar;autopista;peaje
+Lugar;granja;amanecer
+Lugar;fabrica;turno
+Lugar;almacen;palet
+Lugar;taller;herramienta
+Lugar;laboratorio;bata
+Lugar;tribunal;estrado
+Lugar;comisaria;denuncia
+Lugar;mercadillo;regateo
+Lugar;mirador;atardecer
+Profesion;cirujano;mascarilla
+Profesion;traductor;doble texto
+Profesion;contable;cierre
+Profesion;auditor;carpeta
+Profesion;albanil;cemento
+Profesion;soldador;chispa
+Profesion;minero;casco sucio
+Profesion;pescador;amanecer
+Profesion;pastelero;glaseado
+Profesion;frutero;caja
+Profesion;florista;ramo
+Profesion;joyero;lupa
+Profesion;relojero;muelle
+Profesion;cientifico;hipotesis
+Profesion;investigador;nota
+Profesion;entrenador;pizarra
+Profesion;arbitro;silbato
+Profesion;socorrista;torre
+Profesion;astronauta;gravedad
+Profesion;meteorologo;mapa
+Profesion;guia;banderita
+Profesion;locutor;microfono
+Profesion;barbero;navaja
+Profesion;carnicero;delantal
+Profesion;camionero;kilometro
+Accion;saltar;charco
+Accion;reir;sin motivo
+Accion;llorar;pelicula
+Accion;susurrar;secreto
+Accion;gritar;gol
+Accion;escuchar;auricular prestado
+Accion;observar;desde lejos
+Accion;perseguir;pasillo
+Accion;esconder;detras
+Accion;buscar;bolsillos
+Accion;navegar;pestana
+Accion;patinar;pista
+Accion;volar;ventanilla
+Accion;bucear;aleta
+Accion;aplaudir;final
+Accion;brindar;copas
+Accion;desayunar;prisa
+Accion;cenar;tarde
+Accion;merendar;entre horas
+Accion;jugar;turno
+Accion;entrenar;serie
+Accion;reciclar;contenedor
+Accion;reparar;parche
+Accion;decorar;guirnalda
+Accion;cortar;tabla
+Deporte;futbol;penalti
+Deporte;baloncesto;triple
+Deporte;tenis;saque
+Deporte;padel;cristal
+Deporte;boxeo;campana
+Deporte;voleibol;red
+Deporte;balonmano;resina
+Deporte;rugby;melé
+Deporte;beisbol;bate
+Deporte;hockey;disco
+Deporte;golf;green
+Deporte;atletismo;pista
+Deporte;gimnasia;colchoneta
+Deporte;esgrima;careta
+Deporte;surf;ola
+Deporte;esqui;remonte
+Deporte;snowboard;tabla
+Deporte;patinaje;hielo
+Deporte;ciclismo;peloton
+Deporte;triatlon;transicion
+Deporte;judo;kimono
+Deporte;karate;cinturon
+Deporte;taekwondo;patada
+Deporte;remo;cadencia
+Deporte;yoga;esterilla
+Tecnologia;servidor;sala fria
+Tecnologia;firewall;regla
+Tecnologia;nube;sin disco
+Tecnologia;algoritmo;caja negra
+Tecnologia;sensor;lectura
+Tecnologia;dron;zumbido
+Tecnologia;robot;rutina
+Tecnologia;laser;haz
+Tecnologia;chip;silicio
+Tecnologia;bateria;porcentaje
+Tecnologia;satelite;orbita
+Tecnologia;consola;mandos
+Tecnologia;navegador;pestanas
+Tecnologia;wifi;clave
+Tecnologia;bluetooth;emparejar
+Tecnologia;codigo;pull request
+Tecnologia;token;caduca
+Tecnologia;backup;por si acaso
+Tecnologia;kernel;reinicio
+Tecnologia;plugin;extra
+Tecnologia;chatbot;respuesta rapida
+Tecnologia;streaming;buffer
+Tecnologia;gps;flecha
+Tecnologia;api;endpoint
+Tecnologia;criptografia;llave
