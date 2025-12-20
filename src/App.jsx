@@ -39,6 +39,7 @@ const AppLayout = () => {
   const { state, dispatch } = useGame();
   const showExit = state.screen !== 'setup';
   const [theme, setTheme] = useState(getInitialTheme);
+  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -63,17 +64,16 @@ const AppLayout = () => {
           <p className="app__eyebrow">Juego de deducción social</p>
           <h1>El Impostor 😈</h1>
         </div>
-        <button
-          type="button"
-          className="mode-toggle"
-          onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
-          aria-pressed={theme === 'dark'}
-          aria-label={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-        >
-          {theme === 'dark' ? (
+        <div className="header-actions">
+          <button
+            type="button"
+            className="icon-button"
+            onClick={() => setShowHelp(true)}
+            aria-label="Ver instrucciones"
+          >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path
-                d="M12 3v2.25M12 18.75V21M4.219 4.219 5.47 5.47M18.53 18.53l1.25 1.25M3 12h2.25M18.75 12H21M4.219 19.781 5.47 18.53M18.53 5.47l1.25-1.25M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                d="M12 7.5a2.5 2.5 0 0 1 2.5 2.5c0 1.2-.8 1.9-1.6 2.4-.7.5-.9.7-.9 1.6v.5M12 17.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 fill="none"
                 stroke="currentColor"
                 strokeLinecap="round"
@@ -81,19 +81,39 @@ const AppLayout = () => {
                 strokeWidth="1.8"
               />
             </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79Z"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.8"
-              />
-            </svg>
-          )}
-        </button>
+          </button>
+          <button
+            type="button"
+            className="icon-button"
+            onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+            aria-pressed={theme === 'dark'}
+            aria-label={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+          >
+            {theme === 'dark' ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 3v2.25M12 18.75V21M4.219 4.219 5.47 5.47M18.53 18.53l1.25 1.25M3 12h2.25M18.75 12H21M4.219 19.781 5.47 18.53M18.53 5.47l1.25-1.25M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.8"
+                />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79Z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.8"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
       </header>
       <main className="app__main">
         <Screen />
@@ -103,6 +123,35 @@ const AppLayout = () => {
           <button type="button" className="ghost" onClick={onExit}>
             Finalizar partida
           </button>
+        </div>
+      )}
+      {showHelp && (
+        <div
+          className="modal-backdrop"
+          role="presentation"
+          onClick={() => setShowHelp(false)}
+        >
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Instrucciones del juego"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h2>Como jugar</h2>
+            <ol className="modal__list">
+              <li>Configura jugadores, categorias y reglas.</li>
+              <li>Pasa el movil y mira tu rol en secreto.</li>
+              <li>Da pistas sin decir la palabra.</li>
+              <li>Vota al impostor cuando termine la ronda.</li>
+              <li>Si aciertan todos los impostores, ganan los inocentes.</li>
+            </ol>
+            <div className="modal__actions">
+              <button type="button" className="primary" onClick={() => setShowHelp(false)}>
+                Entendido
+              </button>
+            </div>
+          </div>
         </div>
       )}
       <footer className="app__footer">
