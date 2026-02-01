@@ -1,12 +1,35 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
 import ColorSelect from './ColorSelect.jsx';
+import { parseCategoryFiles, pickRandomEntry } from '../utils.js';
+
+const categoryFiles = import.meta.glob('../data/categories/*.csv', {
+  as: 'raw',
+  eager: true,
+});
 
 const Reveal = () => {
   const { state, dispatch } = useGame();
   const [selected, setSelected] = useState('');
   const [secretSelected, setSecretSelected] = useState('');
   const [showSecretForm, setShowSecretForm] = useState(false);
+  const { entries: wordEntries, categories } = useMemo(
+    () => parseCategoryFiles(categoryFiles),
+    []
+  );
+  const selectedCategories = useMemo(
+    () => state.selectedCategories.filter((category) => categories.includes(category)),
+    [categories, state.selectedCategories]
+  );
+  const filteredEntries = useMemo(() => {
+    if (state.categoryMode !== 'custom') {
+      return wordEntries;
+    }
+    if (!selectedCategories.length) {
+      return [];
+    }
+    return wordEntries.filter((entry) => selectedCategories.includes(entry.category));
+  }, [selectedCategories, state.categoryMode, wordEntries]);
   const impostorPlayers = useMemo(
     () =>
       (state.impostorIndices || []).map((index) => ({
@@ -99,6 +122,31 @@ const Reveal = () => {
     if (confirmed) {
       dispatch({ type: 'REVEAL_IMPOSTOR' });
     }
+  };
+
+  const onNewGame = () => {
+    if (!wordEntries.length) {
+      window.alert('Agrega palabras en src/data/categories para iniciar la partida.');
+      return;
+    }
+    if (state.categoryMode === 'custom' && !selectedCategories.length) {
+      window.alert('Selecciona al menos una categoría.');
+      return;
+    }
+    if (state.categoryMode === 'custom' && !filteredEntries.length) {
+      window.alert('No hay palabras para las categorías seleccionadas.');
+      return;
+    }
+    const entry = pickRandomEntry(filteredEntries.length ? filteredEntries : wordEntries);
+    dispatch({
+      type: 'START_GAME',
+      payload: { word: entry.word, wordHint: entry.hint },
+    });
+  };
+
+  const onConfigure = () => {
+    dispatch({ type: 'RESET_GAME' });
+    dispatch({ type: 'START_SETUP' });
   };
 
   const renderResult = () => {
@@ -338,14 +386,14 @@ const Reveal = () => {
                 className={!isSecretMode ? 'chip chip--active' : 'chip'}
                 onClick={() => onSetVoteMode('public')}
               >
-                Pública
+                🗣️ Pública
               </button>
               <button
                 type="button"
                 className={isSecretMode ? 'chip chip--active' : 'chip'}
                 onClick={() => onSetVoteMode('secret')}
               >
-                Secreta
+                🤫 Secreta
               </button>
             </div>
           </div>
@@ -430,8 +478,11 @@ const Reveal = () => {
               Cancelar votación secreta
             </button>
           )}
-          <button type="button" className="ghost" onClick={() => dispatch({ type: 'RESET_GAME' })}>
+          <button type="button" className="ghost" onClick={onNewGame}>
             Nueva partida
+          </button>
+          <button type="button" className="ghost" onClick={onConfigure}>
+            Configurar otra partida
           </button>
         </div>
       </div>

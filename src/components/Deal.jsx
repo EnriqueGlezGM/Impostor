@@ -13,16 +13,25 @@ const Deal = () => {
     wordHint,
     hintsEnabled,
     timerEnabled,
+    gameMode,
   } = state;
 
   if (dealStep >= dealOrder.length) {
+    const showRound = timerEnabled || gameMode === 'draw';
+    const roundLabel =
+      gameMode === 'draw'
+        ? 'Empezar ronda de dibujo'
+        : showRound
+          ? 'Empezar ronda'
+          : 'Ir a votación';
+
     return (
       <section className="screen">
         <div className="card card--center">
           <h2>Todos listos</h2>
           <p className="muted">Cada jugador conoce su rol. Es momento de empezar.</p>
           <button type="button" className="primary" onClick={() => dispatch({ type: 'START_ROUND' })}>
-            {timerEnabled ? 'Empezar ronda' : 'Ir a votación'}
+            {roundLabel}
           </button>
         </div>
       </section>

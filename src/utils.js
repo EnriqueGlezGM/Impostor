@@ -9,7 +9,7 @@ export const shuffle = (list) => {
   return array;
 };
 
-const DEFAULT_PLAYER_COLORS = [
+export const DEFAULT_PLAYER_COLORS = [
   '#ff6b6b',
   '#f7b801',
   '#6adf7e',
@@ -78,42 +78,51 @@ export const formatTime = (totalSeconds) => {
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
 
-export const parseWordEntries = (rawText) => {
+const splitCsvLine = (line) => {
+  const delimiter = line.includes(';') ? ';' : ',';
+  return line.split(delimiter).map((part) => part.trim());
+};
+
+const normalizeCategoryName = (name) =>
+  name.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+
+export const parseCategoryFile = (rawText, category) => {
   if (!rawText) return [];
   const lines = rawText.split(/\r?\n/).map((line) => line.trim());
   const cleaned = lines.filter((line) => line && !line.startsWith('#'));
   if (!cleaned.length) return [];
 
-  const splitLine = (line) => {
-    const delimiter = line.includes(';') ? ';' : ',';
-    return line.split(delimiter).map((part) => part.trim());
-  };
-
-  const firstParts = splitLine(cleaned[0]);
-  const headerParts = firstParts.map((part) => part.toLowerCase());
-  const hasCategoryHeader =
-    headerParts.includes('categoria') || headerParts.includes('category');
-  const hasWordHeader = headerParts.includes('palabra') || headerParts.includes('word');
-  const mode = hasCategoryHeader ? 'category' : 'wordHint';
-  const startIndex = hasCategoryHeader || hasWordHeader ? 1 : 0;
-
-  const entries = cleaned.slice(startIndex).map((line) => {
-    const parts = splitLine(line);
-    if (mode === 'category' || parts.length >= 3) {
+  return cleaned
+    .map((line) => {
+      const parts = splitCsvLine(line);
       return {
-        category: parts[0] || 'General',
-        word: parts[1] || '',
-        hint: parts[2] || '',
+        category,
+        word: parts[0] || '',
+        hint: parts[1] || '',
       };
+    })
+    .filter((entry) => entry.word);
+};
+
+export const parseCategoryFiles = (files) => {
+  const entries = [];
+  const categories = new Set();
+
+  Object.entries(files || {}).forEach(([path, raw]) => {
+    const base = path.split('/').pop() || '';
+    const name = normalizeCategoryName(base.replace(/\.csv$/i, ''));
+    if (!name) return;
+    const parsed = parseCategoryFile(raw, name);
+    if (parsed.length) {
+      parsed.forEach((entry) => entries.push(entry));
+      categories.add(name);
     }
-    return {
-      category: 'General',
-      word: parts[0] || '',
-      hint: parts[1] || '',
-    };
   });
 
-  return entries.filter((entry) => entry.word);
+  return {
+    entries,
+    categories: Array.from(categories).sort((a, b) => a.localeCompare(b, 'es')),
+  };
 };
 
 export const pickRandomEntry = (entries) => {

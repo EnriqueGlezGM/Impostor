@@ -13,9 +13,12 @@ const MIN_PLAYERS_FOR_IMPOSTOR_WIN = 2;
 const createFreshState = () => {
   const playerCount = 5;
   return {
-    screen: 'setup',
+    screen: 'home',
     playerCount,
     players: buildDefaultPlayers(playerCount),
+    gameMode: 'word',
+    drawAllowColorPick: true,
+    drawLimitStrokes: true,
     word: '',
     wordHint: '',
     hintsEnabled: true,
@@ -57,6 +60,11 @@ const hydrateState = () => {
       impostorIndex,
       ...rest
     } = parsed;
+    const gameMode = parsed.gameMode === 'draw' ? 'draw' : 'word';
+    const drawAllowColorPick =
+      typeof parsed.drawAllowColorPick === 'boolean' ? parsed.drawAllowColorPick : true;
+    const drawLimitStrokes =
+      typeof parsed.drawLimitStrokes === 'boolean' ? parsed.drawLimitStrokes : true;
     const rawAlive = Array.isArray(parsed.alivePlayers)
       ? parsed.alivePlayers.filter(
           (id) => Number.isInteger(id) && id >= 0 && id < playerCount
@@ -89,6 +97,9 @@ const hydrateState = () => {
       ...rest,
       playerCount,
       players: normalizePlayers(playerCount, parsed.players || []),
+      gameMode,
+      drawAllowColorPick,
+      drawLimitStrokes,
       hintsEnabled: typeof parsed.hintsEnabled === 'boolean' ? parsed.hintsEnabled : true,
       categoryMode: parsed.categoryMode === 'custom' ? 'custom' : 'all',
       selectedCategories,
@@ -172,6 +183,16 @@ const resolveVote = (state, target) => {
 
 const gameReducer = (state, action) => {
   switch (action.type) {
+    case 'GO_HOME':
+      return {
+        ...state,
+        screen: 'home',
+      };
+    case 'START_SETUP':
+      return {
+        ...state,
+        screen: 'setup',
+      };
     case 'SET_PLAYER_COUNT': {
       const playerCount = clamp(action.payload, 3, 15);
       return {
@@ -203,6 +224,21 @@ const gameReducer = (state, action) => {
         players,
       };
     }
+    case 'SET_GAME_MODE':
+      return {
+        ...state,
+        gameMode: action.payload === 'draw' ? 'draw' : 'word',
+      };
+    case 'SET_DRAW_ALLOW_COLOR_PICK':
+      return {
+        ...state,
+        drawAllowColorPick: action.payload === true,
+      };
+    case 'SET_DRAW_LIMIT_STROKES':
+      return {
+        ...state,
+        drawLimitStrokes: action.payload === true,
+      };
     case 'SET_WORD':
       return {
         ...state,
@@ -290,7 +326,7 @@ const gameReducer = (state, action) => {
     case 'START_ROUND':
       return {
         ...state,
-        screen: state.timerEnabled ? 'round' : 'reveal',
+        screen: state.timerEnabled || state.gameMode === 'draw' ? 'round' : 'reveal',
         revealImpostor: false,
       };
     case 'END_ROUND':
@@ -428,6 +464,9 @@ const gameReducer = (state, action) => {
         ...baseState,
         playerCount: state.playerCount,
         players: normalizePlayers(state.playerCount, state.players),
+        gameMode: state.gameMode,
+        drawAllowColorPick: state.drawAllowColorPick,
+        drawLimitStrokes: state.drawLimitStrokes,
         hintsEnabled: state.hintsEnabled,
         categoryMode: state.categoryMode,
         selectedCategories: state.selectedCategories,

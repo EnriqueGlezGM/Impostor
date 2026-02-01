@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GameProvider, useGame } from './state/GameContext.jsx';
+import Home from './components/Home.jsx';
 import Setup from './components/Setup.jsx';
 import Deal from './components/Deal.jsx';
 import Round from './components/Round.jsx';
@@ -19,10 +20,18 @@ const getInitialTheme = () => {
   return 'dark';
 };
 
-const Screen = () => {
+const Screen = ({ onShowHelp, onToggleTheme, isDark }) => {
   const { state } = useGame();
 
   switch (state.screen) {
+    case 'home':
+      return (
+        <Home
+          onShowHelp={onShowHelp}
+          onToggleTheme={onToggleTheme}
+          isDark={isDark}
+        />
+      );
     case 'deal':
       return <Deal />;
     case 'round':
@@ -37,7 +46,7 @@ const Screen = () => {
 
 const AppLayout = () => {
   const { state, dispatch } = useGame();
-  const showExit = state.screen !== 'setup';
+  const showExit = state.screen !== 'setup' && state.screen !== 'home';
   const [theme, setTheme] = useState(getInitialTheme);
   const [showHelp, setShowHelp] = useState(false);
 
@@ -51,80 +60,22 @@ const AppLayout = () => {
   }, [theme]);
 
   const onExit = () => {
-    const confirmed = window.confirm('Finalizar partida y volver a configuración?');
+    const confirmed = window.confirm('Finalizar partida y volver al inicio?');
     if (confirmed) {
       dispatch({ type: 'RESET_GAME' });
+      dispatch({ type: 'GO_HOME' });
     }
   };
 
   return (
     <div className="app">
-      <header className="app__header">
-        <div>
-          <p className="app__eyebrow">Juego de deducción social</p>
-          <h1>El Impostor 😈</h1>
-        </div>
-        <div className="header-actions">
-          <button
-            type="button"
-            className="icon-button"
-            onClick={() => setShowHelp(true)}
-            aria-label="Ver instrucciones"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 7.5a2.5 2.5 0 0 1 2.5 2.5c0 1.2-.8 1.9-1.6 2.4-.7.5-.9.7-.9 1.6v.5M12 17.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.8"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            className="icon-button"
-            onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
-            aria-pressed={theme === 'dark'}
-            aria-label={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-          >
-            {theme === 'dark' ? (
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M12 3v2.25M12 18.75V21M4.219 4.219 5.47 5.47M18.53 18.53l1.25 1.25M3 12h2.25M18.75 12H21M4.219 19.781 5.47 18.53M18.53 5.47l1.25-1.25M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.8"
-                />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79Z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.8"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-      </header>
       <main className="app__main">
-        <Screen />
+        <Screen
+          onShowHelp={() => setShowHelp(true)}
+          onToggleTheme={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+          isDark={theme === 'dark'}
+        />
       </main>
-      {showExit && (
-        <div className="floating-exit">
-          <button type="button" className="ghost" onClick={onExit}>
-            Finalizar partida
-          </button>
-        </div>
-      )}
       {showHelp && (
         <div
           className="modal-backdrop"
@@ -140,9 +91,9 @@ const AppLayout = () => {
           >
             <h2>Cómo jugar</h2>
             <ol className="modal__list">
-              <li>Configura jugadores, categorías y reglas.</li>
+              <li>Configura jugadores, categorías, modo y reglas.</li>
               <li>Pasa el móvil y mira tu rol en secreto.</li>
-              <li>Da pistas sin decir la palabra.</li>
+              <li>Si es por palabra, da una pista; si es por dibujo, añade un trazo.</li>
               <li>Vota al impostor cuando termine la ronda.</li>
               <li>Si aciertan todos los impostores, ganan los inocentes.</li>
             </ol>
@@ -155,7 +106,11 @@ const AppLayout = () => {
         </div>
       )}
       <footer className="app__footer">
-        <span>Diseñado para jugar en móvil, en ronda y sin prisas.</span>
+        {showExit && (
+          <button type="button" className="ghost footer-exit" onClick={onExit}>
+            Finalizar partida
+          </button>
+        )}
       </footer>
     </div>
   );
