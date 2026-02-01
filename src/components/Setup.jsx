@@ -13,56 +13,13 @@ const steps = [
   { id: 'categories', label: 'Categorías' },
 ];
 
-const CATEGORY_ICONS = {
-  animales: '🐾',
-  animal: '🐾',
-  comida: '🍽️',
-  bebidas: '🥤',
-  lugares: '🗺️',
-  lugar: '🗺️',
-  deportes: '🏀',
-  deporte: '🏀',
-  profesiones: '🧑‍💼',
-  profesion: '🧑‍💼',
-  peliculas: '🎬',
-  cine: '🎬',
-  series: '📺',
-  musica: '🎵',
-  tecnologia: '💻',
-  accion: '⚡',
-  objetos: '📦',
-  objeto: '📦',
-  naturaleza: '🌿',
-  personajes: '🧑',
-  famosos: '⭐',
-  videojuegos: '🎮',
-  transporte: '🚗',
-  viajes: '✈️',
-  historia: '🏛️',
-  ciudades: '🏙️',
-  paises: '🌍',
-  animalesdomesticos: '🐶',
-  animalesmarinos: '🐠',
-  frutas: '🍎',
-  verduras: '🥦',
-  instrumentos: '🎸',
-  deportesolimpicos: '🥇',
-};
-
-const normalizeCategory = (value) =>
-  value
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s+/g, '');
-
-const getCategoryIcon = (category) => CATEGORY_ICONS[normalizeCategory(category)] || '🏷️';
+const getCategoryIcon = (category, icons) => icons[category] || '🏷️';
 
 const Setup = () => {
   const { state, dispatch } = useGame();
   const [errors, setErrors] = useState([]);
   const [stepIndex, setStepIndex] = useState(0);
-  const { entries: wordEntries, categories } = useMemo(
+  const { entries: wordEntries, categories, icons } = useMemo(
     () => parseCategoryFiles(categoryFiles),
     []
   );
@@ -502,7 +459,7 @@ const Setup = () => {
                         aria-pressed={selected}
                       >
                         <span className="category-icon" aria-hidden="true">
-                          {getCategoryIcon(category)}
+                          {getCategoryIcon(category, icons)}
                         </span>
                         <span className="category-label">{category}</span>
                       </button>

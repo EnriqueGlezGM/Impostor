@@ -86,13 +86,32 @@ const splitCsvLine = (line) => {
 const normalizeCategoryName = (name) =>
   name.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
 
-export const parseCategoryFile = (rawText, category) => {
-  if (!rawText) return [];
-  const lines = rawText.split(/\r?\n/).map((line) => line.trim());
-  const cleaned = lines.filter((line) => line && !line.startsWith('#'));
-  if (!cleaned.length) return [];
+const parseIconMeta = (line) => {
+  const cleaned = line.replace(/^#|^\/\//, '').trim();
+  const match = cleaned.match(/^icon\s*[:=]\s*(.+)$/i);
+  return match ? match[1].trim() : '';
+};
 
-  return cleaned
+export const parseCategoryFile = (rawText, category) => {
+  if (!rawText) return { entries: [], icon: '' };
+  const lines = rawText.split(/\r?\n/).map((line) => line.trim());
+  let icon = '';
+  const cleaned = lines.filter((line) => {
+    if (!line) return false;
+    if (line.startsWith('#') || line.startsWith('//')) {
+      if (!icon) {
+        const parsed = parseIconMeta(line);
+        if (parsed) icon = parsed;
+      }
+      return false;
+    }
+    return true;
+  });
+  if (!cleaned.length) {
+    return { entries: [], icon };
+  }
+
+  const entries = cleaned
     .map((line) => {
       const parts = splitCsvLine(line);
       return {
@@ -102,26 +121,33 @@ export const parseCategoryFile = (rawText, category) => {
       };
     })
     .filter((entry) => entry.word);
+
+  return { entries, icon };
 };
 
 export const parseCategoryFiles = (files) => {
   const entries = [];
   const categories = new Set();
+  const icons = {};
 
   Object.entries(files || {}).forEach(([path, raw]) => {
     const base = path.split('/').pop() || '';
     const name = normalizeCategoryName(base.replace(/\.csv$/i, ''));
     if (!name) return;
     const parsed = parseCategoryFile(raw, name);
-    if (parsed.length) {
-      parsed.forEach((entry) => entries.push(entry));
+    if (parsed.entries.length) {
+      parsed.entries.forEach((entry) => entries.push(entry));
       categories.add(name);
+      if (parsed.icon) {
+        icons[name] = parsed.icon;
+      }
     }
   });
 
   return {
     entries,
     categories: Array.from(categories).sort((a, b) => a.localeCompare(b, 'es')),
+    icons,
   };
 };
 
