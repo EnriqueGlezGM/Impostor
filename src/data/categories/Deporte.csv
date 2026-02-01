@@ -1,13 +1,13 @@
 # icon: 🏀
-fútbol;penalti
-baloncesto;triple
+fútbol;balón
+baloncesto;naranja
 tenis;saque
 pádel;cristal
 boxeo;campana
 voleibol;red
-balonmano;resina
-rugby;melé
-béisbol;bate
+balonmano;mano
+rugby;contacto
+béisbol;guante
 hockey;disco
 golf;green
 atletismo;pista
@@ -22,5 +22,5 @@ triatlón;transición
 judo;kimono
 karate;cinturón
 taekwondo;patada
-remo;cadencia
+remo;río
 yoga;esterilla

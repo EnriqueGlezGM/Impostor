@@ -7,7 +7,7 @@ hospital;pasillo
 gimnasio;pesas
 estadio;gradas
 cine;butaca
-teatro;telón
+teatro;escenario
 museo;pasos
 playa;arena
 montaña;sendero
@@ -25,7 +25,7 @@ escuela;timbre
 universidad;campus
 iglesia;eco
 aparcamiento;ticket
-gasolinera;repostar
+gasolinera;manguera
 tienda;probador
 peluquería;espejo
 lavandería;monedas
@@ -35,7 +35,7 @@ discoteca;luces
 auditorio;fila
 piscina;cloro
 spa;silencio
-mirador;foto
+mirador;atardecer
 acantilado;viento
 camping;linterna
 refugio;chimenea
@@ -44,7 +44,7 @@ palacio;escalera
 puerto;amarre
 puente;paso
 túnel;eco
-autopista;peaje
+autopista;carriles
 granja;amanecer
 fábrica;turno
 almacén;palet
@@ -53,4 +53,3 @@ laboratorio;bata
 tribunal;estrado
 comisaría;denuncia
 mercadillo;regateo
-mirador;atardecer
