@@ -123,10 +123,10 @@ nutria;juego
 castor;dique
 murciélago;techo
 `,Xu=`# icon: 🍽️
-tortilla;domingo
-sushi;palillos
+tortilla;cebolla
+sushi;salomón
 paella;domingo
-pizza;caja cuadrada
+pizza;caja
 hamburguesa;doble piso
 ensalada;tenedor frío
 sándwich;papel aluminio
@@ -153,19 +153,18 @@ queso;tabla
 jamón;corte fino
 salchicha;mostaza
 albóndiga;salsa
-gazpacho;vaso
 pan;bolsa
 croissant;migajas
 galleta;leche
 chocolate;envoltorio
-palomita;cine
+palomita;crujido
 granola;crujido
 fresa;semillas
 plátano;curva
 uva;racimo
 manzana;crujido
 burrito;medianoche
-nacho;cine
+nacho;queso
 tiramisú;cuchara pequeña
 brownie;dedos
 cupcake;cumpleaños
@@ -190,15 +189,15 @@ pisto;sartén
 tostada;crujido
 bizcocho;merienda
 `,qu=`# icon: 🏀
-fútbol;penalti
-baloncesto;triple
+fútbol;balón
+baloncesto;naranja
 tenis;saque
 pádel;cristal
 boxeo;campana
 voleibol;red
-balonmano;resina
-rugby;melé
-béisbol;bate
+balonmano;mano
+rugby;contacto
+béisbol;guante
 hockey;disco
 golf;green
 atletismo;pista
@@ -213,7 +212,7 @@ triatlón;transición
 judo;kimono
 karate;cinturón
 taekwondo;patada
-remo;cadencia
+remo;río
 yoga;esterilla
 `,Zu=`# icon: 🗺️
 aeropuerto;cola
@@ -224,7 +223,7 @@ hospital;pasillo
 gimnasio;pesas
 estadio;gradas
 cine;butaca
-teatro;telón
+teatro;escenario
 museo;pasos
 playa;arena
 montaña;sendero
@@ -242,7 +241,7 @@ escuela;timbre
 universidad;campus
 iglesia;eco
 aparcamiento;ticket
-gasolinera;repostar
+gasolinera;manguera
 tienda;probador
 peluquería;espejo
 lavandería;monedas
@@ -252,7 +251,7 @@ discoteca;luces
 auditorio;fila
 piscina;cloro
 spa;silencio
-mirador;foto
+mirador;atardecer
 acantilado;viento
 camping;linterna
 refugio;chimenea
@@ -261,7 +260,7 @@ palacio;escalera
 puerto;amarre
 puente;paso
 túnel;eco
-autopista;peaje
+autopista;carriles
 granja;amanecer
 fábrica;turno
 almacén;palet
@@ -270,7 +269,6 @@ laboratorio;bata
 tribunal;estrado
 comisaría;denuncia
 mercadillo;regateo
-mirador;atardecer
 `,bu=`# icon: 📦
 paraguas;chaparrón
 linterna;corte luz
@@ -279,7 +277,7 @@ llave;bolsillo
 cartera;tarjeta
 gafas;huellas
 auricular;cable
-cargador;enchufe
+cargador;cable
 teclado;clic
 ratón;alfombrilla
 monitor;reflejo
@@ -307,8 +305,8 @@ aspiradora;polvo
 ventilador;verano
 calefactor;invierno
 televisor;mando
-martillo;clavo
-destornillador;tornillo
+martillo;golpe
+destornillador;giro
 tijera;papel
 grapadora;oficina
 pegamento;manualidad
@@ -339,7 +337,7 @@ dentista;guante
 abogado;pleito
 bombero;sirena
 policía;radio
-piloto;cabina
+piloto;vuelo
 azafato;pasillo
 camarero;bandeja
 cocinero;delantal
@@ -389,29 +387,34 @@ barbero;navaja
 carnicero;delantal
 camionero;kilómetro
 `,nc=`# icon: 💻
-servidor;sala fría
-firewall;regla
-nube;sin disco
-algoritmo;caja negra
-sensor;lectura
-dron;zumbido
-robot;rutina
-láser;haz
-chip;silicio
-batería;porcentaje
-satélite;órbita
-consola;mandos
-navegador;pestañas
+iphone;costoso
+android;robot
+internet;red
 wifi;clave
 bluetooth;emparejar
-código;pull request
-token;caduca
-backup;por si acaso
-kernel;reinicio
-plugin;extra
-chatbot;respuesta rápida
-streaming;buffer
-gps;flecha
-api;endpoint
-criptografía;llave
+gps;mapa
+contraseña;secreta
+app;descargar
+pantalla táctil;dedo
+cámara;foto
+selfie;frontal
+correo;bandeja
+mensaje;burbuja
+notificación;campana
+cargador;enchufe
+batería;porcentaje
+auriculares;cable
+altavoz;volumen
+smart tv;aplicaciones
+streaming;serie
+videollamada;cara
+nube;guardar
+usb;pin
+memoria;guardar
+consola;mandos
+juego en línea;partida
+redes sociales;pasa tiempo
+actualización;reinicio
+robot;ayudante
+dron;vuelo
 `,Cf=Object.assign({"../data/categories/Acción.csv":Yu,"../data/categories/Animal.csv":Ju,"../data/categories/Comida.csv":Xu,"../data/categories/Deporte.csv":qu,"../data/categories/Lugar.csv":Zu,"../data/categories/Objeto.csv":bu,"../data/categories/Profesión.csv":ec,"../data/categories/Tecnología.csv":nc}),It=[{id:"players",label:"Jugadores"},{id:"mode",label:"Modo y reglas"},{id:"categories",label:"Categorías"}],_f=(a,p)=>p[a]||"🏷️",Nf=()=>{const{state:a,dispatch:p}=st(),[c,j]=Y.useState([]),[x,_]=Y.useState(0),{entries:I,categories:z,icons:N}=Y.useMemo(()=>Qu(Cf),[]),D=Y.useMemo(()=>a.selectedCategories.filter(w=>z.includes(w)),[z,a.selectedCategories]),L=Y.useMemo(()=>a.categoryMode!=="custom"?I:D.length?I.filter(w=>D.includes(w.category)):[],[D,a.categoryMode,I]),P=a.categoryMode==="custom"?D.length:z.length,Q=a.categoryMode==="custom"?L.length:I.length,q=It[x],te=x===0,ne=x===It.length-1,J=()=>{j([]),p({type:"RESET_ALL"})},b=w=>{if(w==="all"){p({type:"SET_CATEGORY_MODE",payload:"all"});return}!D.length&&z.length&&p({type:"SET_SELECTED_CATEGORIES",payload:z}),p({type:"SET_CATEGORY_MODE",payload:"custom"})},ie=w=>{const R=D.includes(w)?D.filter(B=>B!==w):[...D,w];p({type:"SET_SELECTED_CATEGORIES",payload:R})},ce=()=>{const w=[];if((a.playerCount<3||a.playerCount>15)&&w.push("El número de jugadores debe estar entre 3 y 15."),I.length||w.push("Agrega palabras en src/data/categories para iniciar la partida."),a.categoryMode==="custom"&&(D.length?L.length||w.push("No hay palabras para las categorías seleccionadas."):w.push("Selecciona al menos una categoría.")),a.players.filter(B=>!B.name.trim()).length&&w.push("Todos los jugadores deben tener un nombre."),j(w),w.length===0){const B=$u(L.length?L:I);p({type:"START_GAME",payload:{word:B.word,wordHint:B.hint}})}},F=()=>{j([]),_(w=>Math.min(w+1,It.length-1))},W=()=>{j([]),_(w=>Math.max(w-1,0))};return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"setup-shell",children:[s.jsxs("div",{className:"setup-progress",role:"tablist","aria-label":"Pasos de configuración",style:{"--progress":It.length>1?x/(It.length-1):0},children:[s.jsx("div",{className:"progress-track","aria-hidden":"true"}),It.map((w,R)=>{const B=R===x,he=R<x;return s.jsxs("button",{type:"button",role:"tab","aria-selected":B,"aria-current":B?"step":void 0,className:`progress-step${B?" progress-step--active":""}${he?" progress-step--complete":""}`,onClick:()=>{j([]),_(R)},children:[s.jsx("span",{className:"progress-dot","aria-hidden":"true"}),s.jsx("span",{className:"progress-label",children:w.label})]},w.id)})]}),s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:"Configura la partida"}),s.jsx("p",{className:"muted",children:"Divide la preparación en pasos rápidos."}),q.id==="players"&&s.jsxs(s.Fragment,{children:[s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"playerCount",children:"Número de jugadores"}),s.jsxs("div",{className:"stepper",children:[s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>p({type:"SET_PLAYER_COUNT",payload:a.playerCount-1}),"aria-label":"Disminuir jugadores",children:"▾"}),s.jsx("input",{id:"playerCount",className:"stepper__input",type:"number",min:3,max:15,value:a.playerCount,onChange:w=>p({type:"SET_PLAYER_COUNT",payload:Number(w.target.value)})}),s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>p({type:"SET_PLAYER_COUNT",payload:a.playerCount+1}),"aria-label":"Aumentar jugadores",children:"▴"})]})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Jugadores"}),s.jsx("div",{className:"stack",children:a.players.map((w,R)=>s.jsxs("div",{className:"player-row",children:[s.jsxs("div",{className:"player-name",children:[s.jsx("span",{className:"color-dot",style:{"--player-color":w.color},"aria-hidden":"true"}),s.jsx("input",{type:"text",placeholder:`Jugador ${R+1}`,value:w.name,onChange:B=>p({type:"SET_PLAYER_NAME",payload:{index:R,name:B.target.value}})})]}),s.jsx("input",{type:"color",className:"color-input",value:w.color,onChange:B=>p({type:"SET_PLAYER_COLOR",payload:{index:R,color:B.target.value}}),"aria-label":`Color de ${w.name||`Jugador ${R+1}`}`})]},R))})]})]}),q.id==="mode"&&s.jsxs(s.Fragment,{children:[s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Modo de juego"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.gameMode==="word"?"chip chip--active":"chip",onClick:()=>p({type:"SET_GAME_MODE",payload:"word"}),children:"🗣️ Por palabra"}),s.jsx("button",{type:"button",className:a.gameMode==="draw"?"chip chip--active":"chip",onClick:()=>p({type:"SET_GAME_MODE",payload:"draw"}),children:"🎨 Por dibujo"})]}),s.jsx("span",{className:"helper",children:"En modo dibujo cada jugador añade un trazo a la pizarra común."})]}),a.gameMode==="draw"&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Opciones de dibujo"}),s.jsxs("div",{className:"stack",children:[s.jsxs("div",{children:[s.jsx("span",{className:"helper",children:"Colores del trazo"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.drawAllowColorPick?"chip":"chip chip--active",onClick:()=>p({type:"SET_DRAW_ALLOW_COLOR_PICK",payload:!1}),children:"🎯 Fijos por jugador"}),s.jsx("button",{type:"button",className:a.drawAllowColorPick?"chip chip--active":"chip",onClick:()=>p({type:"SET_DRAW_ALLOW_COLOR_PICK",payload:!0}),children:"🌈 Elegir color"})]})]}),s.jsxs("div",{children:[s.jsx("span",{className:"helper",children:"Trazos por ronda"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.drawLimitStrokes?"chip chip--active":"chip",onClick:()=>p({type:"SET_DRAW_LIMIT_STROKES",payload:!0}),children:"✍️ Un trazo por jugador"}),s.jsx("button",{type:"button",className:a.drawLimitStrokes?"chip":"chip chip--active",onClick:()=>p({type:"SET_DRAW_LIMIT_STROKES",payload:!1}),children:"♾️ Sin límite"})]})]})]})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Impostores"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.allowMultipleImpostors?"chip":"chip chip--active",onClick:()=>p({type:"SET_ALLOW_MULTIPLE_IMPOSTORS",payload:!1}),children:"😈 1 impostor"}),s.jsx("button",{type:"button",className:a.allowMultipleImpostors?"chip chip--active":"chip",onClick:()=>p({type:"SET_ALLOW_MULTIPLE_IMPOSTORS",payload:!0}),children:"👥 Varios impostores"})]}),s.jsx("span",{className:"helper",children:"Activa para ajustar más de un impostor."})]}),a.allowMultipleImpostors&&s.jsxs("div",{className:"field field--danger",children:[s.jsx("label",{htmlFor:"impostorCount",children:"Número de impostores"}),s.jsxs("div",{className:"stepper",children:[s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>p({type:"SET_IMPOSTOR_COUNT",payload:a.impostorCount-1}),"aria-label":"Disminuir impostores",children:"▾"}),s.jsx("input",{id:"impostorCount",className:"stepper__input",type:"number",min:1,max:a.playerCount,value:a.impostorCount,onChange:w=>p({type:"SET_IMPOSTOR_COUNT",payload:Number(w.target.value)})}),s.jsx("button",{type:"button",className:"stepper__button",onClick:()=>p({type:"SET_IMPOSTOR_COUNT",payload:a.impostorCount+1}),"aria-label":"Aumentar impostores",children:"▴"})]}),s.jsx("span",{className:"helper",children:"Se permiten varios impostores."})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Temporizador de ronda"}),s.jsxs("button",{type:"button",className:a.timerEnabled?"chip chip--active":"chip chip--off",onClick:()=>p({type:"SET_TIMER_ENABLED",payload:!a.timerEnabled}),children:["⏱️ ",a.timerEnabled?"Activo":"Desactivado"]})]}),a.timerEnabled&&s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"timer",children:"Duración (segundos)"}),s.jsx("input",{id:"timer",type:"number",min:30,max:900,step:30,value:a.timerSeconds,onChange:w=>p({type:"SET_TIMER_SECONDS",payload:Number(w.target.value)})}),s.jsx("span",{className:"helper",children:"Entre 30 y 900 segundos."})]}),s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Pistas"}),s.jsxs("button",{type:"button",className:a.hintsEnabled?"chip chip--active":"chip chip--off",onClick:()=>p({type:"SET_HINTS_ENABLED",payload:!a.hintsEnabled}),children:["💡 ",a.hintsEnabled?"Activadas":"Desactivadas"]}),s.jsx("span",{className:"helper",children:"Si se activan, solo las ve el impostor."})]})]}),q.id==="categories"&&s.jsxs(s.Fragment,{children:[s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Categorías"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:a.categoryMode!=="custom"?"chip chip--active":"chip",onClick:()=>b("all"),children:"🌐 Todas"}),s.jsx("button",{type:"button",className:a.categoryMode==="custom"?"chip chip--active":"chip",onClick:()=>b("custom"),children:"🧩 Seleccionar"})]}),s.jsxs("span",{className:"helper",children:["Categorías seleccionadas: ",P||0," · Palabras disponibles:"," ",Q||0]})]}),a.categoryMode==="custom"?s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Selecciona categorías"}),s.jsx("div",{className:"category-grid",children:z.map(w=>{const R=D.includes(w);return s.jsxs("button",{type:"button",className:`category-card${R?" category-card--active":""}`,onClick:()=>ie(w),"aria-pressed":R,children:[s.jsx("span",{className:"category-icon","aria-hidden":"true",children:_f(w,N)}),s.jsx("span",{className:"category-label",children:w})]},w)})})]}):s.jsx("p",{className:"muted",children:"Todas las categorías están activas."})]}),c.length>0&&s.jsx("div",{className:"alert",role:"alert",children:c.map(w=>s.jsx("p",{children:w},w))}),s.jsxs("div",{className:"actions",children:[!te&&s.jsx("button",{type:"button",className:"ghost",onClick:W,children:"← Atrás"}),!ne&&s.jsx("button",{type:"button",className:"primary",onClick:F,children:"Siguiente →"}),ne&&s.jsx("button",{type:"button",className:"primary",onClick:ce,children:"🚀 Iniciar"}),te&&s.jsx("button",{type:"button",className:"ghost",onClick:J,children:"↺ Reiniciar ajustes"})]})]})]})})},jf=()=>{const{state:a,dispatch:p}=st(),{dealOrder:c,dealStep:j,players:x,showRole:_,impostorIndices:I,word:z,wordHint:N,hintsEnabled:D,timerEnabled:L,gameMode:P}=a;if(j>=c.length){const b=P==="draw"?"Empezar ronda de dibujo":L||P==="draw"?"Empezar ronda":"Ir a votación";return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card card--center",children:[s.jsx("h2",{children:"Todos listos"}),s.jsx("p",{className:"muted",children:"Cada jugador conoce su rol. Es momento de empezar."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>p({type:"START_ROUND"}),children:b})]})})}const Q=c[j],q=x[Q]||{name:"Jugador",color:"#9aa0a6"},te=I.includes(Q),ne=_?"screen screen--full":"screen";return s.jsx("section",{className:ne,children:_?s.jsxs("div",{className:"card card--center role",children:[te?s.jsxs(s.Fragment,{children:[s.jsx("span",{className:"badge badge--alert",children:"Impostor"}),s.jsxs("p",{className:"muted",children:["Jugador:"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":q.color},children:q.name})]}),s.jsx("h2",{children:"Eres el IMPOSTOR"}),s.jsx("p",{className:"muted",children:"No tienes palabra. Observa y disimula."}),D&&N&&s.jsxs(s.Fragment,{children:[s.jsx("p",{className:"muted",children:"Pista:"}),s.jsx("p",{className:"word-hint",children:N})]})]}):s.jsxs(s.Fragment,{children:[s.jsx("span",{className:"badge",children:"Inocente"}),s.jsxs("p",{className:"muted",children:["Jugador:"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":q.color},children:q.name})]}),s.jsx("h2",{children:"Tu palabra es:"}),s.jsx("p",{className:"word",children:z})]}),s.jsx("button",{type:"button",className:"ghost",onClick:()=>p({type:"HIDE_ROLE"}),children:"Ocultar"})]}):s.jsxs("div",{className:"card card--center",children:[s.jsx("h2",{children:"Pasa el móvil"}),s.jsxs("p",{className:"muted",children:["Es el turno de"," ",s.jsx("strong",{className:"player-tag",style:{"--player-color":q.color},children:q.name}),". Nadie más debe mirar."]}),s.jsx("button",{type:"button",className:"primary",onClick:()=>p({type:"SHOW_ROLE"}),children:"Ver mi rol"})]})})},tc=Y.forwardRef(({color:a,brushSize:p,ariaLabel:c,canDraw:j=!0,onStrokeEnd:x,ownerId:_},I)=>{const z=Y.useRef(null),N=Y.useRef(null),D=Y.useRef(null),L=Y.useRef([]),P=Y.useRef(!1),Q=Y.useRef({width:0,height:0}),q=()=>{const F=D.current,{width:W,height:w}=Q.current;!F||W===0||w===0||(F.clearRect(0,0,W,w),L.current.forEach(R=>{if(!R.points.length)return;F.strokeStyle=R.color,F.lineWidth=R.size,F.beginPath();const B=R.points[0];F.moveTo(B.x*W,B.y*w),R.points.slice(1).forEach(he=>{F.lineTo(he.x*W,he.y*w)}),F.stroke(),R.points.length===1&&(F.fillStyle=R.color,F.beginPath(),F.arc(B.x*W,B.y*w,R.size/2,0,Math.PI*2),F.fill())}))};Y.useImperativeHandle(I,()=>({clear:()=>{L.current=[],q()},undo:F=>{const W=L.current;if(!W.length)return!1;for(let w=W.length-1;w>=0;w-=1){const R=W[w];if(F===void 0||R.owner===F)return W.splice(w,1),q(),!0}return!1}})),Y.useEffect(()=>{const F=z.current,W=N.current;if(!F||!W)return;const w=()=>{const B=F.getBoundingClientRect();if(!B.width||!B.height)return;const he=window.devicePixelRatio||1;W.width=B.width*he,W.height=B.height*he,W.style.width=`${B.width}px`,W.style.height=`${B.height}px`;const ee=W.getContext("2d");ee&&(ee.setTransform(he,0,0,he,0,0),ee.lineCap="round",ee.lineJoin="round",Q.current={width:B.width,height:B.height},D.current=ee,q())};w();let R;return window.ResizeObserver?(R=new ResizeObserver(w),R.observe(F)):window.addEventListener("resize",w),()=>{R?R.disconnect():window.removeEventListener("resize",w)}},[]);const te=F=>{const W=N.current;if(!W)return null;const w=W.getBoundingClientRect();if(!w.width||!w.height)return null;const R=(F.clientX-w.left)/w.width,B=(F.clientY-w.top)/w.height;return{x:Math.min(Math.max(R,0),1),y:Math.min(Math.max(B,0),1)}},ne=(F,W,w)=>{const R=D.current,{width:B,height:he}=Q.current;!R||!W||!w||(R.strokeStyle=F.color,R.lineWidth=F.size,R.beginPath(),R.moveTo(W.x*B,W.y*he),R.lineTo(w.x*B,w.y*he),R.stroke())},J=(F,W)=>{const w=D.current,{width:R,height:B}=Q.current;!w||!W||(w.fillStyle=F.color,w.beginPath(),w.arc(W.x*R,W.y*B,F.size/2,0,Math.PI*2),w.fill())},b=F=>{if(F.button!==0)return;const W=N.current;if(!W||!j)return;F.preventDefault();const w=te(F);if(!w)return;W.setPointerCapture(F.pointerId),P.current=!0;const R={color:a||"#1b1b1b",size:p||6,owner:_,points:[w]};L.current.push(R),J(R,w)},ie=F=>{if(!P.current)return;const W=te(F);if(!W)return;const w=L.current,R=w[w.length-1];if(!R)return;const B=R.points[R.points.length-1];R.points.push(W),ne(R,B,W)},ce=F=>{P.current&&(P.current=!1,F?.pointerId!==void 0&&N.current&&N.current.releasePointerCapture(F.pointerId),typeof x=="function"&&x())};return s.jsx("div",{ref:z,className:`drawing-board${j?"":" drawing-board--disabled"}`,children:s.jsx("canvas",{ref:N,className:"drawing-canvas","aria-label":c,onPointerDown:b,onPointerMove:ie,onPointerUp:ce,onPointerLeave:ce,onPointerCancel:ce})})});tc.displayName="DrawingBoard";const Tf=({seconds:a})=>{const[p,c]=Y.useState(a),[j,x]=Y.useState(!0),_=Y.useRef(!1);Y.useEffect(()=>{c(a),x(!0),_.current=!1},[a]),Y.useEffect(()=>{if(!j||p<=0)return;const z=window.setInterval(()=>{c(N=>Math.max(N-1,0))},1e3);return()=>window.clearInterval(z)},[j,p]),Y.useEffect(()=>{if(p!==0||_.current)return;(()=>{try{const N=window.AudioContext||window.webkitAudioContext;if(!N)return;const D=new N,L=D.createOscillator(),P=D.createGain();L.type="square",P.gain.value=1e-4,L.connect(P),P.connect(D.destination);const Q=D.currentTime,q=(J,b)=>{L.frequency.setValueAtTime(b,J),P.gain.setValueAtTime(1e-4,J),P.gain.exponentialRampToValueAtTime(.18,J+.02),P.gain.exponentialRampToValueAtTime(1e-4,J+.25)},te=8,ne=.18;for(let J=0;J<te;J+=1)q(Q+J*ne,J%2===0?880:660);L.start(Q),L.stop(Q+te*ne+.1),L.onended=()=>D.close()}catch{}})(),_.current=!0},[p]);const I=()=>{c(a),x(!0),_.current=!1};return s.jsxs("div",{className:"timer",children:[s.jsx("div",{className:`timer__face ${p===0?"timer__face--done":""}`,children:hf(p)}),s.jsxs("div",{className:"timer__actions",children:[s.jsx("button",{type:"button",className:"chip",onClick:()=>x(z=>!z),children:j?"Pausar":"Continuar"}),s.jsx("button",{type:"button",className:"chip",onClick:I,children:"Reiniciar"})]}),p===0&&s.jsx("p",{className:"muted",children:"Tiempo agotado. Finaliza la ronda cuando quieras."})]})},Pf=()=>{const{state:a,dispatch:p}=st(),c=a.gameMode==="draw",j=Y.useRef(null),[x,_]=Y.useState(8),[I,z]=Y.useState(""),[N,D]=Y.useState({turnIndex:0,completedPlayers:[],round:1}),L=Y.useMemo(()=>Bu(a.players.length),[a.players.length]),P=Y.useMemo(()=>new Set(N.completedPlayers),[N.completedPlayers]),Q=L.length?N.turnIndex%L.length:0,q=L.length?L[Q]:0,te=a.players[q]||{name:"Jugador",color:"#9aa0a6"},ne=a.drawAllowColorPick&&I||te.color,J=P.has(q),b=N.completedPlayers.length,ie=N.round,ce=c&&a.drawLimitStrokes&&b>=L.length,F=c&&!ce&&(!a.drawLimitStrokes||!J);Y.useEffect(()=>{D({turnIndex:0,completedPlayers:[],round:1})},[a.players.length,a.gameMode]),Y.useEffect(()=>{c&&z(te.color||"#1b1b1b")},[q,te.color,c]);const W=()=>{!a.drawLimitStrokes||!L.length||D(ee=>{const Le=L.length?ee.turnIndex%L.length:0,xe=L.length?L[Le]:0;return ee.completedPlayers.includes(xe)?ee:{...ee,completedPlayers:[...ee.completedPlayers,xe]}})},w=(ee,Le)=>{if(!L.length)return-1;for(let xe=1;xe<=L.length;xe+=1){const ke=(ee+xe)%L.length,Me=L[ke];if(!Le.has(Me))return ke}return-1},R=()=>{if(L.length){if(a.drawLimitStrokes){D(ee=>{if(!L.length)return ee;const Le=ee.turnIndex%L.length,xe=L[Le],ke=new Set(ee.completedPlayers);ke.add(xe);const Me=w(ee.turnIndex,ke);return Me===-1?{...ee,completedPlayers:Array.from(ke)}:{...ee,completedPlayers:Array.from(ke),turnIndex:Me}});return}D(ee=>({...ee,turnIndex:(ee.turnIndex+1)%L.length}))}},B=()=>{j.current?.undo(q)&&a.drawLimitStrokes&&D(Le=>({...Le,completedPlayers:Le.completedPlayers.filter(xe=>xe!==q)}))},he=()=>{D(ee=>({turnIndex:0,completedPlayers:[],round:ee.round+1}))};return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:c?"Ronda de dibujo":"Ronda en marcha"}),!c&&s.jsx("p",{className:"muted",children:"Hablad en círculo, describid la palabra con una pista breve y tratad de descubrir quién no sabe de qué se habla."}),c&&s.jsxs("div",{className:"drawing-panel",children:[s.jsxs("div",{className:"drawing-header",children:[s.jsxs("div",{children:[ce?s.jsx("p",{className:"muted",children:"Todos han dibujado su trazo."}):s.jsxs("p",{className:"muted",children:["Turno de"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":te.color},children:te.name}),"."," ",a.drawLimitStrokes?"Añade un trazo y pulsa siguiente jugador.":"Añade un trazo y pasa el móvil."]}),a.drawLimitStrokes&&s.jsxs("span",{className:"helper",children:["Trazos completados: ",b,"/",L.length]}),a.drawLimitStrokes&&J&&!ce&&s.jsx("span",{className:"helper",children:"Trazo listo. Pulsa siguiente jugador."}),a.drawLimitStrokes&&s.jsxs("span",{className:"badge",children:["Ronda ",Number.isFinite(ie)?ie:1]})]}),s.jsxs("div",{className:"toggle",children:[a.drawLimitStrokes&&ce&&s.jsx("button",{type:"button",className:"chip",onClick:he,children:"Nueva ronda"}),s.jsx("button",{type:"button",className:"icon-button icon-button--soft",onClick:R,disabled:ce,"aria-label":a.drawLimitStrokes?"Siguiente jugador":"Siguiente trazo",title:a.drawLimitStrokes?"Siguiente jugador":"Siguiente trazo",children:s.jsx("svg",{viewBox:"0 0 24 24","aria-hidden":"true",children:s.jsx("path",{d:"M5 12h13m0 0-4-4m4 4-4 4",fill:"none",stroke:"currentColor",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"1.8"})})})]})]}),s.jsx(tc,{ref:j,color:ne,brushSize:x,ariaLabel:"Pizarra de dibujo compartida",canDraw:F,onStrokeEnd:W,ownerId:q}),s.jsxs("div",{className:"drawing-toolbar",children:[a.drawAllowColorPick&&s.jsxs("div",{className:"drawing-palette",children:[s.jsx("span",{className:"helper",children:"Color del trazo"}),s.jsx("div",{className:"palette",children:Ii.map(ee=>s.jsx("button",{type:"button",className:`color-swatch${ne===ee?" color-swatch--active":""}`,style:{"--swatch-color":ee},onClick:()=>z(ee),"aria-pressed":ne===ee,"aria-label":"Seleccionar color"},ee))})]}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:x===4?"chip chip--active":"chip",onClick:()=>_(4),children:"Fino"}),s.jsx("button",{type:"button",className:x===8?"chip chip--active":"chip",onClick:()=>_(8),children:"Medio"}),s.jsx("button",{type:"button",className:x===14?"chip chip--active":"chip",onClick:()=>_(14),children:"Grueso"})]}),s.jsx("button",{type:"button",className:"icon-button icon-button--soft icon-button--glyph",onClick:B,"aria-label":"Deshacer trazo",title:"Deshacer trazo",children:"↶"})]})]}),a.timerEnabled&&s.jsx(Tf,{seconds:a.timerSeconds}),s.jsx("button",{type:"button",className:"primary",onClick:()=>p({type:"END_ROUND"}),children:"Finalizar ronda"})]})})},Wu=({value:a,options:p,placeholder:c,onChange:j,disabled:x})=>{const[_,I]=Y.useState(!1),z=Y.useRef(null),N=Y.useId(),D=p.find(P=>String(P.value)===String(a));Y.useEffect(()=>{if(!_)return;const P=q=>{z.current?.contains(q.target)||I(!1)},Q=q=>{q.key==="Escape"&&I(!1)};return document.addEventListener("pointerdown",P),document.addEventListener("keydown",Q),()=>{document.removeEventListener("pointerdown",P),document.removeEventListener("keydown",Q)}},[_]);const L=P=>{j?.(P.value),I(!1)};return s.jsxs("div",{className:"color-select",ref:z,children:[s.jsxs("button",{type:"button",className:"color-select__trigger","aria-haspopup":"listbox","aria-expanded":_,"aria-controls":N,onClick:()=>I(P=>!P),disabled:x,children:[D?s.jsx("span",{className:"player-tag",style:{"--player-color":D.color},children:D.label}):s.jsx("span",{className:"color-select__placeholder",children:c}),s.jsx("span",{className:"color-select__chevron","aria-hidden":"true",children:"▾"})]}),_&&s.jsx("div",{className:"color-select__list",role:"listbox",id:N,children:p.map(P=>{const Q=String(P.value)===String(a);return s.jsx("button",{type:"button",className:`color-select__option ${Q?"color-select__option--selected":""}`,role:"option","aria-selected":Q,onClick:()=>L(P),children:s.jsx("span",{className:"player-tag",style:{"--player-color":P.color},children:P.label})},P.value)})})]})},Rf=Object.assign({"../data/categories/Acción.csv":Yu,"../data/categories/Animal.csv":Ju,"../data/categories/Comida.csv":Xu,"../data/categories/Deporte.csv":qu,"../data/categories/Lugar.csv":Zu,"../data/categories/Objeto.csv":bu,"../data/categories/Profesión.csv":ec,"../data/categories/Tecnología.csv":nc}),Lf=()=>{const{state:a,dispatch:p}=st(),[c,j]=Y.useState(""),[x,_]=Y.useState(""),[I,z]=Y.useState(!1),{entries:N,categories:D}=Y.useMemo(()=>Qu(Rf),[]),L=Y.useMemo(()=>a.selectedCategories.filter(g=>D.includes(g)),[D,a.selectedCategories]),P=Y.useMemo(()=>a.categoryMode!=="custom"?N:L.length?N.filter(g=>L.includes(g.category)):[],[L,a.categoryMode,N]),Q=Y.useMemo(()=>(a.impostorIndices||[]).map(g=>({index:g,name:a.players[g]?.name||"Jugador",color:a.players[g]?.color||"#9aa0a6"})),[a.impostorIndices,a.players]),q=a.hintsEnabled&&a.wordHint?a.wordHint:"",te=Y.useMemo(()=>a.alivePlayers.length?a.alivePlayers:a.players.map((g,$)=>$),[a.alivePlayers,a.players]),ne=Y.useMemo(()=>a.players.map((g,$)=>({name:g.name,color:g.color,index:$})).filter(g=>!te.includes(g.index)),[te,a.players]),J=te.length-(a.impostorIndices||[]).filter(g=>te.includes(g)).length,b=a.voteMode==="secret",ie=b&&a.secretVoteOrder.length>0&&a.secretVoteStep<a.secretVoteOrder.length,ce=a.tieCandidates.length?a.tieCandidates:te,F=Y.useMemo(()=>ce.map(g=>({value:String(g),label:a.players[g]?.name||"Jugador",color:a.players[g]?.color||"#9aa0a6"})),[a.players,ce]),W=ie?a.secretVoteOrder[a.secretVoteStep]:null,w=W!=null?a.players[W]:null,R=w?.name||"";Y.useEffect(()=>{c&&!ce.includes(Number(c))&&j(""),x&&!ce.includes(Number(x))&&_("")},[c,x,ce]),Y.useEffect(()=>{z(!1),_("")},[a.secretVoteStep]);const B=()=>{if(!c)return;const g=Number(c),$=a.players[g]?.name||"Jugador";window.confirm(`Votar a ${$} como impostor?`)&&p({type:"CAST_VOTE",payload:g})},he=()=>{if(!x)return;const g=Number(x);window.confirm("Confirmar voto secreto?")&&(p({type:"SUBMIT_SECRET_VOTE",payload:g}),z(!1),_(""))},ee=()=>{window.confirm("Revelar el impostor finaliza la partida. Continuar?")&&p({type:"REVEAL_IMPOSTOR"})},Le=()=>{if(!N.length){window.alert("Agrega palabras en src/data/categories para iniciar la partida.");return}if(a.categoryMode==="custom"&&!L.length){window.alert("Selecciona al menos una categoría.");return}if(a.categoryMode==="custom"&&!P.length){window.alert("No hay palabras para las categorías seleccionadas.");return}const g=$u(P.length?P:N);p({type:"START_GAME",payload:{word:g.word,wordHint:g.hint}})},xe=()=>{p({type:"RESET_GAME"}),p({type:"START_SETUP"})},ke=()=>{if(!a.lastVote||a.lastVote.status==="tie")return null;if(a.lastVote.status==="correct"){if(!a.winner){const g=Number.isInteger(a.lastVote.remainingImpostors)?a.lastVote.remainingImpostors:(a.impostorIndices||[]).filter($=>te.includes($)).length;return s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Correcto"}),s.jsx("p",{className:"muted",children:"Era un impostor."}),g>0&&s.jsx("p",{className:"muted",children:"Quedan más impostores."})]})}return a.winner!=="innocents"?null:s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Correcto"}),s.jsx("h3",{children:"Ganan los inocentes"}),s.jsx("div",{className:"tag-list",children:Q.map(g=>s.jsx("span",{className:"player-tag",style:{"--player-color":g.color},children:g.name},g.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),q&&s.jsxs("p",{className:"muted",children:["Pista: ",q]})]})}return s.jsxs("div",{className:"reveal reveal--warning",children:[s.jsx("span",{className:"badge badge--alert",children:"Fallasteis"}),s.jsxs("p",{className:"muted",children:["No era el impostor. Se elimina a"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":a.lastVote.color||"#9aa0a6"},children:a.lastVote.name}),"."]}),!a.winner&&s.jsxs("p",{className:"muted",children:["Quedan"," ",Number.isInteger(a.lastVote.remainingInnocents)?a.lastVote.remainingInnocents:J," ","inocentes."]}),!a.winner&&s.jsx("p",{className:"muted",children:"Seguid hablando y votad de nuevo."})]})},Me=()=>{if(!a.lastVote||a.lastVote.status!=="tie")return null;const g=Array.isArray(a.lastVote.indices)?a.lastVote.indices:[];return g.length?s.jsxs("div",{className:"reveal reveal--warning",children:[s.jsx("span",{className:"badge badge--alert",children:"Empate"}),s.jsx("div",{className:"tag-list",children:g.map($=>s.jsx("span",{className:"player-tag",style:{"--player-color":a.players[$]?.color||"#9aa0a6"},children:a.players[$]?.name||"Jugador"},$))}),s.jsx("p",{className:"muted",children:"Votad de nuevo solo entre ellos."})]}):null},tn=()=>!a.winner||a.winner==="innocents"?null:s.jsxs("div",{className:"reveal reveal--danger",children:[s.jsx("span",{className:"badge badge--alert",children:"Impostor"}),s.jsx("h3",{children:"Ganan los impostores"}),s.jsx("div",{className:"tag-list",children:Q.map(g=>s.jsx("span",{className:"player-tag",style:{"--player-color":g.color},children:g.name},g.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),q&&s.jsxs("p",{className:"muted",children:["Pista: ",q]})]}),Ve=()=>!a.revealImpostor||a.winner?null:s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge badge--alert",children:"Revelado"}),s.jsx("h3",{children:"Impostores"}),s.jsx("div",{className:"tag-list",children:Q.map(g=>s.jsx("span",{className:"player-tag",style:{"--player-color":g.color},children:g.name},g.index))}),s.jsxs("p",{className:"muted",children:["La palabra era: ",a.word]}),q&&s.jsxs("p",{className:"muted",children:["Pista: ",q]})]}),ye=()=>!ie||!R?null:I?s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Voto secreto"}),s.jsx("h3",{children:s.jsx("span",{className:"player-tag",style:{"--player-color":w?.color||"#9aa0a6"},children:R})}),s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"secretVote",children:"Votar por"}),s.jsx(Wu,{value:x,options:F,placeholder:"Selecciona un jugador",onChange:_}),s.jsx("button",{type:"button",className:"primary",onClick:he,disabled:!x,children:"Confirmar voto"})]})]}):s.jsxs("div",{className:"reveal",children:[s.jsx("span",{className:"badge",children:"Votación secreta"}),s.jsxs("h3",{children:["Pasa el móvil a"," ",s.jsx("span",{className:"player-tag",style:{"--player-color":w?.color||"#9aa0a6"},children:R})]}),s.jsx("p",{className:"muted",children:"Nadie más debe mirar."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>z(!0),children:"Votar en secreto"})]}),T=!a.winner&&!a.revealImpostor,X=T&&!b&&!ie,O=T&&b&&!ie,m=g=>{if(g==="public"){z(!1),_(""),p({type:"CANCEL_SECRET_VOTE"}),p({type:"SET_VOTE_MODE",payload:"public"});return}p({type:"SET_VOTE_MODE",payload:"secret"})};return s.jsx("section",{className:"screen",children:s.jsxs("div",{className:"card",children:[s.jsx("h2",{children:"Votación"}),s.jsx("p",{className:"muted",children:"Elige a quién creéis que es el impostor. Si acierta el grupo, ganan los inocentes."}),T&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Modo de votación"}),s.jsxs("div",{className:"toggle",children:[s.jsx("button",{type:"button",className:b?"chip":"chip chip--active",onClick:()=>m("public"),children:"🗣️ Pública"}),s.jsx("button",{type:"button",className:b?"chip chip--active":"chip",onClick:()=>m("secret"),children:"🤫 Secreta"})]})]}),X&&s.jsxs("div",{className:"field",children:[s.jsx("label",{htmlFor:"vote",children:"Votar por"}),s.jsx(Wu,{value:c,options:F,placeholder:"Selecciona un jugador",onChange:j}),s.jsx("button",{type:"button",className:"primary",onClick:B,disabled:!c,children:"Confirmar voto"})]}),O&&s.jsxs("div",{className:"field",children:[s.jsx("p",{className:"muted",children:"Cada jugador vota en privado, uno por uno."}),s.jsx("button",{type:"button",className:"primary",onClick:()=>p({type:"START_SECRET_VOTE"}),children:"Iniciar votación secreta"})]}),ye(),!ie&&Me(),!ie&&ke(),!ie&&tn(),!ie&&Ve(),!ie&&ne.length>0&&s.jsxs("div",{className:"field",children:[s.jsx("label",{children:"Eliminados"}),s.jsx("div",{className:"tag-list",children:ne.map(g=>s.jsx("span",{className:"player-tag",style:{"--player-color":g.color||"#9aa0a6"},children:g.name||"Jugador"},g.index))})]}),s.jsxs("div",{className:"actions",children:[a.timerEnabled&&T&&!ie&&s.jsx("button",{type:"button",className:"ghost",onClick:()=>p({type:"PLAY_AGAIN"}),children:"Jugar otra ronda"}),T&&!ie&&s.jsx("button",{type:"button",className:"ghost",onClick:ee,children:"Revelar impostor"}),ie&&s.jsx("button",{type:"button",className:"ghost",onClick:()=>{z(!1),_(""),p({type:"CANCEL_SECRET_VOTE"})},children:"Cancelar votación secreta"}),s.jsx("button",{type:"button",className:"ghost",onClick:Le,children:"Nueva partida"}),s.jsx("button",{type:"button",className:"ghost",onClick:xe,children:"Configurar otra partida"})]})]})})},rc="impostor-theme",Mf=()=>{try{const a=window.localStorage.getItem(rc);if(a==="light"||a==="dark")return a}catch{}return"dark"},zf=({onShowHelp:a,onToggleTheme:p,isDark:c})=>{const{state:j}=st();switch(j.screen){case"home":return s.jsx(Ef,{onShowHelp:a,onToggleTheme:p,isDark:c});case"deal":return s.jsx(jf,{});case"round":return s.jsx(Pf,{});case"reveal":return s.jsx(Lf,{});default:return s.jsx(Nf,{})}},If=()=>{const{state:a,dispatch:p}=st(),c=a.screen!=="setup"&&a.screen!=="home",[j,x]=Y.useState(Mf),[_,I]=Y.useState(!1);Y.useEffect(()=>{document.documentElement.dataset.theme=j;try{window.localStorage.setItem(rc,j)}catch{}},[j]);const z=()=>{window.confirm("Finalizar partida y volver al inicio?")&&(p({type:"RESET_GAME"}),p({type:"GO_HOME"}))};return s.jsxs("div",{className:"app",children:[s.jsx("main",{className:"app__main",children:s.jsx(zf,{onShowHelp:()=>I(!0),onToggleTheme:()=>x(N=>N==="dark"?"light":"dark"),isDark:j==="dark"})}),_&&s.jsx("div",{className:"modal-backdrop",role:"presentation",onClick:()=>I(!1),children:s.jsxs("div",{className:"modal",role:"dialog","aria-modal":"true","aria-label":"Instrucciones del juego",onClick:N=>N.stopPropagation(),children:[s.jsx("h2",{children:"Cómo jugar"}),s.jsxs("ol",{className:"modal__list",children:[s.jsx("li",{children:"Configura jugadores, categorías, modo y reglas."}),s.jsx("li",{children:"Pasa el móvil y mira tu rol en secreto."}),s.jsx("li",{children:"Si es por palabra, da una pista; si es por dibujo, añade un trazo."}),s.jsx("li",{children:"Vota al impostor cuando termine la ronda."}),s.jsx("li",{children:"Si aciertan todos los impostores, ganan los inocentes."})]}),s.jsx("div",{className:"modal__actions",children:s.jsx("button",{type:"button",className:"primary",onClick:()=>I(!1),children:"Entendido"})})]})}),s.jsx("footer",{className:"app__footer",children:c&&s.jsx("button",{type:"button",className:"ghost footer-exit",onClick:z,children:"Finalizar partida"})})]})},Of=()=>s.jsx(kf,{children:s.jsx(If,{})});df.createRoot(document.getElementById("root")).render(s.jsx(lf.StrictMode,{children:s.jsx(Of,{})}));
