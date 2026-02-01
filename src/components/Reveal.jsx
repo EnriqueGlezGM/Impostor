@@ -479,7 +479,7 @@ const Reveal = () => {
           </div>
         )}
         <div className="actions">
-          {state.timerEnabled && canVote && !secretActive && (
+          {(state.timerEnabled || state.gameMode === 'draw') && canVote && !secretActive && (
             <button
               type="button"
               className="ghost"
