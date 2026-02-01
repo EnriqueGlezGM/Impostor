@@ -30,13 +30,13 @@ export const DEFAULT_PLAYER_COLORS = [
 export const defaultPlayerColor = (index) =>
   DEFAULT_PLAYER_COLORS[index % DEFAULT_PLAYER_COLORS.length];
 
-export const buildDefaultPlayers = (count) =>
+export const buildDefaultPlayers = (count, label = 'Jugador') =>
   Array.from({ length: count }, (_, index) => ({
-    name: `Jugador ${index + 1}`,
+    name: `${label} ${index + 1}`,
     color: defaultPlayerColor(index),
   }));
 
-export const normalizePlayers = (count, players) => {
+export const normalizePlayers = (count, players, label = 'Jugador') => {
   const next = Array.isArray(players) ? [...players] : [];
 
   const ensurePlayer = (player, index) => {
@@ -45,11 +45,11 @@ export const normalizePlayers = (count, players) => {
     }
     if (player && typeof player === 'object') {
       return {
-        name: player.name || `Jugador ${index + 1}`,
+        name: player.name || `${label} ${index + 1}`,
         color: player.color || defaultPlayerColor(index),
       };
     }
-    return { name: `Jugador ${index + 1}`, color: defaultPlayerColor(index) };
+    return { name: `${label} ${index + 1}`, color: defaultPlayerColor(index) };
   };
 
   if (next.length > count) {

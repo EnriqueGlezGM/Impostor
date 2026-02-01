@@ -3,9 +3,11 @@ import { useGame } from '../state/GameContext.jsx';
 import DrawingBoard from './DrawingBoard.jsx';
 import Timer from './Timer.jsx';
 import { buildDealOrder, DEFAULT_PLAYER_COLORS } from '../utils.js';
+import { formatString, getStrings } from '../i18n.js';
 
 const Round = () => {
   const { state, dispatch } = useGame();
+  const t = getStrings(state.language);
   const isDrawMode = state.gameMode === 'draw';
   const boardRef = useRef(null);
   const [brushSize, setBrushSize] = useState(8);
@@ -24,7 +26,10 @@ const Round = () => {
     ? drawState.turnIndex % drawOrder.length
     : 0;
   const activeIndex = drawOrder.length ? drawOrder[currentTurnIndex] : 0;
-  const activePlayer = state.players[activeIndex] || { name: 'Jugador', color: '#9aa0a6' };
+  const activePlayer = state.players[activeIndex] || {
+    name: t.common.playerLabel,
+    color: '#9aa0a6',
+  };
   const activeStrokeColor = state.drawAllowColorPick
     ? strokeColor || activePlayer.color
     : activePlayer.color;
@@ -125,47 +130,45 @@ const Round = () => {
   return (
     <section className="screen">
       <div className="card">
-        <h2>{isDrawMode ? 'Ronda de dibujo' : 'Ronda en marcha'}</h2>
-        {!isDrawMode && (
-          <p className="muted">
-            Hablad en círculo, describid la palabra con una pista breve y tratad de descubrir
-            quién no sabe de qué se habla.
-          </p>
-        )}
+        <h2>{isDrawMode ? t.round.drawRound : t.round.wordRound}</h2>
+        {!isDrawMode && <p className="muted">{t.round.wordIntro}</p>}
         {isDrawMode && (
           <div className="drawing-panel">
             <div className="drawing-header">
               <div>
                 {roundComplete ? (
-                  <p className="muted">Todos han dibujado su trazo.</p>
+                  <p className="muted">{t.round.allDone}</p>
                 ) : (
                   <p className="muted">
-                    Turno de{' '}
+                    {t.round.turnOf}{' '}
                     <span className="player-tag" style={{ '--player-color': activePlayer.color }}>
                       {activePlayer.name}
                     </span>
                     .{' '}
-                    {state.drawLimitStrokes
-                      ? 'Añade un trazo y pulsa siguiente jugador.'
-                      : 'Añade un trazo y pasa el móvil.'}
+                    {state.drawLimitStrokes ? t.round.drawAndNext : t.round.drawAndPass}
                   </p>
                 )}
                 {state.drawLimitStrokes && (
                   <span className="helper">
-                    Trazos completados: {completedCount}/{drawOrder.length}
+                    {formatString(t.round.strokesDone, {
+                      done: completedCount,
+                      total: drawOrder.length,
+                    })}
                   </span>
                 )}
                 {state.drawLimitStrokes && currentCompleted && !roundComplete && (
-                  <span className="helper">Trazo listo. Pulsa siguiente jugador.</span>
+                  <span className="helper">{t.round.strokeReady}</span>
                 )}
                 {state.drawLimitStrokes && (
-                  <span className="badge">Ronda {Number.isFinite(roundNumber) ? roundNumber : 1}</span>
+                  <span className="badge">
+                    {formatString(t.round.roundCount, { round: roundNumber })}
+                  </span>
                 )}
               </div>
               <div className="toggle">
                 {state.drawLimitStrokes && roundComplete && (
                   <button type="button" className="chip" onClick={onNextRound}>
-                    Nueva ronda
+                    {t.round.newRound}
                   </button>
                 )}
                 <button
@@ -173,8 +176,8 @@ const Round = () => {
                   className="icon-button icon-button--soft"
                   onClick={onNextTurn}
                   disabled={roundComplete}
-                  aria-label={state.drawLimitStrokes ? 'Siguiente jugador' : 'Siguiente trazo'}
-                  title={state.drawLimitStrokes ? 'Siguiente jugador' : 'Siguiente trazo'}
+                  aria-label={state.drawLimitStrokes ? t.round.nextPlayer : t.round.nextStroke}
+                  title={state.drawLimitStrokes ? t.round.nextPlayer : t.round.nextStroke}
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -193,7 +196,7 @@ const Round = () => {
               ref={boardRef}
               color={activeStrokeColor}
               brushSize={brushSize}
-              ariaLabel="Pizarra de dibujo compartida"
+              ariaLabel={t.round.boardLabel}
               canDraw={canDraw}
               onStrokeEnd={markCurrentCompleted}
               ownerId={activeIndex}
@@ -201,7 +204,7 @@ const Round = () => {
             <div className="drawing-toolbar">
               {state.drawAllowColorPick && (
                 <div className="drawing-palette">
-                  <span className="helper">Color del trazo</span>
+                  <span className="helper">{t.round.strokeColor}</span>
                   <div className="palette">
                     {DEFAULT_PLAYER_COLORS.map((color) => (
                       <button
@@ -213,7 +216,7 @@ const Round = () => {
                         style={{ '--swatch-color': color }}
                         onClick={() => setStrokeColor(color)}
                         aria-pressed={activeStrokeColor === color}
-                        aria-label="Seleccionar color"
+                        aria-label={t.round.selectColor}
                       />
                     ))}
                   </div>
@@ -225,29 +228,29 @@ const Round = () => {
                   className={brushSize === 4 ? 'chip chip--active' : 'chip'}
                   onClick={() => setBrushSize(4)}
                 >
-                  Fino
+                  {t.round.thin}
                 </button>
                 <button
                   type="button"
                   className={brushSize === 8 ? 'chip chip--active' : 'chip'}
                   onClick={() => setBrushSize(8)}
                 >
-                  Medio
+                  {t.round.medium}
                 </button>
                 <button
                   type="button"
                   className={brushSize === 14 ? 'chip chip--active' : 'chip'}
                   onClick={() => setBrushSize(14)}
                 >
-                  Grueso
+                  {t.round.thick}
                 </button>
               </div>
               <button
                 type="button"
                 className="icon-button icon-button--soft icon-button--glyph"
                 onClick={onUndo}
-                aria-label="Deshacer trazo"
-                title="Deshacer trazo"
+                aria-label={t.round.undo}
+                title={t.round.undo}
               >
                 ↶
               </button>
@@ -256,7 +259,7 @@ const Round = () => {
         )}
         {state.timerEnabled && <Timer seconds={state.timerSeconds} />}
         <button type="button" className="primary" onClick={() => dispatch({ type: 'END_ROUND' })}>
-          Finalizar ronda
+          {t.round.endRound}
         </button>
       </div>
     </section>

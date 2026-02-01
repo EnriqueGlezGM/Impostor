@@ -5,6 +5,7 @@ import Setup from './components/Setup.jsx';
 import Deal from './components/Deal.jsx';
 import Round from './components/Round.jsx';
 import Reveal from './components/Reveal.jsx';
+import { getStrings } from './i18n.js';
 
 const THEME_KEY = 'impostor-theme';
 
@@ -46,6 +47,7 @@ const Screen = ({ onShowHelp, onToggleTheme, isDark }) => {
 
 const AppLayout = () => {
   const { state, dispatch } = useGame();
+  const t = getStrings(state.language);
   const showExit = state.screen !== 'setup' && state.screen !== 'home';
   const [theme, setTheme] = useState(getInitialTheme);
   const [showHelp, setShowHelp] = useState(false);
@@ -60,7 +62,7 @@ const AppLayout = () => {
   }, [theme]);
 
   const onExit = () => {
-    const confirmed = window.confirm('Finalizar partida y volver al inicio?');
+    const confirmed = window.confirm(t.app.exitConfirm);
     if (confirmed) {
       dispatch({ type: 'RESET_GAME' });
       dispatch({ type: 'GO_HOME' });
@@ -86,20 +88,18 @@ const AppLayout = () => {
             className="modal"
             role="dialog"
             aria-modal="true"
-            aria-label="Instrucciones del juego"
+            aria-label={t.app.helpTitle}
             onClick={(event) => event.stopPropagation()}
           >
-            <h2>Cómo jugar</h2>
+            <h2>{t.app.helpTitle}</h2>
             <ol className="modal__list">
-              <li>Configura jugadores, categorías, modo y reglas.</li>
-              <li>Pasa el móvil y mira tu rol en secreto.</li>
-              <li>Si es por palabra, da una pista; si es por dibujo, añade un trazo.</li>
-              <li>Vota al impostor cuando termine la ronda.</li>
-              <li>Si aciertan todos los impostores, ganan los inocentes.</li>
+              {t.app.helpSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
             </ol>
             <div className="modal__actions">
               <button type="button" className="primary" onClick={() => setShowHelp(false)}>
-                Entendido
+                {t.app.helpClose}
               </button>
             </div>
           </div>
@@ -108,7 +108,7 @@ const AppLayout = () => {
       <footer className="app__footer">
         {showExit && (
           <button type="button" className="ghost footer-exit" onClick={onExit}>
-            Finalizar partida
+            {t.app.endGame}
           </button>
         )}
       </footer>

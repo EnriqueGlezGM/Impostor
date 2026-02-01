@@ -2,20 +2,30 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
 import ColorSelect from './ColorSelect.jsx';
 import { parseCategoryFiles, pickRandomEntry } from '../utils.js';
+import { formatString, getStrings } from '../i18n.js';
 
-const categoryFiles = import.meta.glob('../data/categories/*.csv', {
-  as: 'raw',
-  eager: true,
-});
+const categoryFilesByLanguage = {
+  es: import.meta.glob('../data/categories/es/*.csv', {
+    as: 'raw',
+    eager: true,
+  }),
+  en: import.meta.glob('../data/categories/en/*.csv', {
+    as: 'raw',
+    eager: true,
+  }),
+};
 
 const Reveal = () => {
   const { state, dispatch } = useGame();
+  const t = getStrings(state.language);
   const [selected, setSelected] = useState('');
   const [secretSelected, setSecretSelected] = useState('');
   const [showSecretForm, setShowSecretForm] = useState(false);
+
+  const categoryFiles = categoryFilesByLanguage[state.language] || categoryFilesByLanguage.es;
   const { entries: wordEntries, categories } = useMemo(
     () => parseCategoryFiles(categoryFiles),
-    []
+    [categoryFiles]
   );
   const selectedCategories = useMemo(
     () => state.selectedCategories.filter((category) => categories.includes(category)),
@@ -30,14 +40,15 @@ const Reveal = () => {
     }
     return wordEntries.filter((entry) => selectedCategories.includes(entry.category));
   }, [selectedCategories, state.categoryMode, wordEntries]);
+
   const impostorPlayers = useMemo(
     () =>
       (state.impostorIndices || []).map((index) => ({
         index,
-        name: state.players[index]?.name || 'Jugador',
+        name: state.players[index]?.name || t.common.playerLabel,
         color: state.players[index]?.color || '#9aa0a6',
       })),
-    [state.impostorIndices, state.players]
+    [state.impostorIndices, state.players, t]
   );
   const hintText = state.hintsEnabled && state.wordHint ? state.wordHint : '';
 
@@ -68,10 +79,10 @@ const Reveal = () => {
     () =>
       voteCandidates.map((index) => ({
         value: String(index),
-        label: state.players[index]?.name || 'Jugador',
+        label: state.players[index]?.name || t.common.playerLabel,
         color: state.players[index]?.color || '#9aa0a6',
       })),
-    [state.players, voteCandidates]
+    [state.players, t, voteCandidates]
   );
   const currentSecretVoter = secretActive
     ? state.secretVoteOrder[state.secretVoteStep]
@@ -99,8 +110,10 @@ const Reveal = () => {
   const onVote = () => {
     if (!selected) return;
     const targetIndex = Number(selected);
-    const targetName = state.players[targetIndex]?.name || 'Jugador';
-    const confirmed = window.confirm(`Votar a ${targetName} como impostor?`);
+    const targetName = state.players[targetIndex]?.name || t.common.playerLabel;
+    const confirmed = window.confirm(
+      formatString(t.reveal.confirmVotePrompt, { name: targetName })
+    );
     if (confirmed) {
       dispatch({ type: 'CAST_VOTE', payload: targetIndex });
     }
@@ -109,7 +122,7 @@ const Reveal = () => {
   const onSecretVote = () => {
     if (!secretSelected) return;
     const targetIndex = Number(secretSelected);
-    const confirmed = window.confirm('Confirmar voto secreto?');
+    const confirmed = window.confirm(t.reveal.confirmSecret);
     if (confirmed) {
       dispatch({ type: 'SUBMIT_SECRET_VOTE', payload: targetIndex });
       setShowSecretForm(false);
@@ -118,7 +131,7 @@ const Reveal = () => {
   };
 
   const onReveal = () => {
-    const confirmed = window.confirm('Revelar el impostor finaliza la partida. Continuar?');
+    const confirmed = window.confirm(t.reveal.confirmReveal);
     if (confirmed) {
       dispatch({ type: 'REVEAL_IMPOSTOR' });
     }
@@ -126,15 +139,15 @@ const Reveal = () => {
 
   const onNewGame = () => {
     if (!wordEntries.length) {
-      window.alert('Agrega palabras en src/data/categories para iniciar la partida.');
+      window.alert(t.reveal.alertWords);
       return;
     }
     if (state.categoryMode === 'custom' && !selectedCategories.length) {
-      window.alert('Selecciona al menos una categoría.');
+      window.alert(t.reveal.alertCategories);
       return;
     }
     if (state.categoryMode === 'custom' && !filteredEntries.length) {
-      window.alert('No hay palabras para las categorías seleccionadas.');
+      window.alert(t.reveal.alertNoWords);
       return;
     }
     const entry = pickRandomEntry(filteredEntries.length ? filteredEntries : wordEntries);
@@ -161,10 +174,10 @@ const Reveal = () => {
 
         return (
           <div className="reveal">
-            <span className="badge">Correcto</span>
-            <p className="muted">Era un impostor.</p>
+            <span className="badge">{t.reveal.correct}</span>
+            <p className="muted">{t.reveal.wasImpostor}</p>
             {remainingImpostors > 0 && (
-              <p className="muted">Quedan más impostores.</p>
+              <p className="muted">{t.reveal.moreImpostors}</p>
             )}
           </div>
         );
@@ -174,8 +187,8 @@ const Reveal = () => {
       }
       return (
         <div className="reveal">
-          <span className="badge">Correcto</span>
-          <h3>Ganan los inocentes</h3>
+          <span className="badge">{t.reveal.correct}</span>
+          <h3>{t.reveal.innocentsWin}</h3>
           <div className="tag-list">
             {impostorPlayers.map((player) => (
               <span
@@ -187,17 +200,23 @@ const Reveal = () => {
               </span>
             ))}
           </div>
-          <p className="muted">La palabra era: {state.word}</p>
-          {hintText && <p className="muted">Pista: {hintText}</p>}
+          <p className="muted">
+            {t.reveal.wordWas} {state.word}
+          </p>
+          {hintText && (
+            <p className="muted">
+              {t.reveal.hintWas} {hintText}
+            </p>
+          )}
         </div>
       );
     }
 
     return (
       <div className="reveal reveal--warning">
-        <span className="badge badge--alert">Fallasteis</span>
+        <span className="badge badge--alert">{t.reveal.wrong}</span>
         <p className="muted">
-          No era el impostor. Se elimina a{' '}
+          {t.reveal.notImpostor}{' '}
           <span
             className="player-tag"
             style={{ '--player-color': state.lastVote.color || '#9aa0a6' }}
@@ -208,14 +227,14 @@ const Reveal = () => {
         </p>
         {!state.winner && (
           <p className="muted">
-            Quedan{' '}
-            {Number.isInteger(state.lastVote.remainingInnocents)
-              ? state.lastVote.remainingInnocents
-              : innocentsAliveCount}{' '}
-            inocentes.
+            {formatString(t.reveal.innocentsLeft, {
+              count: Number.isInteger(state.lastVote.remainingInnocents)
+                ? state.lastVote.remainingInnocents
+                : innocentsAliveCount,
+            })}
           </p>
         )}
-        {!state.winner && <p className="muted">Seguid hablando y votad de nuevo.</p>}
+        {!state.winner && <p className="muted">{t.reveal.keepTalking}</p>}
       </div>
     );
   };
@@ -227,7 +246,7 @@ const Reveal = () => {
 
     return (
       <div className="reveal reveal--warning">
-        <span className="badge badge--alert">Empate</span>
+        <span className="badge badge--alert">{t.reveal.tie}</span>
         <div className="tag-list">
           {indices.map((index) => (
             <span
@@ -235,11 +254,11 @@ const Reveal = () => {
               className="player-tag"
               style={{ '--player-color': state.players[index]?.color || '#9aa0a6' }}
             >
-              {state.players[index]?.name || 'Jugador'}
+              {state.players[index]?.name || t.common.playerLabel}
             </span>
           ))}
         </div>
-        <p className="muted">Votad de nuevo solo entre ellos.</p>
+        <p className="muted">{t.reveal.voteAgainTie}</p>
       </div>
     );
   };
@@ -251,8 +270,8 @@ const Reveal = () => {
 
     return (
       <div className="reveal reveal--danger">
-        <span className="badge badge--alert">Impostor</span>
-        <h3>Ganan los impostores</h3>
+        <span className="badge badge--alert">{t.reveal.impostorLabel}</span>
+        <h3>{t.reveal.impostorsWin}</h3>
         <div className="tag-list">
           {impostorPlayers.map((player) => (
             <span
@@ -264,8 +283,14 @@ const Reveal = () => {
             </span>
           ))}
         </div>
-        <p className="muted">La palabra era: {state.word}</p>
-        {hintText && <p className="muted">Pista: {hintText}</p>}
+        <p className="muted">
+          {t.reveal.wordWas} {state.word}
+        </p>
+        {hintText && (
+          <p className="muted">
+            {t.reveal.hintWas} {hintText}
+          </p>
+        )}
       </div>
     );
   };
@@ -277,8 +302,8 @@ const Reveal = () => {
 
     return (
       <div className="reveal">
-        <span className="badge badge--alert">Revelado</span>
-        <h3>Impostores</h3>
+        <span className="badge badge--alert">{t.reveal.revealed}</span>
+        <h3>{t.reveal.impostorsLabel}</h3>
         <div className="tag-list">
           {impostorPlayers.map((player) => (
             <span
@@ -290,8 +315,14 @@ const Reveal = () => {
             </span>
           ))}
         </div>
-        <p className="muted">La palabra era: {state.word}</p>
-        {hintText && <p className="muted">Pista: {hintText}</p>}
+        <p className="muted">
+          {t.reveal.wordWas} {state.word}
+        </p>
+        {hintText && (
+          <p className="muted">
+            {t.reveal.hintWas} {hintText}
+          </p>
+        )}
       </div>
     );
   };
@@ -304,9 +335,9 @@ const Reveal = () => {
     if (!showSecretForm) {
       return (
         <div className="reveal">
-          <span className="badge">Votación secreta</span>
+          <span className="badge">{t.reveal.secretTitle}</span>
           <h3>
-            Pasa el móvil a{' '}
+            {t.reveal.passPhoneTo}{' '}
             <span
               className="player-tag"
               style={{ '--player-color': currentSecretPlayer?.color || '#9aa0a6' }}
@@ -314,9 +345,9 @@ const Reveal = () => {
               {currentSecretName}
             </span>
           </h3>
-          <p className="muted">Nadie más debe mirar.</p>
+          <p className="muted">{t.reveal.secretNoLook}</p>
           <button type="button" className="primary" onClick={() => setShowSecretForm(true)}>
-            Votar en secreto
+            {t.reveal.voteSecret}
           </button>
         </div>
       );
@@ -324,7 +355,7 @@ const Reveal = () => {
 
     return (
       <div className="reveal">
-        <span className="badge">Voto secreto</span>
+        <span className="badge">{t.reveal.secretVoteTitle}</span>
         <h3>
           <span
             className="player-tag"
@@ -334,11 +365,11 @@ const Reveal = () => {
           </span>
         </h3>
         <div className="field">
-          <label htmlFor="secretVote">Votar por</label>
+          <label htmlFor="secretVote">{t.reveal.voteFor}</label>
           <ColorSelect
             value={secretSelected}
             options={voteOptions}
-            placeholder="Selecciona un jugador"
+            placeholder={t.reveal.selectPlayer}
             onChange={setSecretSelected}
           />
           <button
@@ -347,7 +378,7 @@ const Reveal = () => {
             onClick={onSecretVote}
             disabled={!secretSelected}
           >
-            Confirmar voto
+            {t.reveal.confirmVoteLabel}
           </button>
         </div>
       </div>
@@ -372,39 +403,36 @@ const Reveal = () => {
   return (
     <section className="screen">
       <div className="card">
-        <h2>Votación</h2>
-        <p className="muted">
-          Elige a quién creéis que es el impostor. Si acierta el grupo, ganan los
-          inocentes.
-        </p>
+        <h2>{t.reveal.title}</h2>
+        <p className="muted">{t.reveal.intro}</p>
         {canVote && (
           <div className="field">
-            <label>Modo de votación</label>
+            <label>{t.reveal.voteMode}</label>
             <div className="toggle">
               <button
                 type="button"
                 className={!isSecretMode ? 'chip chip--active' : 'chip'}
                 onClick={() => onSetVoteMode('public')}
               >
-                🗣️ Pública
+                {t.reveal.public}
               </button>
               <button
                 type="button"
                 className={isSecretMode ? 'chip chip--active' : 'chip'}
                 onClick={() => onSetVoteMode('secret')}
               >
-                🤫 Secreta
+                {t.reveal.secret}
               </button>
             </div>
           </div>
         )}
         {showPublicVoting && (
           <div className="field">
-            <label htmlFor="vote">Votar por</label>
+            <label htmlFor="vote">{t.reveal.voteFor}</label>
             <ColorSelect
               value={selected}
               options={voteOptions}
-              placeholder="Selecciona un jugador"
+              placeholder={t.reveal.selectPlayer}
               onChange={setSelected}
             />
             <button
@@ -413,19 +441,19 @@ const Reveal = () => {
               onClick={onVote}
               disabled={!selected}
             >
-              Confirmar voto
+              {t.reveal.confirmVoteLabel}
             </button>
           </div>
         )}
         {showSecretControls && (
           <div className="field">
-            <p className="muted">Cada jugador vota en privado, uno por uno.</p>
+            <p className="muted">{t.reveal.secretIntro}</p>
             <button
               type="button"
               className="primary"
               onClick={() => dispatch({ type: 'START_SECRET_VOTE' })}
             >
-              Iniciar votación secreta
+              {t.reveal.startSecret}
             </button>
           </div>
         )}
@@ -436,7 +464,7 @@ const Reveal = () => {
         {!secretActive && renderReveal()}
         {!secretActive && eliminatedPlayers.length > 0 && (
           <div className="field">
-            <label>Eliminados</label>
+            <label>{t.reveal.eliminated}</label>
             <div className="tag-list">
               {eliminatedPlayers.map((player) => (
                 <span
@@ -444,7 +472,7 @@ const Reveal = () => {
                   className="player-tag"
                   style={{ '--player-color': player.color || '#9aa0a6' }}
                 >
-                  {player.name || 'Jugador'}
+                  {player.name || t.common.playerLabel}
                 </span>
               ))}
             </div>
@@ -457,12 +485,12 @@ const Reveal = () => {
               className="ghost"
               onClick={() => dispatch({ type: 'PLAY_AGAIN' })}
             >
-              Jugar otra ronda
+              {t.reveal.playAgain}
             </button>
           )}
           {canVote && !secretActive && (
             <button type="button" className="ghost" onClick={onReveal}>
-              Revelar impostor
+              {t.reveal.revealImpostor}
             </button>
           )}
           {secretActive && (
@@ -475,14 +503,14 @@ const Reveal = () => {
                 dispatch({ type: 'CANCEL_SECRET_VOTE' });
               }}
             >
-              Cancelar votación secreta
+              {t.reveal.cancelSecret}
             </button>
           )}
           <button type="button" className="ghost" onClick={onNewGame}>
-            Nueva partida
+            {t.reveal.newGame}
           </button>
           <button type="button" className="ghost" onClick={onConfigure}>
-            Configurar otra partida
+            {t.reveal.configure}
           </button>
         </div>
       </div>

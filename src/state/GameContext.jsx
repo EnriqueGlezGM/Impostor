@@ -10,12 +10,17 @@ import {
 const STORAGE_KEY = 'impostor-game-state-v1';
 const MIN_PLAYERS_FOR_IMPOSTOR_WIN = 2;
 
-const createFreshState = () => {
+const PLAYER_LABELS = { es: 'Jugador', en: 'Player' };
+
+const getPlayerLabel = (language) => PLAYER_LABELS[language] || PLAYER_LABELS.es;
+
+const createFreshState = (language = 'es') => {
   const playerCount = 5;
   return {
     screen: 'home',
+    language,
     playerCount,
-    players: buildDefaultPlayers(playerCount),
+    players: buildDefaultPlayers(playerCount, getPlayerLabel(language)),
     gameMode: 'word',
     drawAllowColorPick: true,
     drawLimitStrokes: true,
@@ -52,6 +57,7 @@ const hydrateState = () => {
     }
     const parsed = JSON.parse(raw);
     const playerCount = clamp(parsed.playerCount || 5, 3, 15);
+    const language = parsed.language === 'en' ? 'en' : 'es';
     const {
       useCategory,
       category,
@@ -93,10 +99,11 @@ const hydrateState = () => {
         : [];
 
     return {
-      ...createFreshState(),
+      ...createFreshState(language),
       ...rest,
+      language,
       playerCount,
-      players: normalizePlayers(playerCount, parsed.players || []),
+      players: normalizePlayers(playerCount, parsed.players || [], getPlayerLabel(language)),
       gameMode,
       drawAllowColorPick,
       drawLimitStrokes,
@@ -135,7 +142,7 @@ const resolveVote = (state, target) => {
     return state;
   }
 
-  const targetName = state.players[target]?.name || 'Jugador';
+  const targetName = state.players[target]?.name || getPlayerLabel(state.language);
   const targetColor = state.players[target]?.color || '#9aa0a6';
   const remainingPlayers = state.alivePlayers.filter((id) => id !== target);
   const impostorsAlive = state.impostorIndices.filter((id) => remainingPlayers.includes(id)).length;
@@ -198,10 +205,33 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         playerCount,
-        players: normalizePlayers(playerCount, state.players),
+        players: normalizePlayers(
+          playerCount,
+          state.players,
+          getPlayerLabel(state.language)
+        ),
         impostorCount: state.allowMultipleImpostors
           ? Math.min(state.impostorCount, playerCount)
           : 1,
+      };
+    }
+    case 'SET_LANGUAGE': {
+      const language = action.payload === 'en' ? 'en' : 'es';
+      const previousLabel = getPlayerLabel(state.language);
+      const nextLabel = getPlayerLabel(language);
+      const players = state.players.map((player, index) => {
+        const expected = `${previousLabel} ${index + 1}`;
+        if (player?.name === expected) {
+          return { ...player, name: `${nextLabel} ${index + 1}` };
+        }
+        return player;
+      });
+      return {
+        ...state,
+        language,
+        players,
+        categoryMode: 'all',
+        selectedCategories: [],
       };
     }
     case 'SET_PLAYER_NAME': {
@@ -437,7 +467,9 @@ const gameReducer = (state, action) => {
           tieCandidates: topTargets,
           lastVote: {
             status: 'tie',
-            names: topTargets.map((index) => state.players[index]?.name || 'Jugador'),
+            names: topTargets.map(
+              (index) => state.players[index]?.name || getPlayerLabel(state.language)
+            ),
             indices: topTargets,
           },
         };
@@ -459,11 +491,15 @@ const gameReducer = (state, action) => {
       };
     }
     case 'RESET_GAME': {
-      const baseState = createFreshState();
+      const baseState = createFreshState(state.language);
       return {
         ...baseState,
         playerCount: state.playerCount,
-        players: normalizePlayers(state.playerCount, state.players),
+        players: normalizePlayers(
+          state.playerCount,
+          state.players,
+          getPlayerLabel(state.language)
+        ),
         gameMode: state.gameMode,
         drawAllowColorPick: state.drawAllowColorPick,
         drawLimitStrokes: state.drawLimitStrokes,
@@ -478,7 +514,7 @@ const gameReducer = (state, action) => {
       };
     }
     case 'RESET_ALL':
-      return createFreshState();
+      return createFreshState(state.language);
     default:
       return state;
   }

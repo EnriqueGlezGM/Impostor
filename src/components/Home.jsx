@@ -1,23 +1,24 @@
 import React from 'react';
 import { useGame } from '../state/GameContext.jsx';
+import { getStrings } from '../i18n.js';
 
 const Home = ({ onShowHelp, onToggleTheme, isDark }) => {
-  const { dispatch } = useGame();
+  const { state, dispatch } = useGame();
+  const t = getStrings(state.language);
+  const isSpanish = state.language === 'es';
 
   return (
     <section className="screen">
       <div className="home-stack">
-        <h1 className="home-title">El Impostor 😈</h1>
+        <h1 className="home-title">{t.home.title}</h1>
         <div className="card card--center home-card">
-          <p className="muted">
-            Prepara la partida y descubre quién finge conocer la palabra.
-          </p>
+          <p className="muted">{t.home.tagline}</p>
           <button
             type="button"
             className="primary home-start"
             onClick={() => dispatch({ type: 'START_SETUP' })}
           >
-            Iniciar juego
+            {t.home.start}
           </button>
         </div>
         <div className="home-actions">
@@ -25,7 +26,7 @@ const Home = ({ onShowHelp, onToggleTheme, isDark }) => {
             type="button"
             className="icon-button"
             onClick={onShowHelp}
-            aria-label="Ver instrucciones"
+            aria-label={t.home.helpLabel}
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path
@@ -40,10 +41,18 @@ const Home = ({ onShowHelp, onToggleTheme, isDark }) => {
           </button>
           <button
             type="button"
+            className="icon-button icon-button--emoji"
+            onClick={() => dispatch({ type: 'SET_LANGUAGE', payload: isSpanish ? 'en' : 'es' })}
+            aria-label={t.home.languageToggle}
+          >
+            {isSpanish ? '🇪🇸' : '🇬🇧'}
+          </button>
+          <button
+            type="button"
             className="icon-button"
             onClick={onToggleTheme}
             aria-pressed={isDark}
-            aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+            aria-label={isDark ? t.home.themeToLight : t.home.themeToDark}
           >
             {isDark ? (
               <svg viewBox="0 0 24 24" aria-hidden="true">

@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useGame } from '../state/GameContext.jsx';
 import { formatTime } from '../utils.js';
+import { getStrings } from '../i18n.js';
 
 const Timer = ({ seconds }) => {
+  const { state } = useGame();
+  const t = getStrings(state.language);
   const [timeLeft, setTimeLeft] = useState(seconds);
   const [running, setRunning] = useState(true);
   const beepedRef = useRef(false);
@@ -79,13 +83,13 @@ const Timer = ({ seconds }) => {
       </div>
       <div className="timer__actions">
         <button type="button" className="chip" onClick={() => setRunning((prev) => !prev)}>
-          {running ? 'Pausar' : 'Continuar'}
+          {running ? t.timer.pause : t.timer.resume}
         </button>
         <button type="button" className="chip" onClick={onReset}>
-          Reiniciar
+          {t.timer.reset}
         </button>
       </div>
-      {timeLeft === 0 && <p className="muted">Tiempo agotado. Finaliza la ronda cuando quieras.</p>}
+      {timeLeft === 0 && <p className="muted">{t.timer.done}</p>}
     </div>
   );
 };
