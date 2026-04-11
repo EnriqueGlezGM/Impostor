@@ -68,7 +68,7 @@ export const buildDealOrder = (count) => Array.from({ length: count }, (_, i) =>
 export const pickImpostor = (count) => Math.floor(Math.random() * count);
 
 export const pickImpostors = (count, impostorCount) => {
-  const total = Math.max(1, Math.min(impostorCount, count));
+  const total = Math.max(0, Math.min(impostorCount, count));
   return shuffle(Array.from({ length: count }, (_, index) => index)).slice(0, total);
 };
 
@@ -155,4 +155,25 @@ export const pickRandomEntry = (entries) => {
   if (!entries.length) return { category: '', word: '', hint: '' };
   const index = Math.floor(Math.random() * entries.length);
   return entries[index];
+};
+
+const normalizeWordKey = (word) => String(word || '').trim().toLocaleLowerCase();
+
+export const pickRandomEntryExcluding = (entries, excludedWords = []) => {
+  if (!entries.length) return { category: '', word: '', hint: '' };
+  const excluded = new Set(excludedWords.map(normalizeWordKey).filter(Boolean));
+  const available = entries.filter((entry) => !excluded.has(normalizeWordKey(entry.word)));
+  return pickRandomEntry(available.length ? available : entries);
+};
+
+export const addRecentWord = (recentWords = [], word, limit = 15) => {
+  const key = normalizeWordKey(word);
+  if (!key) return Array.isArray(recentWords) ? recentWords.slice(0, limit) : [];
+  const next = [
+    String(word),
+    ...(Array.isArray(recentWords)
+      ? recentWords.filter((item) => normalizeWordKey(item) !== key)
+      : []),
+  ];
+  return next.slice(0, limit);
 };

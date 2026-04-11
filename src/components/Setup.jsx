@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
-import { parseCategoryFiles, pickRandomEntry } from '../utils.js';
+import { parseCategoryFiles, pickRandomEntryExcluding } from '../utils.js';
 import { formatString, getStrings } from '../i18n.js';
 
 const categoryFilesByLanguage = {
@@ -108,7 +108,10 @@ const Setup = () => {
 
     setErrors(nextErrors);
     if (nextErrors.length === 0) {
-      const entry = pickRandomEntry(filteredEntries.length ? filteredEntries : wordEntries);
+      const entry = pickRandomEntryExcluding(
+        filteredEntries.length ? filteredEntries : wordEntries,
+        state.recentWords
+      );
       dispatch({
         type: 'START_GAME',
         payload: { word: entry.word, wordHint: entry.hint },
@@ -416,50 +419,85 @@ const Setup = () => {
               </div>
               {state.allowMultipleImpostors && (
                 <div className="field field--danger">
-                  <label htmlFor="impostorCount">{t.setup.impostorCount}</label>
-                  <div className="stepper">
+                  <label>{t.setup.impostorCountMode}</label>
+                  <div className="toggle">
                     <button
                       type="button"
-                      className="stepper__button"
-                      onClick={() =>
-                        dispatch({
-                          type: 'SET_IMPOSTOR_COUNT',
-                          payload: state.impostorCount - 1,
-                        })
+                      className={
+                        state.impostorCountMode !== 'random' ? 'chip chip--active' : 'chip'
                       }
-                      aria-label={t.setup.decreaseImpostors}
+                      onClick={() =>
+                        dispatch({ type: 'SET_IMPOSTOR_COUNT_MODE', payload: 'fixed' })
+                      }
                     >
-                      ▾
+                      {t.setup.fixedImpostors}
                     </button>
-                    <input
-                      id="impostorCount"
-                      className="stepper__input"
-                      type="number"
-                      min={1}
-                      max={state.playerCount}
-                      value={state.impostorCount}
-                      onChange={(event) =>
-                        dispatch({
-                          type: 'SET_IMPOSTOR_COUNT',
-                          payload: Number(event.target.value),
-                        })
-                      }
-                    />
                     <button
                       type="button"
-                      className="stepper__button"
-                      onClick={() =>
-                        dispatch({
-                          type: 'SET_IMPOSTOR_COUNT',
-                          payload: state.impostorCount + 1,
-                        })
+                      className={
+                        state.impostorCountMode === 'random' ? 'chip chip--active' : 'chip'
                       }
-                      aria-label={t.setup.increaseImpostors}
+                      onClick={() =>
+                        dispatch({ type: 'SET_IMPOSTOR_COUNT_MODE', payload: 'random' })
+                      }
                     >
-                      ▴
+                      {t.setup.randomImpostors}
                     </button>
                   </div>
-                  <span className="helper">{t.setup.multipleImpostors}</span>
+                  {state.impostorCountMode === 'random' ? (
+                    <span className="helper">
+                      {formatString(t.setup.randomImpostorsHelper, {
+                        count: state.playerCount,
+                      })}
+                    </span>
+                  ) : (
+                    <>
+                      <label htmlFor="impostorCount">{t.setup.impostorCount}</label>
+                      <div className="stepper">
+                        <button
+                          type="button"
+                          className="stepper__button"
+                          onClick={() =>
+                            dispatch({
+                              type: 'SET_IMPOSTOR_COUNT',
+                              payload: state.impostorCount - 1,
+                            })
+                          }
+                          aria-label={t.setup.decreaseImpostors}
+                        >
+                          ▾
+                        </button>
+                        <input
+                          id="impostorCount"
+                          className="stepper__input"
+                          type="number"
+                          min={1}
+                          max={state.playerCount}
+                          value={state.impostorCount}
+                          onChange={(event) =>
+                            dispatch({
+                              type: 'SET_IMPOSTOR_COUNT',
+                              payload: Number(event.target.value),
+                            })
+                          }
+                        />
+                        <button
+                          type="button"
+                          className="stepper__button"
+                          onClick={() =>
+                            dispatch({
+                              type: 'SET_IMPOSTOR_COUNT',
+                              payload: state.impostorCount + 1,
+                            })
+                          }
+                          aria-label={t.setup.increaseImpostors}
+                        >
+                          ▴
+                        </button>
+                      </div>
+                      <span className="helper">{t.setup.multipleImpostors}</span>
+                    </>
+                  )}
                 </div>
               )}
               <div className="field">

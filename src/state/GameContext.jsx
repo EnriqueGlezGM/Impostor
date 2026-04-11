@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import {
   buildDealOrder,
   buildDefaultPlayers,
+  addRecentWord,
   clamp,
   normalizePlayers,
   pickImpostors,
@@ -9,6 +10,7 @@ import {
 
 const STORAGE_KEY = 'impostor-game-state-v1';
 const MIN_PLAYERS_FOR_IMPOSTOR_WIN = 2;
+const RECENT_WORD_LIMIT = 15;
 
 const PLAYER_LABELS = { es: 'Jugador', en: 'Player' };
 
@@ -26,12 +28,14 @@ const createFreshState = (language = 'es') => {
     drawLimitStrokes: true,
     word: '',
     wordHint: '',
+    recentWords: [],
     hintsEnabled: true,
     categoryMode: 'all',
     selectedCategories: [],
     timerEnabled: false,
     timerSeconds: 180,
     allowMultipleImpostors: false,
+    impostorCountMode: 'fixed',
     impostorCount: 1,
     impostorIndices: [],
     dealOrder: [],
@@ -109,6 +113,9 @@ const hydrateState = () => {
       categoryMode: parsed.categoryMode === 'custom' ? 'custom' : 'all',
       selectedCategories,
       wordHint: parsed.wordHint || '',
+      recentWords: Array.isArray(parsed.recentWords)
+        ? parsed.recentWords.filter((word) => typeof word === 'string').slice(0, RECENT_WORD_LIMIT)
+        : [],
       voteMode: parsed.voteMode === 'secret' ? 'secret' : 'public',
       secretVoteOrder: Array.isArray(parsed.secretVoteOrder) ? parsed.secretVoteOrder : [],
       secretVoteStep: Number.isInteger(parsed.secretVoteStep) ? parsed.secretVoteStep : 0,
@@ -119,6 +126,7 @@ const hydrateState = () => {
         typeof parsed.allowMultipleImpostors === 'boolean'
           ? parsed.allowMultipleImpostors
           : (parsed.impostorCount || impostorIndices.length || 1) > 1,
+      impostorCountMode: parsed.impostorCountMode === 'random' ? 'random' : 'fixed',
       impostorCount: Math.max(
         1,
         Math.min(parsed.impostorCount || impostorIndices.length || 1, playerCount)
@@ -323,9 +331,15 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         allowMultipleImpostors,
+        impostorCountMode: allowMultipleImpostors ? state.impostorCountMode : 'fixed',
         impostorCount: allowMultipleImpostors ? state.impostorCount : 1,
       };
     }
+    case 'SET_IMPOSTOR_COUNT_MODE':
+      return {
+        ...state,
+        impostorCountMode: action.payload === 'random' ? 'random' : 'fixed',
+      };
     case 'SET_IMPOSTOR_COUNT': {
       const count = Math.max(1, Math.min(action.payload, state.playerCount));
       return {
@@ -336,12 +350,19 @@ const gameReducer = (state, action) => {
     case 'START_GAME': {
       const word = action.payload?.word ? String(action.payload.word) : state.word;
       const wordHint = action.payload?.wordHint ? String(action.payload.wordHint) : '';
-      const impostorIndices = pickImpostors(state.players.length, state.impostorCount);
+      const impostorCount =
+        state.allowMultipleImpostors && state.impostorCountMode === 'random'
+          ? Math.floor(Math.random() * (state.players.length + 1))
+          : state.allowMultipleImpostors
+            ? state.impostorCount
+            : 1;
+      const impostorIndices = pickImpostors(state.players.length, impostorCount);
       return {
         ...state,
         screen: 'deal',
         word,
         wordHint,
+        recentWords: addRecentWord(state.recentWords, word, RECENT_WORD_LIMIT),
         impostorIndices,
         dealOrder: buildDealOrder(state.players.length),
         dealStep: 0,
@@ -517,6 +538,7 @@ const gameReducer = (state, action) => {
         gameMode: state.gameMode,
         drawAllowColorPick: true,
         drawLimitStrokes: state.drawLimitStrokes,
+        recentWords: state.recentWords,
         hintsEnabled: state.hintsEnabled,
         categoryMode: state.categoryMode,
         selectedCategories: state.selectedCategories,
@@ -524,6 +546,7 @@ const gameReducer = (state, action) => {
         timerSeconds: state.timerSeconds,
         voteMode: state.voteMode,
         allowMultipleImpostors: state.allowMultipleImpostors,
+        impostorCountMode: state.impostorCountMode,
         impostorCount: state.impostorCount,
       };
     }

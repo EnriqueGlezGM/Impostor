@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
 import ColorSelect from './ColorSelect.jsx';
-import { parseCategoryFiles, pickRandomEntry } from '../utils.js';
+import { parseCategoryFiles, pickRandomEntryExcluding } from '../utils.js';
 import { formatString, getStrings } from '../i18n.js';
 
 const categoryFilesByLanguage = {
@@ -150,7 +150,10 @@ const Reveal = () => {
       window.alert(t.reveal.alertNoWords);
       return;
     }
-    const entry = pickRandomEntry(filteredEntries.length ? filteredEntries : wordEntries);
+    const entry = pickRandomEntryExcluding(
+      filteredEntries.length ? filteredEntries : wordEntries,
+      state.recentWords
+    );
     dispatch({
       type: 'START_GAME',
       payload: { word: entry.word, wordHint: entry.hint },
@@ -189,17 +192,19 @@ const Reveal = () => {
         <div className="reveal">
           <span className="badge">{t.reveal.correct}</span>
           <h3>{t.reveal.innocentsWin}</h3>
-          <div className="tag-list">
-            {impostorPlayers.map((player) => (
-              <span
-                key={player.index}
-                className="player-tag"
-                style={{ '--player-color': player.color }}
-              >
-                {player.name}
-              </span>
-            ))}
-          </div>
+          {impostorPlayers.length > 0 && (
+            <div className="tag-list">
+              {impostorPlayers.map((player) => (
+                <span
+                  key={player.index}
+                  className="player-tag"
+                  style={{ '--player-color': player.color }}
+                >
+                  {player.name}
+                </span>
+              ))}
+            </div>
+          )}
           <p className="muted">
             {t.reveal.wordWas} {state.word}
           </p>
@@ -298,6 +303,24 @@ const Reveal = () => {
   const renderReveal = () => {
     if (!state.revealImpostor || state.winner) {
       return null;
+    }
+
+    if (impostorPlayers.length === 0) {
+      return (
+        <div className="reveal">
+          <span className="badge badge--alert">{t.reveal.revealed}</span>
+          <h3>{t.reveal.noImpostorsLabel}</h3>
+          <p className="muted">{t.reveal.noImpostorsText}</p>
+          <p className="muted">
+            {t.reveal.wordWas} {state.word}
+          </p>
+          {hintText && (
+            <p className="muted">
+              {t.reveal.hintWas} {hintText}
+            </p>
+          )}
+        </div>
+      );
     }
 
     return (
