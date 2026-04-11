@@ -365,29 +365,6 @@ const Setup = () => {
                   <label>{t.setup.drawOptions}</label>
                   <div className="stack">
                     <div>
-                      <span className="helper">{t.setup.strokeColors}</span>
-                      <div className="toggle">
-                        <button
-                          type="button"
-                          className={!state.drawAllowColorPick ? 'chip chip--active' : 'chip'}
-                          onClick={() =>
-                            dispatch({ type: 'SET_DRAW_ALLOW_COLOR_PICK', payload: false })
-                          }
-                        >
-                          {t.setup.fixedPerPlayer}
-                        </button>
-                        <button
-                          type="button"
-                          className={state.drawAllowColorPick ? 'chip chip--active' : 'chip'}
-                          onClick={() =>
-                            dispatch({ type: 'SET_DRAW_ALLOW_COLOR_PICK', payload: true })
-                          }
-                        >
-                          {t.setup.pickColor}
-                        </button>
-                      </div>
-                    </div>
-                    <div>
                       <span className="helper">{t.setup.strokesPerRound}</span>
                       <div className="toggle">
                         <button

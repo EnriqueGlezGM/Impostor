@@ -1,7 +1,16 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 
 const DrawingBoard = forwardRef(
-  ({ color, brushSize, ariaLabel, canDraw = true, onStrokeEnd, ownerId }, ref) => {
+  ({
+    color,
+    brushSize,
+    ariaLabel,
+    canDraw = true,
+    onStrokeEnd,
+    ownerId,
+    strokeGroup,
+    toolMode = 'draw',
+  }, ref) => {
   const wrapperRef = useRef(null);
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
@@ -17,6 +26,7 @@ const DrawingBoard = forwardRef(
     ctx.clearRect(0, 0, width, height);
     strokesRef.current.forEach((stroke) => {
       if (!stroke.points.length) return;
+      ctx.globalCompositeOperation = stroke.mode === 'erase' ? 'destination-out' : 'source-over';
       ctx.strokeStyle = stroke.color;
       ctx.lineWidth = stroke.size;
       ctx.beginPath();
@@ -33,12 +43,31 @@ const DrawingBoard = forwardRef(
         ctx.fill();
       }
     });
+    ctx.globalCompositeOperation = 'source-over';
   };
 
   useImperativeHandle(ref, () => ({
     clear: () => {
       strokesRef.current = [];
       redraw();
+    },
+    clearOwner: (targetOwner) => {
+      const strokes = strokesRef.current;
+      if (targetOwner === undefined || !strokes.length) return false;
+      const nextStrokes = strokes.filter((stroke) => stroke.owner !== targetOwner);
+      if (nextStrokes.length === strokes.length) return false;
+      strokesRef.current = nextStrokes;
+      redraw();
+      return true;
+    },
+    clearGroup: (targetGroup) => {
+      const strokes = strokesRef.current;
+      if (!targetGroup || !strokes.length) return false;
+      const nextStrokes = strokes.filter((stroke) => stroke.group !== targetGroup);
+      if (nextStrokes.length === strokes.length) return false;
+      strokesRef.current = nextStrokes;
+      redraw();
+      return true;
     },
     undo: (targetOwner) => {
       const strokes = strokesRef.current;
@@ -118,22 +147,26 @@ const DrawingBoard = forwardRef(
     const ctx = contextRef.current;
     const { width, height } = sizeRef.current;
     if (!ctx || !from || !to) return;
+    ctx.globalCompositeOperation = stroke.mode === 'erase' ? 'destination-out' : 'source-over';
     ctx.strokeStyle = stroke.color;
     ctx.lineWidth = stroke.size;
     ctx.beginPath();
     ctx.moveTo(from.x * width, from.y * height);
     ctx.lineTo(to.x * width, to.y * height);
     ctx.stroke();
+    ctx.globalCompositeOperation = 'source-over';
   };
 
   const drawDot = (stroke, point) => {
     const ctx = contextRef.current;
     const { width, height } = sizeRef.current;
     if (!ctx || !point) return;
+    ctx.globalCompositeOperation = stroke.mode === 'erase' ? 'destination-out' : 'source-over';
     ctx.fillStyle = stroke.color;
     ctx.beginPath();
     ctx.arc(point.x * width, point.y * height, stroke.size / 2, 0, Math.PI * 2);
     ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
   };
 
   const handlePointerDown = (event) => {
@@ -149,10 +182,13 @@ const DrawingBoard = forwardRef(
     canvas.setPointerCapture(event.pointerId);
     drawingRef.current = true;
 
+    const mode = toolMode === 'erase' ? 'erase' : 'draw';
     const stroke = {
       color: color || '#1b1b1b',
       size: brushSize || 6,
+      mode,
       owner: ownerId,
+      group: strokeGroup,
       points: [point],
     };
     strokesRef.current.push(stroke);
@@ -180,14 +216,17 @@ const DrawingBoard = forwardRef(
       canvasRef.current.releasePointerCapture(event.pointerId);
     }
     if (typeof onStrokeEnd === 'function') {
-      onStrokeEnd();
+      const strokes = strokesRef.current;
+      onStrokeEnd(strokes[strokes.length - 1]);
     }
   };
 
   return (
     <div
       ref={wrapperRef}
-      className={`drawing-board${canDraw ? '' : ' drawing-board--disabled'}`}
+      className={`drawing-board${canDraw ? '' : ' drawing-board--disabled'}${
+        toolMode === 'erase' ? ' drawing-board--eraser' : ''
+      }`}
     >
       <canvas
         ref={canvasRef}

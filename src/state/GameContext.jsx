@@ -67,8 +67,6 @@ const hydrateState = () => {
       ...rest
     } = parsed;
     const gameMode = parsed.gameMode === 'draw' ? 'draw' : 'word';
-    const drawAllowColorPick =
-      typeof parsed.drawAllowColorPick === 'boolean' ? parsed.drawAllowColorPick : true;
     const drawLimitStrokes =
       typeof parsed.drawLimitStrokes === 'boolean' ? parsed.drawLimitStrokes : true;
     const rawAlive = Array.isArray(parsed.alivePlayers)
@@ -105,7 +103,7 @@ const hydrateState = () => {
       playerCount,
       players: normalizePlayers(playerCount, parsed.players || [], getPlayerLabel(language)),
       gameMode,
-      drawAllowColorPick,
+      drawAllowColorPick: true,
       drawLimitStrokes,
       hintsEnabled: typeof parsed.hintsEnabled === 'boolean' ? parsed.hintsEnabled : true,
       categoryMode: parsed.categoryMode === 'custom' ? 'custom' : 'all',
@@ -279,11 +277,6 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         gameMode: action.payload === 'draw' ? 'draw' : 'word',
-      };
-    case 'SET_DRAW_ALLOW_COLOR_PICK':
-      return {
-        ...state,
-        drawAllowColorPick: action.payload === true,
       };
     case 'SET_DRAW_LIMIT_STROKES':
       return {
@@ -522,7 +515,7 @@ const gameReducer = (state, action) => {
           getPlayerLabel(state.language)
         ),
         gameMode: state.gameMode,
-        drawAllowColorPick: state.drawAllowColorPick,
+        drawAllowColorPick: true,
         drawLimitStrokes: state.drawLimitStrokes,
         hintsEnabled: state.hintsEnabled,
         categoryMode: state.categoryMode,

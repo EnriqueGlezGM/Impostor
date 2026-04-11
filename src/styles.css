@@ -218,6 +218,11 @@ body::before {
   line-height: 1;
 }
 
+.icon-button--active {
+  background: var(--chip-active-bg);
+  color: var(--chip-active-text);
+}
+
 
 .footer-exit {
   width: min(480px, 100%);
@@ -578,6 +583,7 @@ body::before {
   border-radius: 999px;
   background: var(--surface-soft);
   font-weight: 600;
+  line-height: 1.1;
 }
 
 .player-tag::before {
@@ -586,6 +592,7 @@ body::before {
   height: 10px;
   border-radius: 999px;
   background: var(--player-color, #9aa0a6);
+  flex: 0 0 auto;
 }
 
 .tag-list {
@@ -831,12 +838,123 @@ button:disabled {
   gap: 16px;
 }
 
+.drawing-panel--fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: block;
+  background: #f7f3eb;
+}
+
+[data-theme="light"] .drawing-panel--fullscreen {
+  background: #ffffff;
+}
+
 .drawing-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 6px;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.drawing-turn-bubble {
+  width: 100%;
+  background: var(--card-strong);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px;
+  min-width: 0;
+}
+
+.drawing-turn-info {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.drawing-turn-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  flex: 0 0 auto;
+}
+
+.drawing-turn-info .player-tag {
+  min-width: 0;
+  max-width: min(130px, 28vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 4px 8px;
+  min-height: 28px;
+}
+
+.turn-state {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  background: rgba(255, 180, 84, 0.14);
+  flex: 0 0 auto;
+}
+
+.turn-state--locked {
+  color: var(--danger);
+  background: rgba(255, 95, 109, 0.14);
+}
+
+.turn-state svg {
+  width: 15px;
+  height: 15px;
+}
+
+.badge--compact {
+  padding: 5px 7px;
+  font-size: 0.68rem;
+  letter-spacing: 0;
+  text-transform: none;
+  flex: 0 0 auto;
+}
+
+.drawing-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+}
+
+.drawing-actions .icon-button {
+  width: 36px;
+  height: 36px;
+}
+
+.drawing-panel--fullscreen .drawing-turn-bubble,
+.drawing-panel--fullscreen .drawing-tools-bubble {
+  position: fixed;
+  z-index: 3;
+  width: min(640px, calc(100vw - 24px));
+  border-radius: 18px;
+  border: 1px solid var(--card-border);
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.drawing-panel--fullscreen .drawing-turn-bubble {
+  top: calc(22px + env(safe-area-inset-top, 0px));
+  left: 12px;
+}
+
+.drawing-panel--fullscreen .drawing-tools-bubble {
+  left: 12px;
+  bottom: 12px;
 }
 
 .drawing-board {
@@ -847,6 +965,15 @@ button:disabled {
   border: 1px solid var(--border);
   background: #f7f3eb;
   overflow: hidden;
+}
+
+.drawing-panel--fullscreen .drawing-board {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: 100dvh;
+  border: 0;
+  border-radius: 0;
 }
 
 .drawing-board--disabled {
@@ -885,6 +1012,11 @@ button:disabled {
   touch-action: none;
   position: relative;
   z-index: 1;
+  cursor: crosshair;
+}
+
+.drawing-board--eraser .drawing-canvas {
+  cursor: cell;
 }
 
 .drawing-board--disabled .drawing-canvas {
@@ -896,13 +1028,67 @@ button:disabled {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  padding: 4px;
 }
 
-.drawing-palette {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.drawing-panel--fullscreen .drawing-toolbar {
+  align-items: flex-end;
+  padding: 12px 14px;
+}
+
+.drawing-palette-menu {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.drawing-eraser-menu {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.color-menu-button {
+  position: relative;
+}
+
+.color-menu-button--active {
+  background: var(--chip-active-bg);
+  color: var(--chip-active-text);
+}
+
+.color-menu-button__dot {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--swatch-color, #111);
+  box-shadow: 0 0 0 2px var(--card);
+}
+
+.palette-popover {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+  z-index: 6;
+  width: min(260px, calc(100vw - 48px));
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 10px;
+}
+
+.eraser-popover {
+  left: auto;
+  right: 0;
+}
+
+.eraser-popover .chip {
+  width: 100%;
 }
 
 .palette {
@@ -924,6 +1110,54 @@ button:disabled {
 .color-swatch--active {
   border-color: var(--text);
   box-shadow: 0 0 0 2px rgba(15, 21, 22, 0.4);
+}
+
+.brush-control {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brush-slider {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 28px minmax(80px, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.brush-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.brush-preview {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--surface-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brush-preview::after {
+  content: '';
+  width: var(--brush-size, 8px);
+  height: var(--brush-size, 8px);
+  max-width: 22px;
+  max-height: 22px;
+  border-radius: 999px;
+  background: var(--brush-color, #111111);
+}
+
+@supports not (background: color-mix(in srgb, white, transparent)) {
+  .drawing-panel--fullscreen .drawing-turn-bubble,
+  .drawing-panel--fullscreen .drawing-tools-bubble {
+    background: var(--card);
+  }
 }
 
 @keyframes screenFade {
@@ -948,5 +1182,33 @@ button:disabled {
 
   .actions {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .drawing-panel--fullscreen .drawing-turn-bubble {
+    top: calc(28px + env(safe-area-inset-top, 0px));
+    left: 18px;
+  }
+
+  .drawing-panel--fullscreen .drawing-actions .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .drawing-panel--fullscreen .drawing-turn-info {
+    gap: 8px;
+  }
+
+  .drawing-panel--fullscreen .drawing-turn-label {
+    font-size: 0.9rem;
+  }
+
+  .drawing-panel--fullscreen .drawing-turn-info .player-tag {
+    max-width: 180px;
+    padding: 4px 12px;
+  }
+
+  .drawing-panel--fullscreen .drawing-tools-bubble {
+    left: 18px;
+    bottom: 18px;
   }
 }
