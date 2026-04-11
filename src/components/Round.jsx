@@ -5,6 +5,17 @@ import Timer from './Timer.jsx';
 import { buildDealOrder, DEFAULT_PLAYER_COLORS } from '../utils.js';
 import { formatString, getStrings } from '../i18n.js';
 
+const getRandomStartIndex = (count) => {
+  if (count <= 1) return 0;
+  return Math.floor(Math.random() * count);
+};
+
+const rotateOrder = (order, startIndex) => {
+  if (!order.length) return order;
+  const offset = ((startIndex % order.length) + order.length) % order.length;
+  return [...order.slice(offset), ...order.slice(0, offset)];
+};
+
 const Round = () => {
   const { state, dispatch } = useGame();
   const t = getStrings(state.language);
@@ -12,12 +23,20 @@ const Round = () => {
   const boardRef = useRef(null);
   const [brushSize, setBrushSize] = useState(8);
   const [strokeColor, setStrokeColor] = useState('');
-  const [drawState, setDrawState] = useState({
+  const [drawState, setDrawState] = useState(() => ({
     turnIndex: 0,
     completedPlayers: [],
     round: 1,
-  });
-  const drawOrder = useMemo(() => buildDealOrder(state.players.length), [state.players.length]);
+    startIndex: getRandomStartIndex(state.players.length),
+  }));
+  const baseDrawOrder = useMemo(
+    () => buildDealOrder(state.players.length),
+    [state.players.length]
+  );
+  const drawOrder = useMemo(
+    () => rotateOrder(baseDrawOrder, drawState.startIndex),
+    [baseDrawOrder, drawState.startIndex]
+  );
   const completedSet = useMemo(
     () => new Set(drawState.completedPlayers),
     [drawState.completedPlayers]
@@ -42,7 +61,12 @@ const Round = () => {
     isDrawMode && !roundComplete && (!state.drawLimitStrokes || !currentCompleted);
 
   useEffect(() => {
-    setDrawState({ turnIndex: 0, completedPlayers: [], round: 1 });
+    setDrawState({
+      turnIndex: 0,
+      completedPlayers: [],
+      round: 1,
+      startIndex: getRandomStartIndex(state.players.length),
+    });
   }, [state.players.length, state.gameMode]);
 
   useEffect(() => {
@@ -124,6 +148,7 @@ const Round = () => {
       turnIndex: 0,
       completedPlayers: [],
       round: current.round + 1,
+      startIndex: drawOrder.length ? (current.startIndex + 1) % drawOrder.length : 0,
     }));
   };
 

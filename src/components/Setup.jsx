@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
 import { parseCategoryFiles, pickRandomEntry } from '../utils.js';
 import { formatString, getStrings } from '../i18n.js';
@@ -21,6 +21,9 @@ const Setup = () => {
   const t = getStrings(state.language);
   const [errors, setErrors] = useState([]);
   const [stepIndex, setStepIndex] = useState(0);
+  const [draggedPlayerIndex, setDraggedPlayerIndex] = useState(null);
+  const dragIndexRef = useRef(null);
+  const dragCleanupRef = useRef(null);
   const steps = useMemo(
     () => [
       { id: 'players', label: t.setup.steps.players },
@@ -123,6 +126,74 @@ const Setup = () => {
     setStepIndex((index) => Math.max(index - 1, 0));
   };
 
+  const stopPlayerDrag = () => {
+    dragIndexRef.current = null;
+    setDraggedPlayerIndex(null);
+    if (dragCleanupRef.current) {
+      dragCleanupRef.current();
+      dragCleanupRef.current = null;
+    }
+  };
+
+  useEffect(
+    () => () => {
+      dragCleanupRef.current?.();
+      dragIndexRef.current = null;
+    },
+    []
+  );
+
+  const onPlayerDragStart = (event, index) => {
+    if (event.button !== 0) return;
+    event.preventDefault();
+    dragCleanupRef.current?.();
+    dragIndexRef.current = index;
+    setDraggedPlayerIndex(index);
+
+    const movePlayer = (targetIndex) => {
+      const from = dragIndexRef.current;
+      if (!Number.isInteger(from) || targetIndex === from) return;
+      dispatch({ type: 'REORDER_PLAYER', payload: { from, to: targetIndex } });
+      dragIndexRef.current = targetIndex;
+      setDraggedPlayerIndex(targetIndex);
+    };
+
+    const onPointerMove = (moveEvent) => {
+      const target = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY);
+      const row = target?.closest?.('[data-player-index]');
+      if (!row) return;
+      const targetIndex = Number(row.dataset.playerIndex);
+      if (Number.isInteger(targetIndex)) {
+        movePlayer(targetIndex);
+      }
+    };
+
+    const onPointerUp = () => {
+      stopPlayerDrag();
+    };
+
+    document.addEventListener('pointermove', onPointerMove);
+    document.addEventListener('pointerup', onPointerUp, { once: true });
+    document.addEventListener('pointercancel', onPointerUp, { once: true });
+    dragCleanupRef.current = () => {
+      document.removeEventListener('pointermove', onPointerMove);
+      document.removeEventListener('pointerup', onPointerUp);
+      document.removeEventListener('pointercancel', onPointerUp);
+    };
+  };
+
+  const onPlayerHandleKeyDown = (event, index) => {
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+    event.preventDefault();
+    const direction = event.key === 'ArrowUp' ? -1 : 1;
+    const targetIndex = index + direction;
+    if (targetIndex < 0 || targetIndex >= state.players.length) return;
+    dispatch({ type: 'REORDER_PLAYER', payload: { from: index, to: targetIndex } });
+    window.requestAnimationFrame(() => {
+      document.querySelector(`[data-player-handle-index="${targetIndex}"]`)?.focus();
+    });
+  };
+
   return (
     <section className="screen">
       <div className="setup-shell">
@@ -204,9 +275,30 @@ const Setup = () => {
               </div>
               <div className="field">
                 <label>{t.setup.players}</label>
+                <span className="helper">{t.setup.reorderPlayers}</span>
                 <div className="stack">
                   {state.players.map((player, index) => (
-                    <div key={index} className="player-row">
+                    <div
+                      key={index}
+                      className={`player-row${
+                        draggedPlayerIndex === index ? ' player-row--dragging' : ''
+                      }`}
+                      data-player-index={index}
+                    >
+                      <button
+                        type="button"
+                        className="drag-handle"
+                        data-player-handle-index={index}
+                        onPointerDown={(event) => onPlayerDragStart(event, index)}
+                        onKeyDown={(event) => onPlayerHandleKeyDown(event, index)}
+                        aria-label={formatString(t.setup.reorderPlayer, {
+                          name: player.name || `${t.common.playerLabel} ${index + 1}`,
+                        })}
+                      >
+                        <span aria-hidden="true" />
+                        <span aria-hidden="true" />
+                        <span aria-hidden="true" />
+                      </button>
                       <div className="player-name">
                         <span
                           className="color-dot"

@@ -509,9 +509,42 @@ body::before {
 
 .player-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr auto;
   gap: 10px;
   align-items: center;
+  border-radius: 14px;
+}
+
+.player-row--dragging {
+  background: var(--surface-soft);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.drag-handle {
+  width: 34px;
+  height: 44px;
+  padding: 0;
+  border-radius: 12px;
+  background: var(--surface-soft);
+  color: var(--muted);
+  display: inline-grid;
+  align-content: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-handle span {
+  display: block;
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
 }
 
 .player-name {

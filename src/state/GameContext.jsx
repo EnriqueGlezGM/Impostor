@@ -254,6 +254,27 @@ const gameReducer = (state, action) => {
         players,
       };
     }
+    case 'REORDER_PLAYER': {
+      const { from, to } = action.payload || {};
+      if (
+        !Number.isInteger(from) ||
+        !Number.isInteger(to) ||
+        from === to ||
+        from < 0 ||
+        to < 0 ||
+        from >= state.players.length ||
+        to >= state.players.length
+      ) {
+        return state;
+      }
+      const players = [...state.players];
+      const [player] = players.splice(from, 1);
+      players.splice(to, 0, player);
+      return {
+        ...state,
+        players,
+      };
+    }
     case 'SET_GAME_MODE':
       return {
         ...state,
