@@ -151,6 +151,79 @@ export const parseCategoryFiles = (files) => {
   };
 };
 
+export const normalizeCustomCategories = (categories, fallbackLanguage = 'es') => {
+  if (!Array.isArray(categories)) return [];
+  return categories
+    .map((category, index) => {
+      const language = category?.language === 'en' ? 'en' : fallbackLanguage;
+      const name = normalizeCategoryName(category?.name || '');
+      const rows = Array.isArray(category?.rows)
+        ? category.rows
+            .map((row) => ({
+              word: String(row?.word || '').trim(),
+              hint: String(row?.hint || '').trim(),
+            }))
+            .filter((row) => row.word)
+        : [];
+      if (!name || !rows.length) return null;
+      return {
+        id: String(category?.id || `custom-${language}-${index}-${name}`),
+        language,
+        name,
+        icon: String(category?.icon || '✨').trim() || '✨',
+        rows,
+      };
+    })
+    .filter(Boolean);
+};
+
+export const parseCustomCategories = (customCategories, language = 'es') => {
+  const normalized = normalizeCustomCategories(customCategories, language).filter(
+    (category) => category.language === language
+  );
+  const entries = [];
+  const categories = new Set();
+  const icons = {};
+
+  normalized.forEach((category) => {
+    category.rows.forEach((row) => {
+      entries.push({
+        category: category.name,
+        word: row.word,
+        hint: row.hint,
+      });
+    });
+    categories.add(category.name);
+    icons[category.name] = category.icon;
+  });
+
+  return {
+    entries,
+    categories: Array.from(categories).sort((a, b) => a.localeCompare(b, language)),
+    icons,
+  };
+};
+
+export const customCategoryToCsv = (category) => {
+  const icon = String(category?.icon || '✨').trim() || '✨';
+  const rows = Array.isArray(category?.rows) ? category.rows : [];
+  const lines = [`# icon: ${icon}`];
+  rows.forEach((row) => {
+    const word = String(row?.word || '').trim();
+    if (!word) return;
+    const hint = String(row?.hint || '').trim();
+    lines.push(`${word.replace(/[;\r\n]/g, ' ')};${hint.replace(/[;\r\n]/g, ' ')}`);
+  });
+  return `${lines.join('\n')}\n`;
+};
+
+export const categoryFileName = (name) => {
+  const safeName = normalizeCategoryName(name || 'category')
+    .replace(/[\\/:*?"<>|]+/g, '')
+    .replace(/\s+/g, '_');
+  return `${safeName || 'category'}.csv`;
+};
+
 export const pickRandomEntry = (entries) => {
   if (!entries.length) return { category: '', word: '', hint: '' };
   const index = Math.floor(Math.random() * entries.length);

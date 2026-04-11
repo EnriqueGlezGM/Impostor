@@ -4,6 +4,7 @@ import {
   buildDefaultPlayers,
   addRecentWord,
   clamp,
+  normalizeCustomCategories,
   normalizePlayers,
   pickImpostors,
 } from '../utils.js';
@@ -32,6 +33,7 @@ const createFreshState = (language = 'es') => {
     hintsEnabled: true,
     categoryMode: 'all',
     selectedCategories: [],
+    customCategories: [],
     timerEnabled: false,
     timerSeconds: 180,
     allowMultipleImpostors: false,
@@ -112,6 +114,7 @@ const hydrateState = () => {
       hintsEnabled: typeof parsed.hintsEnabled === 'boolean' ? parsed.hintsEnabled : true,
       categoryMode: parsed.categoryMode === 'custom' ? 'custom' : 'all',
       selectedCategories,
+      customCategories: normalizeCustomCategories(parsed.customCategories, language),
       wordHint: parsed.wordHint || '',
       recentWords: Array.isArray(parsed.recentWords)
         ? parsed.recentWords.filter((word) => typeof word === 'string').slice(0, RECENT_WORD_LIMIT)
@@ -316,6 +319,35 @@ const gameReducer = (state, action) => {
         ...state,
         selectedCategories: action.payload,
       };
+    case 'SAVE_CUSTOM_CATEGORY': {
+      const category = normalizeCustomCategories([action.payload], state.language)[0];
+      if (!category) {
+        return state;
+      }
+      const previous = state.customCategories.find((item) => item.id === category.id);
+      const customCategories = previous
+        ? state.customCategories.map((item) => (item.id === category.id ? category : item))
+        : [...state.customCategories, category];
+      const selectedCategories = state.selectedCategories
+        .filter((name) => name !== previous?.name)
+        .concat(state.selectedCategories.includes(category.name) ? [] : [category.name]);
+      return {
+        ...state,
+        categoryMode: 'custom',
+        selectedCategories,
+        customCategories,
+      };
+    }
+    case 'DELETE_CUSTOM_CATEGORY': {
+      const id = action.payload;
+      const category = state.customCategories.find((item) => item.id === id);
+      if (!category) return state;
+      return {
+        ...state,
+        selectedCategories: state.selectedCategories.filter((name) => name !== category.name),
+        customCategories: state.customCategories.filter((item) => item.id !== id),
+      };
+    }
     case 'SET_TIMER_ENABLED':
       return {
         ...state,
@@ -542,6 +574,7 @@ const gameReducer = (state, action) => {
         hintsEnabled: state.hintsEnabled,
         categoryMode: state.categoryMode,
         selectedCategories: state.selectedCategories,
+        customCategories: state.customCategories,
         timerEnabled: state.timerEnabled,
         timerSeconds: state.timerSeconds,
         voteMode: state.voteMode,

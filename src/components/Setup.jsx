@@ -1,6 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
-import { parseCategoryFiles, pickRandomEntryExcluding } from '../utils.js';
+import {
+  categoryFileName,
+  customCategoryToCsv,
+  parseCategoryFiles,
+  parseCustomCategories,
+  pickRandomEntryExcluding,
+} from '../utils.js';
 import { formatString, getStrings } from '../i18n.js';
 
 const categoryFilesByLanguage = {
@@ -16,12 +22,26 @@ const categoryFilesByLanguage = {
 
 const getCategoryIcon = (category, icons) => icons[category] || '🏷️';
 
+const createCustomCategoryDraft = (language) => ({
+  id: `custom-${Date.now()}`,
+  language,
+  name: '',
+  icon: '✨',
+  rows: [
+    { word: '', hint: '' },
+    { word: '', hint: '' },
+    { word: '', hint: '' },
+  ],
+});
+
 const Setup = () => {
   const { state, dispatch } = useGame();
   const t = getStrings(state.language);
   const [errors, setErrors] = useState([]);
   const [stepIndex, setStepIndex] = useState(0);
   const [draggedPlayerIndex, setDraggedPlayerIndex] = useState(null);
+  const [customDraft, setCustomDraft] = useState(null);
+  const [customErrors, setCustomErrors] = useState([]);
   const dragIndexRef = useRef(null);
   const dragCleanupRef = useRef(null);
   const steps = useMemo(
@@ -34,10 +54,36 @@ const Setup = () => {
   );
 
   const categoryFiles = categoryFilesByLanguage[state.language] || categoryFilesByLanguage.es;
-  const { entries: wordEntries, categories, icons } = useMemo(
+  const parsedFileCategories = useMemo(
     () => parseCategoryFiles(categoryFiles),
     [categoryFiles]
   );
+  const parsedCustomCategories = useMemo(
+    () => parseCustomCategories(state.customCategories, state.language),
+    [state.customCategories, state.language]
+  );
+  const wordEntries = useMemo(
+    () => [...parsedFileCategories.entries, ...parsedCustomCategories.entries],
+    [parsedCustomCategories.entries, parsedFileCategories.entries]
+  );
+  const categories = useMemo(
+    () =>
+      Array.from(
+        new Set([...parsedFileCategories.categories, ...parsedCustomCategories.categories])
+      ).sort((a, b) => a.localeCompare(b, state.language)),
+    [parsedCustomCategories.categories, parsedFileCategories.categories, state.language]
+  );
+  const icons = useMemo(
+    () => ({ ...parsedFileCategories.icons, ...parsedCustomCategories.icons }),
+    [parsedCustomCategories.icons, parsedFileCategories.icons]
+  );
+  const customCategoriesForLanguage = useMemo(
+    () => state.customCategories.filter((category) => category.language === state.language),
+    [state.customCategories, state.language]
+  );
+  const editingCustomCategory = customDraft
+    ? state.customCategories.find((category) => category.id === customDraft.id)
+    : null;
   const selectedCategories = useMemo(
     () => state.selectedCategories.filter((category) => categories.includes(category)),
     [categories, state.selectedCategories]
@@ -81,6 +127,98 @@ const Setup = () => {
       ? selectedCategories.filter((item) => item !== category)
       : [...selectedCategories, category];
     dispatch({ type: 'SET_SELECTED_CATEGORIES', payload: next });
+  };
+
+  const onStartCustomCategory = () => {
+    setErrors([]);
+    setCustomErrors([]);
+    setCustomDraft(createCustomCategoryDraft(state.language));
+  };
+
+  const onEditCustomCategory = (category) => {
+    setErrors([]);
+    setCustomErrors([]);
+    setCustomDraft({
+      ...category,
+      rows: category.rows.length ? category.rows : [{ word: '', hint: '' }],
+    });
+  };
+
+  const onUpdateCustomRow = (index, field, value) => {
+    setCustomDraft((current) => {
+      if (!current) return current;
+      const rows = [...current.rows];
+      rows[index] = { ...rows[index], [field]: value };
+      return { ...current, rows };
+    });
+  };
+
+  const onAddCustomRow = () => {
+    setCustomDraft((current) =>
+      current ? { ...current, rows: [...current.rows, { word: '', hint: '' }] } : current
+    );
+  };
+
+  const onRemoveCustomRow = (index) => {
+    setCustomDraft((current) => {
+      if (!current) return current;
+      const rows = current.rows.filter((_, rowIndex) => rowIndex !== index);
+      return { ...current, rows: rows.length ? rows : [{ word: '', hint: '' }] };
+    });
+  };
+
+  const onSaveCustomCategory = () => {
+    if (!customDraft) return;
+    const rows = customDraft.rows
+      .map((row) => ({ word: row.word.trim(), hint: row.hint.trim() }))
+      .filter((row) => row.word);
+    const nextErrors = [];
+    if (!customDraft.name.trim()) {
+      nextErrors.push(t.setup.errors.customCategoryName);
+    }
+    if (!rows.length) {
+      nextErrors.push(t.setup.errors.customCategoryWords);
+    }
+    setCustomErrors(nextErrors);
+    if (nextErrors.length) return;
+    dispatch({
+      type: 'SAVE_CUSTOM_CATEGORY',
+      payload: {
+        ...customDraft,
+        language: state.language,
+        name: customDraft.name.trim(),
+        icon: customDraft.icon.trim() || '✨',
+        rows,
+      },
+    });
+    setCustomDraft(null);
+  };
+
+  const onExportCustomCategory = (category) => {
+    const blob = new Blob([customCategoryToCsv(category)], {
+      type: 'text/csv;charset=utf-8',
+    });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = categoryFileName(category.name);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const onDeleteCustomCategory = (category) => {
+    const confirmed = window.confirm(
+      formatString(t.setup.deleteCustomCategoryConfirm, { name: category.name })
+    );
+    if (confirmed) {
+      dispatch({ type: 'DELETE_CUSTOM_CATEGORY', payload: category.id });
+      if (customDraft?.id === category.id) {
+        setCustomDraft(null);
+        setCustomErrors([]);
+      }
+    }
   };
 
   const onStart = () => {
@@ -545,7 +683,110 @@ const Setup = () => {
             </>
           )}
 
-          {currentStep.id === 'categories' && (
+          {currentStep.id === 'categories' && customDraft && (
+            <>
+              <div className="field">
+                <label>{t.setup.customCategoryTitle}</label>
+                <span className="helper">{t.setup.customCategoryHelper}</span>
+              </div>
+              <div className="custom-category-editor">
+                <div className="custom-category-meta">
+                  <div className="field">
+                    <label htmlFor="customCategoryName">{t.setup.customCategoryName}</label>
+                    <input
+                      id="customCategoryName"
+                      type="text"
+                      value={customDraft.name}
+                      onChange={(event) =>
+                        setCustomDraft((current) =>
+                          current ? { ...current, name: event.target.value } : current
+                        )
+                      }
+                    />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="customCategoryIcon">{t.setup.customCategoryIcon}</label>
+                    <input
+                      id="customCategoryIcon"
+                      type="text"
+                      className="icon-input"
+                      value={customDraft.icon}
+                      maxLength={4}
+                      onChange={(event) =>
+                        setCustomDraft((current) =>
+                          current ? { ...current, icon: event.target.value } : current
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label>{t.setup.customCategoryRows}</label>
+                  <div className="custom-word-list">
+                    {customDraft.rows.map((row, index) => (
+                      <div key={index} className="custom-word-row">
+                        <input
+                          type="text"
+                          value={row.word}
+                          placeholder={t.setup.customWordPlaceholder}
+                          onChange={(event) =>
+                            onUpdateCustomRow(index, 'word', event.target.value)
+                          }
+                        />
+                        <input
+                          type="text"
+                          value={row.hint}
+                          placeholder={t.setup.customHintPlaceholder}
+                          onChange={(event) =>
+                            onUpdateCustomRow(index, 'hint', event.target.value)
+                          }
+                        />
+                        <button
+                          type="button"
+                          className="icon-button icon-button--soft icon-button--glyph"
+                          onClick={() => onRemoveCustomRow(index)}
+                          aria-label={t.setup.removeCustomRow}
+                          title={t.setup.removeCustomRow}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <button type="button" className="chip" onClick={onAddCustomRow}>
+                    {t.setup.addCustomRow}
+                  </button>
+                </div>
+              </div>
+              {customErrors.length > 0 && (
+                <div className="alert" role="alert">
+                  {customErrors.map((error) => (
+                    <p key={error}>{error}</p>
+                  ))}
+                </div>
+              )}
+              {editingCustomCategory && (
+                <div className="custom-category-editor-actions">
+                  <button
+                    type="button"
+                    className="chip"
+                    onClick={() => onExportCustomCategory(editingCustomCategory)}
+                  >
+                    {t.setup.exportCustomCategory}
+                  </button>
+                  <button
+                    type="button"
+                    className="chip chip--off"
+                    onClick={() => onDeleteCustomCategory(editingCustomCategory)}
+                  >
+                    {t.setup.deleteCustomCategory}
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+
+          {currentStep.id === 'categories' && !customDraft && (
             <>
               <div className="field">
                 <label>{t.setup.categories}</label>
@@ -578,21 +819,51 @@ const Setup = () => {
                   <div className="category-grid">
                     {categories.map((category) => {
                       const selected = selectedCategories.includes(category);
+                      const customCategory = customCategoriesForLanguage.find(
+                        (item) => item.name === category
+                      );
                       return (
-                        <button
+                        <div
                           key={category}
-                          type="button"
-                          className={`category-card${selected ? ' category-card--active' : ''}`}
-                          onClick={() => onToggleCategory(category)}
-                          aria-pressed={selected}
+                          className={`category-card${
+                            selected ? ' category-card--active' : ''
+                          }${customCategory ? ' category-card--has-edit' : ''}`}
                         >
-                          <span className="category-icon" aria-hidden="true">
-                            {getCategoryIcon(category, icons)}
-                          </span>
-                          <span className="category-label">{category}</span>
-                        </button>
+                          <button
+                            type="button"
+                            className="category-card__main"
+                            onClick={() => onToggleCategory(category)}
+                            aria-pressed={selected}
+                          >
+                            <span className="category-icon" aria-hidden="true">
+                              {getCategoryIcon(category, icons)}
+                            </span>
+                            <span className="category-label">{category}</span>
+                          </button>
+                          {customCategory && (
+                            <button
+                              type="button"
+                              className="category-edit-button"
+                              onClick={() => onEditCustomCategory(customCategory)}
+                              aria-label={t.setup.editCustomCategory}
+                              title={t.setup.editCustomCategory}
+                            >
+                              ✎
+                            </button>
+                          )}
+                        </div>
                       );
                     })}
+                    <button
+                      type="button"
+                      className="category-card category-card--create"
+                      onClick={onStartCustomCategory}
+                    >
+                      <span className="category-icon" aria-hidden="true">
+                        ＋
+                      </span>
+                      <span className="category-label">{t.setup.createCustomCategory}</span>
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -609,22 +880,39 @@ const Setup = () => {
             </div>
           )}
           <div className="actions">
-            {!isFirst && (
+            {customDraft && (
+              <button type="button" className="primary" onClick={onSaveCustomCategory}>
+                {t.setup.saveCustomCategory}
+              </button>
+            )}
+            {customDraft && (
+              <button
+                type="button"
+                className="ghost"
+                onClick={() => {
+                  setCustomDraft(null);
+                  setCustomErrors([]);
+                }}
+              >
+                {t.setup.cancelCustomCategory}
+              </button>
+            )}
+            {!customDraft && !isFirst && (
               <button type="button" className="ghost" onClick={onPrev}>
                 {t.setup.back}
               </button>
             )}
-            {!isLast && (
+            {!customDraft && !isLast && (
               <button type="button" className="primary" onClick={onNext}>
                 {t.setup.next}
               </button>
             )}
-            {isLast && (
+            {!customDraft && isLast && (
               <button type="button" className="primary" onClick={onStart}>
                 {t.setup.start}
               </button>
             )}
-            {isFirst && (
+            {!customDraft && isFirst && (
               <button type="button" className="ghost" onClick={onResetAll}>
                 {t.setup.reset}
               </button>

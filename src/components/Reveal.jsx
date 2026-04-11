@@ -1,7 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
 import ColorSelect from './ColorSelect.jsx';
-import { parseCategoryFiles, pickRandomEntryExcluding } from '../utils.js';
+import {
+  parseCategoryFiles,
+  parseCustomCategories,
+  pickRandomEntryExcluding,
+} from '../utils.js';
 import { formatString, getStrings } from '../i18n.js';
 
 const categoryFilesByLanguage = {
@@ -23,9 +27,24 @@ const Reveal = () => {
   const [showSecretForm, setShowSecretForm] = useState(false);
 
   const categoryFiles = categoryFilesByLanguage[state.language] || categoryFilesByLanguage.es;
-  const { entries: wordEntries, categories } = useMemo(
+  const parsedFileCategories = useMemo(
     () => parseCategoryFiles(categoryFiles),
     [categoryFiles]
+  );
+  const parsedCustomCategories = useMemo(
+    () => parseCustomCategories(state.customCategories, state.language),
+    [state.customCategories, state.language]
+  );
+  const wordEntries = useMemo(
+    () => [...parsedFileCategories.entries, ...parsedCustomCategories.entries],
+    [parsedCustomCategories.entries, parsedFileCategories.entries]
+  );
+  const categories = useMemo(
+    () =>
+      Array.from(
+        new Set([...parsedFileCategories.categories, ...parsedCustomCategories.categories])
+      ).sort((a, b) => a.localeCompare(b, state.language)),
+    [parsedCustomCategories.categories, parsedFileCategories.categories, state.language]
   );
   const selectedCategories = useMemo(
     () => state.selectedCategories.filter((category) => categories.includes(category)),
