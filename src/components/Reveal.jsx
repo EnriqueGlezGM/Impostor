@@ -10,11 +10,13 @@ import { formatString, getStrings } from '../i18n.js';
 
 const categoryFilesByLanguage = {
   es: import.meta.glob('../data/categories/es/*.csv', {
-    as: 'raw',
+    query: '?raw',
+    import: 'default',
     eager: true,
   }),
   en: import.meta.glob('../data/categories/en/*.csv', {
-    as: 'raw',
+    query: '?raw',
+    import: 'default',
     eager: true,
   }),
 };
