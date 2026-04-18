@@ -1,28 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="El Impostor">
-  <defs>
-    <linearGradient id="bg" x1="128" y1="96" x2="896" y2="928" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#172a2f" />
-      <stop offset="0.55" stop-color="#0d1b1e" />
-      <stop offset="1" stop-color="#050b0d" />
-    </linearGradient>
-    <linearGradient id="body" x1="288" y1="220" x2="740" y2="860" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ff4f6d" />
-      <stop offset="1" stop-color="#b51635" />
-    </linearGradient>
-    <linearGradient id="visor" x1="416" y1="300" x2="684" y2="478" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#dffbff" />
-      <stop offset="1" stop-color="#42c6d6" />
-    </linearGradient>
-  </defs>
-  <rect width="1024" height="1024" rx="216" fill="url(#bg)" />
-  <circle cx="780" cy="196" r="74" fill="#f7b801" opacity="0.88" />
-  <path d="M320 420c0-116 88-204 206-204h40c118 0 206 88 206 204v222c0 42-34 76-76 76h-30v104c0 35-29 64-64 64h-72c-35 0-64-29-64-64V718h-66v104c0 35-29 64-64 64h-70c-35 0-64-29-64-64V718h-10c-42 0-76-34-76-76V514c0-52 42-94 94-94h110Z" fill="#071014" opacity="0.55" transform="translate(0 24)" />
-  <path d="M284 410c0-116 88-204 206-204h42c118 0 206 88 206 204v222c0 42-34 76-76 76h-24v106c0 35-29 64-64 64h-78c-35 0-64-29-64-64V708h-72v106c0 35-29 64-64 64h-78c-35 0-64-29-64-64V708h-4c-42 0-76-34-76-76V504c0-52 42-94 94-94h120Z" fill="#071014" />
-  <path d="M314 410c0-98 75-174 176-174h42c101 0 176 76 176 174v222c0 25-21 46-46 46h-54v136c0 19-15 34-34 34h-78c-19 0-34-15-34-34V678H326v136c0 19-15 34-34 34h-78c-19 0-34-15-34-34V678h-34c-25 0-46-21-46-46V504c0-35 29-64 64-64h150v-30Z" fill="url(#body)" />
-  <rect x="402" y="316" width="278" height="158" rx="78" fill="#071014" />
-  <rect x="424" y="338" width="234" height="114" rx="56" fill="url(#visor)" />
-  <path d="M472 362h96c30 0 55 17 68 42-40-18-98-14-178 12 3-21 8-39 14-54Z" fill="#ffffff" opacity="0.78" />
-  <path d="M286 236c-57 30-96 90-96 158v24h72v-24c0-52 24-98 62-128l-38-30Z" fill="#ff8195" opacity="0.55" />
-  <path d="M708 462h84c40 0 72 32 72 72v112c0 40-32 72-72 72h-84V462Z" fill="#071014" />
-  <path d="M708 494h70c29 0 52 23 52 52v88c0 29-23 52-52 52h-70V494Z" fill="#8f132b" />
+  <rect width="1024" height="1024" fill="#111318" />
+  <text
+    x="512"
+    y="560"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif"
+    font-size="700"
+  >😈</text>
 </svg>
