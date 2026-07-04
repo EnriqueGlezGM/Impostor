@@ -127,7 +127,7 @@ murciélago;techo
 `,mc=`# icon: 🍽️
 tortilla;cebolla
 sushi;salomón
-paella;domingo
+paella;amarillo
 pizza;caja
 hamburguesa;doble piso
 ensalada;tenedor frío
