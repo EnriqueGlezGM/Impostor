@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
 import ColorSelect from './ColorSelect.jsx';
 import {
+  mergeCategorySources,
   parseCategoryFiles,
   parseCustomCategories,
   pickRandomEntryExcluding,
@@ -37,16 +38,17 @@ const Reveal = () => {
     () => parseCustomCategories(state.customCategories, state.language),
     [state.customCategories, state.language]
   );
+  const mergedCategories = useMemo(
+    () => mergeCategorySources(parsedFileCategories, parsedCustomCategories, state.language),
+    [parsedCustomCategories, parsedFileCategories, state.language]
+  );
   const wordEntries = useMemo(
-    () => [...parsedFileCategories.entries, ...parsedCustomCategories.entries],
-    [parsedCustomCategories.entries, parsedFileCategories.entries]
+    () => mergedCategories.entries,
+    [mergedCategories.entries]
   );
   const categories = useMemo(
-    () =>
-      Array.from(
-        new Set([...parsedFileCategories.categories, ...parsedCustomCategories.categories])
-      ).sort((a, b) => a.localeCompare(b, state.language)),
-    [parsedCustomCategories.categories, parsedFileCategories.categories, state.language]
+    () => mergedCategories.categories,
+    [mergedCategories.categories]
   );
   const selectedCategories = useMemo(
     () => state.selectedCategories.filter((category) => categories.includes(category)),

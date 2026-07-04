@@ -3,6 +3,7 @@ import { useGame } from '../state/GameContext.jsx';
 import {
   categoryFileName,
   customCategoryToCsv,
+  mergeCategorySources,
   parseCategoryFiles,
   parseCustomCategoryCsv,
   parseCustomCategories,
@@ -68,20 +69,25 @@ const Setup = () => {
     () => parseCustomCategories(state.customCategories, state.language),
     [state.customCategories, state.language]
   );
+  const mergedCategories = useMemo(
+    () => mergeCategorySources(parsedFileCategories, parsedCustomCategories, state.language),
+    [parsedCustomCategories, parsedFileCategories, state.language]
+  );
   const wordEntries = useMemo(
-    () => [...parsedFileCategories.entries, ...parsedCustomCategories.entries],
-    [parsedCustomCategories.entries, parsedFileCategories.entries]
+    () => mergedCategories.entries,
+    [mergedCategories.entries]
   );
   const categories = useMemo(
-    () =>
-      Array.from(
-        new Set([...parsedFileCategories.categories, ...parsedCustomCategories.categories])
-      ).sort((a, b) => a.localeCompare(b, state.language)),
-    [parsedCustomCategories.categories, parsedFileCategories.categories, state.language]
+    () => mergedCategories.categories,
+    [mergedCategories.categories]
   );
   const icons = useMemo(
-    () => ({ ...parsedFileCategories.icons, ...parsedCustomCategories.icons }),
-    [parsedCustomCategories.icons, parsedFileCategories.icons]
+    () => mergedCategories.icons,
+    [mergedCategories.icons]
+  );
+  const fileCategoryNames = useMemo(
+    () => new Set(parsedFileCategories.categories),
+    [parsedFileCategories.categories]
   );
   const customCategoriesForLanguage = useMemo(
     () => state.customCategories.filter((category) => category.language === state.language),
@@ -90,6 +96,7 @@ const Setup = () => {
   const editingCustomCategory = customDraft
     ? state.customCategories.find((category) => category.id === customDraft.id)
     : null;
+  const editingOverridesDefault = customDraft ? fileCategoryNames.has(customDraft.name) : false;
   const selectedCategories = useMemo(
     () => state.selectedCategories.filter((category) => categories.includes(category)),
     [categories, state.selectedCategories]
@@ -150,6 +157,25 @@ const Setup = () => {
       rows: category.rows.length ? category.rows : [{ word: '', hint: '' }],
     };
     setCustomDraft(draft);
+  };
+
+  const onEditCategory = (category, customCategory) => {
+    if (customCategory) {
+      onEditCustomCategory(customCategory);
+      return;
+    }
+    setErrors([]);
+    setCustomErrors([]);
+    const rows = parsedFileCategories.entries
+      .filter((entry) => entry.category === category)
+      .map((entry) => ({ word: entry.word, hint: entry.hint }));
+    setCustomDraft({
+      id: `custom-${state.language}-${Date.now()}-${category}`,
+      language: state.language,
+      name: category,
+      icon: parsedFileCategories.icons[category] || '✨',
+      rows: rows.length ? rows : [{ word: '', hint: '' }],
+    });
   };
 
   const applyImportedCustomCategory = (rawText, fallbackName = '') => {
@@ -265,6 +291,9 @@ const Setup = () => {
         name: categoryToSave.name.trim(),
         icon: categoryToSave.icon.trim() || '✨',
         rows,
+        preserveSelection: Boolean(
+          editingCustomCategory || fileCategoryNames.has(categoryToSave.name.trim())
+        ),
       },
     });
     setCustomDraft(null);
@@ -285,11 +314,18 @@ const Setup = () => {
   };
 
   const onDeleteCustomCategory = (category) => {
-    const confirmed = window.confirm(
-      formatString(t.setup.deleteCustomCategoryConfirm, { name: category.name })
-    );
+    const confirmText = fileCategoryNames.has(category.name)
+      ? t.setup.restoreDefaultCategoryConfirm
+      : t.setup.deleteCustomCategoryConfirm;
+    const confirmed = window.confirm(formatString(confirmText, { name: category.name }));
     if (confirmed) {
-      dispatch({ type: 'DELETE_CUSTOM_CATEGORY', payload: category.id });
+      dispatch({
+        type: 'DELETE_CUSTOM_CATEGORY',
+        payload: {
+          id: category.id,
+          preserveSelection: fileCategoryNames.has(category.name),
+        },
+      });
       if (customDraft?.id === category.id) {
         setCustomDraft(null);
         setCustomErrors([]);
@@ -890,7 +926,9 @@ const Setup = () => {
                     className="chip chip--off"
                     onClick={() => onDeleteCustomCategory(editingCustomCategory)}
                   >
-                    {t.setup.deleteCustomCategory}
+                    {editingOverridesDefault
+                      ? t.setup.restoreDefaultCategory
+                      : t.setup.deleteCustomCategory}
                   </button>
                 </div>
               )}
@@ -933,12 +971,17 @@ const Setup = () => {
                       const customCategory = customCategoriesForLanguage.find(
                         (item) => item.name === category
                       );
+                      const isDefaultCategory = fileCategoryNames.has(category);
+                      const isEditedDefault = Boolean(customCategory && isDefaultCategory);
+                      const isUserCreated = Boolean(customCategory && !isDefaultCategory);
                       return (
                         <div
                           key={category}
                           className={`category-card${
                             selected ? ' category-card--active' : ''
-                          }${customCategory ? ' category-card--has-edit' : ''}`}
+                          }${isEditedDefault ? ' category-card--edited-default' : ''}${
+                            isUserCreated ? ' category-card--user-created' : ''
+                          }`}
                         >
                           <button
                             type="button"
@@ -949,19 +992,34 @@ const Setup = () => {
                             <span className="category-icon" aria-hidden="true">
                               {getCategoryIcon(category, icons)}
                             </span>
+                            {(isEditedDefault || isUserCreated) && (
+                              <span
+                                className={`category-status-dot${
+                                  isUserCreated ? ' category-status-dot--created' : ''
+                                }`}
+                                aria-label={
+                                  isUserCreated
+                                    ? t.setup.userCreatedCategory
+                                    : t.setup.editedDefaultCategory
+                                }
+                                title={
+                                  isUserCreated
+                                    ? t.setup.userCreatedCategory
+                                    : t.setup.editedDefaultCategory
+                                }
+                              />
+                            )}
                             <span className="category-label">{category}</span>
                           </button>
-                          {customCategory && (
-                            <button
-                              type="button"
-                              className="category-edit-button"
-                              onClick={() => onEditCustomCategory(customCategory)}
-                              aria-label={t.setup.editCustomCategory}
-                              title={t.setup.editCustomCategory}
-                            >
-                              ✎
-                            </button>
-                          )}
+                          <button
+                            type="button"
+                            className="category-edit-button"
+                            onClick={() => onEditCategory(category, customCategory)}
+                            aria-label={t.setup.editCustomCategory}
+                            title={t.setup.editCustomCategory}
+                          >
+                            ✎
+                          </button>
                         </div>
                       );
                     })}

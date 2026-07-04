@@ -336,9 +336,22 @@ const gameReducer = (state, action) => {
       const customCategories = previous
         ? state.customCategories.map((item) => (item.id === category.id ? category : item))
         : [...state.customCategories, category];
-      const selectedCategories = state.selectedCategories
-        .filter((name) => name !== previous?.name)
-        .concat(state.selectedCategories.includes(category.name) ? [] : [category.name]);
+      const preserveSelection = action.payload?.preserveSelection === true;
+      const wasSelected = previous
+        ? state.selectedCategories.includes(previous.name)
+        : state.selectedCategories.includes(category.name);
+      const selectedWithoutPrevious = state.selectedCategories.filter(
+        (name) => name !== previous?.name
+      );
+      const selectedCategories = preserveSelection
+        ? selectedWithoutPrevious.concat(
+            wasSelected && !selectedWithoutPrevious.includes(category.name)
+              ? [category.name]
+              : []
+          )
+        : state.selectedCategories
+            .filter((name) => name !== previous?.name)
+            .concat(state.selectedCategories.includes(category.name) ? [] : [category.name]);
       return {
         ...state,
         categoryMode: 'custom',
@@ -347,12 +360,21 @@ const gameReducer = (state, action) => {
       };
     }
     case 'DELETE_CUSTOM_CATEGORY': {
-      const id = action.payload;
+      const id =
+        typeof action.payload === 'object' && action.payload !== null
+          ? action.payload.id
+          : action.payload;
+      const preserveSelection =
+        typeof action.payload === 'object' &&
+        action.payload !== null &&
+        action.payload.preserveSelection === true;
       const category = state.customCategories.find((item) => item.id === id);
       if (!category) return state;
       return {
         ...state,
-        selectedCategories: state.selectedCategories.filter((name) => name !== category.name),
+        selectedCategories: preserveSelection
+          ? state.selectedCategories
+          : state.selectedCategories.filter((name) => name !== category.name),
         customCategories: state.customCategories.filter((item) => item.id !== id),
       };
     }

@@ -879,6 +879,14 @@ button:disabled {
   background: rgba(255, 180, 84, 0.12);
 }
 
+.category-card--edited-default {
+  border-color: rgba(67, 188, 205, 0.55);
+}
+
+.category-card--user-created {
+  border-color: rgba(106, 223, 126, 0.55);
+}
+
 .category-card__main {
   appearance: none;
   border: 0;
@@ -893,6 +901,21 @@ button:disabled {
   padding: 14px 12px;
   width: 100%;
   font: inherit;
+}
+
+.category-status-dot {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #43bccd;
+  box-shadow: 0 0 0 3px var(--card-strong);
+}
+
+.category-status-dot--created {
+  background: #6adf7e;
 }
 
 .category-edit-button {

@@ -204,6 +204,29 @@ export const parseCustomCategories = (customCategories, language = 'es') => {
   };
 };
 
+export const mergeCategorySources = (fileCategories, customCategories, language = 'es') => {
+  const customCategoryNames = new Set(customCategories.categories || []);
+  const entries = [
+    ...(fileCategories.entries || []).filter(
+      (entry) => !customCategoryNames.has(entry.category)
+    ),
+    ...(customCategories.entries || []),
+  ];
+  const categories = Array.from(
+    new Set([...(fileCategories.categories || []), ...(customCategories.categories || [])])
+  ).sort((a, b) => a.localeCompare(b, language));
+  const icons = {
+    ...(fileCategories.icons || {}),
+    ...(customCategories.icons || {}),
+  };
+
+  return {
+    entries,
+    categories,
+    icons,
+  };
+};
+
 export const customCategoryToCsv = (category) => {
   const icon = String(category?.icon || '✨').trim() || '✨';
   const rows = Array.isArray(category?.rows) ? category.rows : [];
