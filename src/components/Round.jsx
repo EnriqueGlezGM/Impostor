@@ -7,11 +7,6 @@ import { formatString, getStrings } from '../i18n.js';
 
 const STROKE_COLORS = ['#111111', ...DEFAULT_PLAYER_COLORS];
 
-const getRandomStartIndex = (count) => {
-  if (count <= 1) return 0;
-  return Math.floor(Math.random() * count);
-};
-
 const rotateOrder = (order, startIndex) => {
   if (!order.length) return order;
   const offset = ((startIndex % order.length) + order.length) % order.length;
@@ -34,19 +29,29 @@ const Round = () => {
     turnId: 0,
     completedPlayers: [],
     round: 1,
-    startIndex: getRandomStartIndex(state.players.length),
+    startIndex: state.drawStartIndex || 0,
   }));
+  const alivePlayerSet = useMemo(() => {
+    const alivePlayers = state.alivePlayers.length
+      ? state.alivePlayers
+      : state.players.map((_, index) => index);
+    return new Set(alivePlayers);
+  }, [state.alivePlayers, state.players]);
   const baseDrawOrder = useMemo(
     () => buildDealOrder(state.players.length),
     [state.players.length]
   );
   const drawOrder = useMemo(
-    () => rotateOrder(baseDrawOrder, drawState.startIndex),
-    [baseDrawOrder, drawState.startIndex]
+    () => rotateOrder(baseDrawOrder, drawState.startIndex).filter((id) => alivePlayerSet.has(id)),
+    [alivePlayerSet, baseDrawOrder, drawState.startIndex]
   );
   const completedSet = useMemo(
     () => new Set(drawState.completedPlayers),
     [drawState.completedPlayers]
+  );
+  const completedCount = useMemo(
+    () => drawState.completedPlayers.filter((id) => alivePlayerSet.has(id)).length,
+    [alivePlayerSet, drawState.completedPlayers]
   );
   const currentTurnIndex = drawOrder.length
     ? drawState.turnIndex % drawOrder.length
@@ -61,7 +66,6 @@ const Round = () => {
     isBoardFullscreen ? ' drawing-panel--fullscreen' : ''
   }`;
   const currentCompleted = completedSet.has(activeIndex);
-  const completedCount = drawState.completedPlayers.length;
   const roundNumber = drawState.round;
   const currentTurnKey = `${roundNumber}:${drawState.turnId}:${activeIndex}`;
   const roundComplete =
@@ -76,9 +80,24 @@ const Round = () => {
       turnId: 0,
       completedPlayers: [],
       round: 1,
-      startIndex: getRandomStartIndex(state.players.length),
+      startIndex: state.drawStartIndex || 0,
     });
-  }, [state.players.length, state.gameMode]);
+  }, [state.drawStartIndex, state.gameMode, state.players.length]);
+
+  useEffect(() => {
+    setDrawState((current) => {
+      const completedPlayers = current.completedPlayers.filter((id) =>
+        alivePlayerSet.has(id)
+      );
+      if (completedPlayers.length === current.completedPlayers.length) {
+        return current;
+      }
+      return {
+        ...current,
+        completedPlayers,
+      };
+    });
+  }, [alivePlayerSet]);
 
   useEffect(() => {
     if (!isDrawMode) return;
@@ -160,7 +179,7 @@ const Round = () => {
       turnId: 0,
       completedPlayers: [],
       round: current.round + 1,
-      startIndex: drawOrder.length ? (current.startIndex + 1) % drawOrder.length : 0,
+      startIndex: current.startIndex,
     }));
   };
 

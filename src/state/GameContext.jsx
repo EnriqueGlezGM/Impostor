@@ -42,6 +42,7 @@ const createFreshState = (language = 'es') => {
     impostorIndices: [],
     dealOrder: [],
     dealStep: 0,
+    drawStartIndex: 0,
     showRole: false,
     revealImpostor: false,
     alivePlayers: [],
@@ -101,6 +102,12 @@ const hydrateState = () => {
       : Number.isInteger(impostorIndex)
         ? [impostorIndex]
         : [];
+    const drawStartIndex =
+      Number.isInteger(parsed.drawStartIndex) &&
+      parsed.drawStartIndex >= 0 &&
+      parsed.drawStartIndex < playerCount
+        ? parsed.drawStartIndex
+        : 0;
 
     return {
       ...createFreshState(language),
@@ -135,6 +142,7 @@ const hydrateState = () => {
         Math.min(parsed.impostorCount || impostorIndices.length || 1, playerCount)
       ),
       impostorIndices,
+      drawStartIndex,
     };
   } catch (error) {
     return createFreshState();
@@ -389,6 +397,7 @@ const gameReducer = (state, action) => {
             ? state.impostorCount
             : 1;
       const impostorIndices = pickImpostors(state.players.length, impostorCount);
+      const drawStartIndex = Math.floor(Math.random() * state.players.length);
       return {
         ...state,
         screen: 'deal',
@@ -398,6 +407,7 @@ const gameReducer = (state, action) => {
         impostorIndices,
         dealOrder: buildDealOrder(state.players.length),
         dealStep: 0,
+        drawStartIndex,
         showRole: false,
         revealImpostor: false,
         alivePlayers: Array.from({ length: state.players.length }, (_, index) => index),
