@@ -220,7 +220,14 @@ const Round = () => {
     <section className="screen">
       <div className="card">
         {!isDrawMode && <h2>{t.round.wordRound}</h2>}
-        {!isDrawMode && <p className="muted">{t.round.wordIntro}</p>}
+        {!isDrawMode && (
+          <div className="word-starter">
+            <span className="badge">{t.round.wordStarterLabel}</span>
+            <span className="player-tag" style={{ '--player-color': activePlayer.color }}>
+              {activePlayer.name}
+            </span>
+          </div>
+        )}
         {isDrawMode && (
           <div className={panelClassName}>
             <div className="drawing-header drawing-turn-bubble">
@@ -514,7 +521,7 @@ const Round = () => {
         )}
         {state.timerEnabled && <Timer seconds={state.timerSeconds} />}
         <button type="button" className="primary" onClick={onEndRound}>
-          {t.round.endRound}
+          {isDrawMode ? t.round.endRound : t.round.goVote}
         </button>
       </div>
     </section>

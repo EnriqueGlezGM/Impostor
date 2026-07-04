@@ -433,7 +433,7 @@ const gameReducer = (state, action) => {
     case 'START_ROUND':
       return {
         ...state,
-        screen: state.timerEnabled || state.gameMode === 'draw' ? 'round' : 'reveal',
+        screen: 'round',
         revealImpostor: false,
       };
     case 'END_ROUND':

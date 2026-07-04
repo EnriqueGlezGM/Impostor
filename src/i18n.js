@@ -112,6 +112,7 @@ export const STRINGS = {
       allSetText: 'Cada jugador conoce su rol. Es momento de empezar.',
       startDrawing: 'Empezar ronda de dibujo',
       startRound: 'Empezar ronda',
+      showStarter: 'Ver quién empieza',
       goVote: 'Ir a votación',
       passPhone: 'Pasa el móvil',
       turnOf: 'Es el turno de',
@@ -129,8 +130,7 @@ export const STRINGS = {
     round: {
       drawRound: 'Ronda de dibujo',
       wordRound: 'Ronda en marcha',
-      wordIntro:
-        'Hablad en círculo, describid la palabra con una pista breve y tratad de descubrir quién no sabe de qué se habla.',
+      wordStarterLabel: 'Empieza',
       allDone: 'Todos han dibujado su trazo.',
       allDoneShort: 'Listos',
       turnOf: 'Turno de',
@@ -160,6 +160,7 @@ export const STRINGS = {
       thick: 'Grueso',
       boardLabel: 'Pizarra de dibujo compartida',
       endRound: 'Finalizar ronda',
+      goVote: 'Ir a votación',
     },
     reveal: {
       title: 'Votación',
@@ -329,6 +330,7 @@ export const STRINGS = {
       allSetText: 'Each player knows their role. Time to start.',
       startDrawing: 'Start drawing round',
       startRound: 'Start round',
+      showStarter: 'Show who starts',
       goVote: 'Go to vote',
       passPhone: 'Pass the phone',
       turnOf: 'It is the turn of',
@@ -346,8 +348,7 @@ export const STRINGS = {
     round: {
       drawRound: 'Drawing round',
       wordRound: 'Round in progress',
-      wordIntro:
-        "Talk in a circle, give a short clue without saying the word, and try to find who doesn't know what it is.",
+      wordStarterLabel: 'Starts',
       allDone: 'Everyone has drawn their stroke.',
       allDoneShort: 'Done',
       turnOf: 'Turn of',
@@ -377,6 +378,7 @@ export const STRINGS = {
       thick: 'Thick',
       boardLabel: 'Shared drawing board',
       endRound: 'End round',
+      goVote: 'Go to vote',
     },
     reveal: {
       title: 'Voting',

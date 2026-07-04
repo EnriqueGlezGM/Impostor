@@ -743,6 +743,26 @@ button:disabled {
   text-underline-offset: 6px;
 }
 
+.word-starter {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 8px 0 4px;
+}
+
+.word-starter .badge {
+  width: fit-content;
+}
+
+.word-starter .player-tag {
+  max-width: 100%;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 16px;
+  font-size: 1.25rem;
+  overflow-wrap: anywhere;
+}
+
 .timer {
   background: var(--card-strong);
   border-radius: 16px;

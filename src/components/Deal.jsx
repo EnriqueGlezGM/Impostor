@@ -19,13 +19,12 @@ const Deal = () => {
   } = state;
 
   if (dealStep >= dealOrder.length) {
-    const showRound = timerEnabled || gameMode === 'draw';
     const roundLabel =
       gameMode === 'draw'
         ? t.deal.startDrawing
-        : showRound
+        : timerEnabled
           ? t.deal.startRound
-          : t.deal.goVote;
+          : t.deal.showStarter;
 
     return (
       <section className="screen">
