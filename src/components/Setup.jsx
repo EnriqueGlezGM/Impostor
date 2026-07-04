@@ -4,6 +4,7 @@ import {
   categoryFileName,
   customCategoryToCsv,
   parseCategoryFiles,
+  parseCustomCategoryCsv,
   parseCustomCategories,
   pickRandomEntryExcluding,
 } from '../utils.js';
@@ -44,8 +45,11 @@ const Setup = () => {
   const [draggedPlayerIndex, setDraggedPlayerIndex] = useState(null);
   const [customDraft, setCustomDraft] = useState(null);
   const [customErrors, setCustomErrors] = useState([]);
+  const [customCsvText, setCustomCsvText] = useState('');
   const dragIndexRef = useRef(null);
   const dragCleanupRef = useRef(null);
+  const customFileInputRef = useRef(null);
+  const customCsvTextEditRef = useRef(false);
   const steps = useMemo(
     () => [
       { id: 'players', label: t.setup.steps.players },
@@ -134,16 +138,71 @@ const Setup = () => {
   const onStartCustomCategory = () => {
     setErrors([]);
     setCustomErrors([]);
-    setCustomDraft(createCustomCategoryDraft(state.language));
+    const draft = createCustomCategoryDraft(state.language);
+    setCustomDraft(draft);
   };
 
   const onEditCustomCategory = (category) => {
     setErrors([]);
     setCustomErrors([]);
-    setCustomDraft({
+    const draft = {
       ...category,
       rows: category.rows.length ? category.rows : [{ word: '', hint: '' }],
+    };
+    setCustomDraft(draft);
+  };
+
+  const applyImportedCustomCategory = (rawText, fallbackName = '') => {
+    const parsed = parseCustomCategoryCsv(rawText, fallbackName);
+    if (!parsed.rows.length) {
+      setCustomErrors([t.setup.errors.customCategoryImport]);
+      return;
+    }
+    setCustomErrors([]);
+    setCustomDraft((current) => {
+      const next = {
+        ...(current || createCustomCategoryDraft(state.language)),
+        language: state.language,
+        name: current?.name?.trim() ? current.name : parsed.name,
+        icon: parsed.icon,
+        rows: parsed.rows,
+      };
+      return next;
     });
+  };
+
+  const onImportCustomCategoryFile = (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      applyImportedCustomCategory(String(reader.result || ''), file.name);
+      event.target.value = '';
+    };
+    reader.onerror = () => {
+      setCustomErrors([t.setup.errors.customCategoryImport]);
+      event.target.value = '';
+    };
+    reader.readAsText(file);
+  };
+
+  const onUpdateCustomCsvText = (value) => {
+    setCustomCsvText(value);
+    if (!customDraft || !value.trim()) return;
+    const parsed = parseCustomCategoryCsv(value, customDraft.name);
+    if (!parsed.rows.length) return;
+    setCustomErrors([]);
+    customCsvTextEditRef.current = true;
+    setCustomDraft((current) =>
+      current
+        ? {
+            ...current,
+            name: current.name.trim() ? current.name : parsed.name,
+            icon: parsed.icon,
+            rows: parsed.rows,
+          }
+        : current
+    );
   };
 
   const onUpdateCustomRow = (index, field, value) => {
@@ -171,11 +230,26 @@ const Setup = () => {
 
   const onSaveCustomCategory = () => {
     if (!customDraft) return;
-    const rows = customDraft.rows
+    const parsedText = customCsvText.trim()
+      ? parseCustomCategoryCsv(customCsvText, customDraft.name)
+      : null;
+    if (parsedText && !parsedText.rows.length) {
+      setCustomErrors([t.setup.errors.customCategoryImport]);
+      return;
+    }
+    const categoryToSave = parsedText
+      ? {
+          ...customDraft,
+          name: customDraft.name.trim() || parsedText.name,
+          icon: parsedText.icon,
+          rows: parsedText.rows,
+        }
+      : customDraft;
+    const rows = categoryToSave.rows
       .map((row) => ({ word: row.word.trim(), hint: row.hint.trim() }))
       .filter((row) => row.word);
     const nextErrors = [];
-    if (!customDraft.name.trim()) {
+    if (!categoryToSave.name.trim()) {
       nextErrors.push(t.setup.errors.customCategoryName);
     }
     if (!rows.length) {
@@ -186,10 +260,10 @@ const Setup = () => {
     dispatch({
       type: 'SAVE_CUSTOM_CATEGORY',
       payload: {
-        ...customDraft,
+        ...categoryToSave,
         language: state.language,
-        name: customDraft.name.trim(),
-        icon: customDraft.icon.trim() || '✨',
+        name: categoryToSave.name.trim(),
+        icon: categoryToSave.icon.trim() || '✨',
         rows,
       },
     });
@@ -285,6 +359,14 @@ const Setup = () => {
     },
     []
   );
+
+  useEffect(() => {
+    if (customCsvTextEditRef.current) {
+      customCsvTextEditRef.current = false;
+      return;
+    }
+    setCustomCsvText(customDraft ? customCategoryToCsv(customDraft) : '');
+  }, [customDraft]);
 
   const onPlayerDragStart = (event, index) => {
     if (event.button !== 0) return;
@@ -759,6 +841,33 @@ const Setup = () => {
                     {t.setup.addCustomRow}
                   </button>
                 </div>
+                <div className="field">
+                  <label htmlFor="customCategoryCsv">{t.setup.customCategoryCsvText}</label>
+                  <textarea
+                    id="customCategoryCsv"
+                    className="csv-textarea"
+                    value={customCsvText}
+                    onChange={(event) => onUpdateCustomCsvText(event.target.value)}
+                    spellCheck={false}
+                  />
+                  <span className="helper">{t.setup.customCategoryCsvHelper}</span>
+                  <div className="custom-category-editor-actions">
+                    <button
+                      type="button"
+                      className="chip"
+                      onClick={() => customFileInputRef.current?.click()}
+                    >
+                      {t.setup.importCustomCategoryFile}
+                    </button>
+                    <input
+                      ref={customFileInputRef}
+                      type="file"
+                      accept=".csv,text/csv"
+                      className="visually-hidden"
+                      onChange={onImportCustomCategoryFile}
+                    />
+                  </div>
+                </div>
               </div>
               {customErrors.length > 0 && (
                 <div className="alert" role="alert">
@@ -894,6 +1003,7 @@ const Setup = () => {
                 onClick={() => {
                   setCustomDraft(null);
                   setCustomErrors([]);
+                  setCustomCsvText('');
                 }}
               >
                 {t.setup.cancelCustomCategory}

@@ -217,6 +217,19 @@ export const customCategoryToCsv = (category) => {
   return `${lines.join('\n')}\n`;
 };
 
+export const parseCustomCategoryCsv = (rawText, fallbackName = '') => {
+  const name = normalizeCategoryName(String(fallbackName || '').replace(/\.csv$/i, ''));
+  const parsed = parseCategoryFile(rawText, name || 'category');
+  return {
+    name,
+    icon: parsed.icon || '✨',
+    rows: parsed.entries.map((entry) => ({
+      word: entry.word,
+      hint: entry.hint,
+    })),
+  };
+};
+
 export const categoryFileName = (name) => {
   const safeName = normalizeCategoryName(name || 'category')
     .replace(/[\\/:*?"<>|]+/g, '')
