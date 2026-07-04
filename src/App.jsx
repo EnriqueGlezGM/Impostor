@@ -51,6 +51,7 @@ const AppLayout = () => {
   const showExit = state.screen !== 'setup' && state.screen !== 'home';
   const [theme, setTheme] = useState(getInitialTheme);
   const [showHelp, setShowHelp] = useState(false);
+  const [scrollControls, setScrollControls] = useState({ up: false, down: false });
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -60,6 +61,23 @@ const AppLayout = () => {
       // Ignore storage errors.
     }
   }, [theme]);
+
+  useEffect(() => {
+    const updateScrollControls = () => {
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      setScrollControls({
+        up: window.scrollY > 360,
+        down: maxScroll - window.scrollY > 360,
+      });
+    };
+    updateScrollControls();
+    window.addEventListener('scroll', updateScrollControls, { passive: true });
+    window.addEventListener('resize', updateScrollControls);
+    return () => {
+      window.removeEventListener('scroll', updateScrollControls);
+      window.removeEventListener('resize', updateScrollControls);
+    };
+  }, []);
 
   const onExit = () => {
     const confirmed = window.confirm(t.app.exitConfirm);
@@ -112,6 +130,37 @@ const AppLayout = () => {
           </button>
         )}
       </footer>
+      {(scrollControls.up || scrollControls.down) && (
+        <div className="scroll-buttons" aria-label={t.app.scrollControls}>
+          {scrollControls.up && (
+            <button
+              type="button"
+              className="scroll-button"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              aria-label={t.app.scrollTop}
+              title={t.app.scrollTop}
+            >
+              ↑
+            </button>
+          )}
+          {scrollControls.down && (
+            <button
+              type="button"
+              className="scroll-button"
+              onClick={() =>
+                window.scrollTo({
+                  top: document.documentElement.scrollHeight,
+                  behavior: 'smooth',
+                })
+              }
+              aria-label={t.app.scrollBottom}
+              title={t.app.scrollBottom}
+            >
+              ↓
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

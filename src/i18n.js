@@ -26,6 +26,9 @@ export const STRINGS = {
         'Si aciertan todos los impostores, ganan los inocentes.',
       ],
       helpClose: 'Entendido',
+      scrollControls: 'Controles de desplazamiento',
+      scrollTop: 'Volver arriba',
+      scrollBottom: 'Ir abajo',
     },
     setup: {
       title: 'Configura la partida',
@@ -255,6 +258,9 @@ export const STRINGS = {
         'If all impostors are found, the innocents win.',
       ],
       helpClose: 'Got it',
+      scrollControls: 'Scroll controls',
+      scrollTop: 'Back to top',
+      scrollBottom: 'Go to bottom',
     },
     setup: {
       title: 'Set up the game',
