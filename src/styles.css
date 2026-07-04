@@ -263,6 +263,14 @@ body::before {
   gap: 16px;
 }
 
+.modal--board {
+  width: min(760px, 100%);
+}
+
+.modal--board .drawing-board {
+  height: clamp(320px, 62vh, 560px);
+}
+
 .modal__list {
   margin: 0;
   padding-left: 20px;

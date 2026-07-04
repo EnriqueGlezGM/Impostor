@@ -70,6 +70,14 @@ const Round = () => {
   const currentTurnKey = `${roundNumber}:${drawState.turnId}:${activeIndex}`;
   const roundComplete =
     isDrawMode && state.drawLimitStrokes && completedCount >= drawOrder.length;
+  const canClearBoard =
+    isDrawMode &&
+    state.drawLimitStrokes &&
+    (roundComplete ||
+      (!roundComplete &&
+        completedCount === 0 &&
+        currentTurnIndex === 0 &&
+        state.drawStrokes.length > 0));
   const canDraw =
     isDrawMode && !roundComplete && (!state.drawLimitStrokes || !currentCompleted);
   const canUseBoard = canDraw || (isDrawMode && toolMode === 'erase' && !roundComplete);
@@ -185,6 +193,10 @@ const Round = () => {
 
   const onClearBoard = () => {
     boardRef.current?.clear();
+  };
+
+  const onBoardStrokesChange = (strokes) => {
+    dispatch({ type: 'SET_DRAW_STROKES', payload: strokes });
   };
 
   const onEndRound = () => {
@@ -306,7 +318,7 @@ const Round = () => {
                     </svg>
                   )}
                 </button>
-                {state.drawLimitStrokes && roundComplete && (
+                {canClearBoard && (
                   <button
                     type="button"
                     className="icon-button icon-button--soft"
@@ -374,6 +386,8 @@ const Round = () => {
               brushSize={brushSize}
               ariaLabel={t.round.boardLabel}
               canDraw={canUseBoard}
+              drawStrokes={state.drawStrokes}
+              onStrokesChange={onBoardStrokesChange}
               onStrokeEnd={markCurrentCompleted}
               ownerId={activeIndex}
               strokeGroup={currentTurnKey}

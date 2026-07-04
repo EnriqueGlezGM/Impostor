@@ -1,11 +1,23 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 
+const cloneStrokes = (strokes) =>
+  Array.isArray(strokes)
+    ? strokes.map((stroke) => ({
+        ...stroke,
+        points: Array.isArray(stroke.points)
+          ? stroke.points.map((point) => ({ ...point }))
+          : [],
+      }))
+    : [];
+
 const DrawingBoard = forwardRef(
   ({
     color,
     brushSize,
     ariaLabel,
     canDraw = true,
+    drawStrokes = [],
+    onStrokesChange,
     onStrokeEnd,
     ownerId,
     strokeGroup,
@@ -17,6 +29,12 @@ const DrawingBoard = forwardRef(
   const strokesRef = useRef([]);
   const drawingRef = useRef(false);
   const sizeRef = useRef({ width: 0, height: 0 });
+
+  const emitStrokesChange = () => {
+    if (typeof onStrokesChange === 'function') {
+      onStrokesChange(cloneStrokes(strokesRef.current));
+    }
+  };
 
   const redraw = () => {
     const ctx = contextRef.current;
@@ -50,6 +68,7 @@ const DrawingBoard = forwardRef(
     clear: () => {
       strokesRef.current = [];
       redraw();
+      emitStrokesChange();
     },
     clearOwner: (targetOwner) => {
       const strokes = strokesRef.current;
@@ -58,6 +77,7 @@ const DrawingBoard = forwardRef(
       if (nextStrokes.length === strokes.length) return false;
       strokesRef.current = nextStrokes;
       redraw();
+      emitStrokesChange();
       return true;
     },
     clearGroup: (targetGroup) => {
@@ -67,6 +87,7 @@ const DrawingBoard = forwardRef(
       if (nextStrokes.length === strokes.length) return false;
       strokesRef.current = nextStrokes;
       redraw();
+      emitStrokesChange();
       return true;
     },
     undo: (targetOwner) => {
@@ -77,12 +98,19 @@ const DrawingBoard = forwardRef(
         if (targetOwner === undefined || stroke.owner === targetOwner) {
           strokes.splice(i, 1);
           redraw();
+          emitStrokesChange();
           return true;
         }
       }
       return false;
     },
   }));
+
+  useEffect(() => {
+    if (drawingRef.current) return;
+    strokesRef.current = cloneStrokes(drawStrokes);
+    redraw();
+  }, [drawStrokes]);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -219,6 +247,7 @@ const DrawingBoard = forwardRef(
       const strokes = strokesRef.current;
       onStrokeEnd(strokes[strokes.length - 1]);
     }
+    emitStrokesChange();
   };
 
   return (

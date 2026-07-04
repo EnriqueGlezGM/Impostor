@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
 import ColorSelect from './ColorSelect.jsx';
+import DrawingBoard from './DrawingBoard.jsx';
 import {
   mergeCategorySources,
   parseCategoryFiles,
@@ -28,6 +29,7 @@ const Reveal = () => {
   const [selected, setSelected] = useState('');
   const [secretSelected, setSecretSelected] = useState('');
   const [showSecretForm, setShowSecretForm] = useState(false);
+  const [showBoard, setShowBoard] = useState(false);
 
   const categoryFiles = categoryFilesByLanguage[state.language] || categoryFilesByLanguage.es;
   const parsedFileCategories = useMemo(
@@ -434,6 +436,7 @@ const Reveal = () => {
   const canVote = !state.winner && !state.revealImpostor;
   const showPublicVoting = canVote && !isSecretMode && !secretActive;
   const showSecretControls = canVote && isSecretMode && !secretActive;
+  const canShowBoard = state.gameMode === 'draw' && state.drawStrokes.length > 0;
 
   const onSetVoteMode = (mode) => {
     if (mode === 'public') {
@@ -552,6 +555,11 @@ const Reveal = () => {
               {t.reveal.cancelSecret}
             </button>
           )}
+          {canShowBoard && !secretActive && (
+            <button type="button" className="ghost" onClick={() => setShowBoard(true)}>
+              {t.reveal.viewBoard}
+            </button>
+          )}
           <button type="button" className="ghost" onClick={onNewGame}>
             {t.reveal.newGame}
           </button>
@@ -560,6 +568,33 @@ const Reveal = () => {
           </button>
         </div>
       </div>
+      {showBoard && (
+        <div
+          className="modal-backdrop"
+          role="presentation"
+          onClick={() => setShowBoard(false)}
+        >
+          <div
+            className="modal modal--board"
+            role="dialog"
+            aria-modal="true"
+            aria-label={t.reveal.boardTitle}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h2>{t.reveal.boardTitle}</h2>
+            <DrawingBoard
+              ariaLabel={t.reveal.boardTitle}
+              canDraw={false}
+              drawStrokes={state.drawStrokes}
+            />
+            <div className="modal__actions">
+              <button type="button" className="primary" onClick={() => setShowBoard(false)}>
+                {t.reveal.closeBoard}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

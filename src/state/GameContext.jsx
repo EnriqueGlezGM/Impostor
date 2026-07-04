@@ -43,6 +43,7 @@ const createFreshState = (language = 'es') => {
     dealOrder: [],
     dealStep: 0,
     drawStartIndex: 0,
+    drawStrokes: [],
     showRole: false,
     revealImpostor: false,
     alivePlayers: [],
@@ -108,6 +109,7 @@ const hydrateState = () => {
       parsed.drawStartIndex < playerCount
         ? parsed.drawStartIndex
         : 0;
+    const drawStrokes = Array.isArray(parsed.drawStrokes) ? parsed.drawStrokes : [];
 
     return {
       ...createFreshState(language),
@@ -143,6 +145,7 @@ const hydrateState = () => {
       ),
       impostorIndices,
       drawStartIndex,
+      drawStrokes,
     };
   } catch (error) {
     return createFreshState();
@@ -302,6 +305,11 @@ const gameReducer = (state, action) => {
         ...state,
         drawLimitStrokes: action.payload === true,
       };
+    case 'SET_DRAW_STROKES':
+      return {
+        ...state,
+        drawStrokes: Array.isArray(action.payload) ? action.payload : [],
+      };
     case 'SET_WORD':
       return {
         ...state,
@@ -430,6 +438,7 @@ const gameReducer = (state, action) => {
         dealOrder: buildDealOrder(state.players.length),
         dealStep: 0,
         drawStartIndex,
+        drawStrokes: [],
         showRole: false,
         revealImpostor: false,
         alivePlayers: Array.from({ length: state.players.length }, (_, index) => index),
