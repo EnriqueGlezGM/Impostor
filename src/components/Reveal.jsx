@@ -382,10 +382,10 @@ const Reveal = () => {
 
     if (!showSecretForm) {
       return (
-        <div className="reveal">
+        <div className="reveal reveal--secret-pass">
           <span className="badge">{t.reveal.secretTitle}</span>
-          <h3>
-            {t.reveal.passPhoneTo}{' '}
+          <h3 className="secret-pass-title">
+            <span>{t.reveal.passPhoneTo}</span>
             <span
               className="player-tag"
               style={{ '--player-color': currentSecretPlayer?.color || '#9aa0a6' }}
@@ -402,9 +402,9 @@ const Reveal = () => {
     }
 
     return (
-      <div className="reveal">
+      <div className="reveal reveal--secret-vote">
         <span className="badge">{t.reveal.secretVoteTitle}</span>
-        <h3>
+        <h3 className="secret-voter-title">
           <span
             className="player-tag"
             style={{ '--player-color': currentSecretPlayer?.color || '#9aa0a6' }}

@@ -875,6 +875,51 @@ button:disabled {
   border-radius: 16px;
 }
 
+.reveal--secret-pass {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding-top: 28px;
+}
+
+.reveal--secret-vote {
+  display: grid;
+  justify-items: stretch;
+  gap: 16px;
+  padding-top: 28px;
+}
+
+.reveal--secret-vote > .badge {
+  justify-self: center;
+}
+
+.secret-voter-title {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  line-height: 1.2;
+}
+
+.secret-voter-title .player-tag {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.secret-pass-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  max-width: 100%;
+  line-height: 1.2;
+}
+
+.secret-pass-title .player-tag {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
 .reveal--warning {
   background: rgba(255, 95, 109, 0.12);
 }
