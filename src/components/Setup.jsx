@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useGame } from '../state/GameContext.jsx';
+import { CATEGORY_COLLECTIONS } from '../data/categoryCollections.js';
 import {
   categoryFileName,
   customCategoryToCsv,
@@ -47,6 +48,8 @@ const Setup = () => {
   const [customDraft, setCustomDraft] = useState(null);
   const [customErrors, setCustomErrors] = useState([]);
   const [customCsvText, setCustomCsvText] = useState('');
+  const [showCategoryDetails, setShowCategoryDetails] = useState(false);
+  const [selectedCollectionIds, setSelectedCollectionIds] = useState([]);
   const dragIndexRef = useRef(null);
   const dragCleanupRef = useRef(null);
   const customFileInputRef = useRef(null);
@@ -114,6 +117,7 @@ const Setup = () => {
     state.categoryMode === 'custom' ? selectedCategories.length : categories.length;
   const availableWordsCount =
     state.categoryMode === 'custom' ? filteredEntries.length : wordEntries.length;
+  const hasAvailableCategorySelection = selectedCount > 0 && availableWordsCount > 0;
 
   const currentStep = steps[stepIndex];
   const isFirst = stepIndex === 0;
@@ -121,17 +125,19 @@ const Setup = () => {
 
   const onResetAll = () => {
     setErrors([]);
+    setSelectedCollectionIds([]);
     dispatch({ type: 'RESET_ALL' });
   };
 
   const onSetCategoryMode = (mode) => {
     if (mode === 'all') {
+      setShowCategoryDetails(false);
+      setSelectedCollectionIds([]);
       dispatch({ type: 'SET_CATEGORY_MODE', payload: 'all' });
       return;
     }
-    if (!selectedCategories.length && categories.length) {
-      dispatch({ type: 'SET_SELECTED_CATEGORIES', payload: categories });
-    }
+    setSelectedCollectionIds([]);
+    setShowCategoryDetails(true);
     dispatch({ type: 'SET_CATEGORY_MODE', payload: 'custom' });
   };
 
@@ -140,6 +146,56 @@ const Setup = () => {
       ? selectedCategories.filter((item) => item !== category)
       : [...selectedCategories, category];
     dispatch({ type: 'SET_SELECTED_CATEGORIES', payload: next });
+  };
+
+  const onApplyCategoryCollection = (collection) => {
+    const collectionCategories = collection.categories[state.language] || collection.categories.es;
+    const available = collectionCategories.filter((category) => categories.includes(category));
+    if (!available.length) return;
+    const isRemoving = selectedCollectionIds.includes(collection.id);
+    const nextCollectionIds = isRemoving
+      ? selectedCollectionIds.filter((id) => id !== collection.id)
+      : [...selectedCollectionIds, collection.id];
+    const baseSelectedCategories = state.categoryMode === 'custom' ? selectedCategories : [];
+    const remainingCollectionCategories = new Set(
+      CATEGORY_COLLECTIONS.filter((item) => nextCollectionIds.includes(item.id)).flatMap(
+        (item) => {
+          const itemCategories = item.categories[state.language] || item.categories.es;
+          return itemCategories.filter((category) => categories.includes(category));
+        }
+      )
+    );
+    const next = isRemoving
+      ? baseSelectedCategories.filter(
+          (category) => !available.includes(category) || remainingCollectionCategories.has(category)
+        )
+      : Array.from(new Set([...baseSelectedCategories, ...available]));
+    setSelectedCollectionIds(nextCollectionIds);
+    dispatch({ type: 'SET_CATEGORY_MODE', payload: 'custom' });
+    dispatch({ type: 'SET_SELECTED_CATEGORIES', payload: next });
+  };
+
+  const onToggleCategoryDetails = () => {
+    if (state.categoryMode !== 'custom') {
+      setSelectedCollectionIds([]);
+      dispatch({ type: 'SET_SELECTED_CATEGORIES', payload: categories });
+      dispatch({ type: 'SET_CATEGORY_MODE', payload: 'custom' });
+      setShowCategoryDetails(true);
+      return;
+    }
+    setShowCategoryDetails((current) => !current);
+  };
+
+  const onSelectAllCategories = () => {
+    setSelectedCollectionIds([]);
+    dispatch({ type: 'SET_CATEGORY_MODE', payload: 'custom' });
+    dispatch({ type: 'SET_SELECTED_CATEGORIES', payload: categories });
+  };
+
+  const onClearSelectedCategories = () => {
+    setSelectedCollectionIds([]);
+    dispatch({ type: 'SET_CATEGORY_MODE', payload: 'custom' });
+    dispatch({ type: 'SET_SELECTED_CATEGORIES', payload: [] });
   };
 
   const onStartCustomCategory = () => {
@@ -938,33 +994,74 @@ const Setup = () => {
           {currentStep.id === 'categories' && !customDraft && (
             <>
               <div className="field">
-                <label>{t.setup.categories}</label>
-                <div className="toggle">
+                <label>{t.setup.categoryCollections}</label>
+                <div className="collection-grid">
+                  {CATEGORY_COLLECTIONS.map((collection) => {
+                    const collectionCategories =
+                      collection.categories[state.language] || collection.categories.es;
+                    const available = collectionCategories.filter((category) =>
+                      categories.includes(category)
+                    );
+                    const isSelectedCollection = selectedCollectionIds.includes(collection.id);
+                    return (
+                      <button
+                        key={collection.id}
+                        type="button"
+                        className={`collection-chip${
+                          isSelectedCollection ? ' collection-chip--active' : ''
+                        }`}
+                        onClick={() => onApplyCategoryCollection(collection)}
+                        disabled={!available.length}
+                        aria-pressed={isSelectedCollection}
+                      >
+                        <span aria-hidden="true">{collection.icon}</span>
+                        {t.setup.collections[collection.id]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="field">
+                <div className="custom-category-editor-actions">
                   <button
                     type="button"
                     className={state.categoryMode !== 'custom' ? 'chip chip--active' : 'chip'}
                     onClick={() => onSetCategoryMode('all')}
+                    aria-pressed={state.categoryMode !== 'custom'}
                   >
                     {t.setup.all}
                   </button>
-                  <button
-                    type="button"
-                    className={state.categoryMode === 'custom' ? 'chip chip--active' : 'chip'}
-                    onClick={() => onSetCategoryMode('custom')}
-                  >
-                    {t.setup.select}
-                  </button>
                 </div>
+              </div>
+              <div className="category-detail-bar">
                 <span className="helper">
                   {formatString(t.setup.categoryCount, {
                     count: selectedCount || 0,
                     words: availableWordsCount || 0,
                   })}
                 </span>
+                <button
+                  type="button"
+                  className="icon-button icon-button--soft"
+                  onClick={onToggleCategoryDetails}
+                  aria-expanded={state.categoryMode === 'custom' && showCategoryDetails}
+                  aria-label={t.setup.toggleCategoryDetails}
+                  title={t.setup.toggleCategoryDetails}
+                >
+                  ✎
+                </button>
               </div>
-              {state.categoryMode === 'custom' ? (
+              {state.categoryMode === 'custom' && showCategoryDetails ? (
                 <div className="field">
                   <label>{t.setup.pickCategories}</label>
+                  <div className="custom-category-editor-actions">
+                    <button type="button" className="chip" onClick={onSelectAllCategories}>
+                      {t.setup.selectAllCategories}
+                    </button>
+                    <button type="button" className="chip" onClick={onClearSelectedCategories}>
+                      {t.setup.clearCategories}
+                    </button>
+                  </div>
                   <div className="category-grid">
                     {categories.map((category) => {
                       const selected = selectedCategories.includes(category);
@@ -1035,9 +1132,7 @@ const Setup = () => {
                     </button>
                   </div>
                 </div>
-              ) : (
-                <p className="muted">{t.setup.allActive}</p>
-              )}
+              ) : null}
             </>
           )}
 
@@ -1078,7 +1173,12 @@ const Setup = () => {
               </button>
             )}
             {!customDraft && isLast && (
-              <button type="button" className="primary" onClick={onStart}>
+              <button
+                type="button"
+                className="primary"
+                onClick={onStart}
+                disabled={!hasAvailableCategorySelection}
+              >
                 {t.setup.start}
               </button>
             )}
